@@ -2,7 +2,7 @@
 
 ## Introduction
 
-{Give a product intro}
+**FlashBang** is a CLI app designed to provide students with a smart way of studying for their modules. The app will manage a limited number of flashcards for a small number of modules, optimized for users who prefer a CLI.
 
 ## Quick Start
 
@@ -11,32 +11,116 @@
 1. Ensure that you have Java 17 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+### Adding flashcards: `add`
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Add a flashcard to a flashcard set.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+```bash
+add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
+```
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+**Examples:**
+```bash
+add --m CS2113 --q "What is OOP?" --a "Object-Oriented Programming"
+add --m CS1010 --q "What is a variable?" --a "A storage location in memory with a name"
+add --m MA1521 --q "What is the derivative of sin(x)?" --a "cos(x)"
+```
 
-Example of usage: 
+### Deleting flashcards: `delete`
 
-`todo n/Write the rest of the User Guide d/next week`
+To delete one flashcard:
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+```bash
+delete --m [MODULE NAME] --i [INDEX]
+```
 
-## FAQ
+To delete all flashcards in a set:
 
-**Q**: How do I transfer my data to another computer? 
+```bash
+delete --m [MODULE NAME]
+```
 
-**A**: {your answer here}
+**Examples:**
+```bash
+delete --m CS2113 --i 2    # Deletes second flashcard in the module CS2113
+delete --m MA1521 --i 5    # Deletes fifth flashcard in the module MA1521
+delete --m CS1010          # Deletes all flashcards in the module CS1010
+```
 
-## Command Summary
+### Viewing all flashcards: `view`
 
-{Give a 'cheat sheet' of commands here}
+```bash
+view --all
+```
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+**Example:**
+```bash
+view --all
+```
+
+### Viewing all flashcards in a module without the answers: `flashbang`
+
+```bash
+flashbang --m [MODULE NAME]
+```
+
+**Example:**
+```bash
+flashbang --m CS1010
+```
+```
+Question: "What is a variable?"
+Reveal answer? (Q to quit) (Y/N)
+Y
+Answer: "A storage location in memory with a name." 
+Next question: "What is a constant?"
+Reveal answer? (Q to quit) (Y/N)
+Q
+Bye!!
+```
+
+### Filter flashcards by module: `view`
+
+```bash
+view --m [MODULE NAME]
+```
+
+**Example:**
+```bash
+view --m CS2113
+```
+
+### Edit flashcard: `edit`
+
+Edits an existing flashcard.
+
+```bash
+edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]
+```
+
+Or 
+
+```bash
+edit --m [MODULE NAME] --i [INDEX]    # Prompts for inputs
+```
+
+**App Prompts:**
+```
+App: New Question: [NEW QUESTION]
+App: New Answer: [NEW ANSWER]
+```
+
+**Examples:**
+```bash
+edit --m CS1010 --i 2 --q "What is a constant?" --a "A value that cannot be changed once initialized."
+edit --m MA1521 --i 3 --q "What is the integral of 1/x?" --a "ln|x| + C"
+edit --m CS2040 --i 4
+New Question: "What is a graph?"
+New Answer: "A data structure consisting of vertices and edges."
+edit --m MA1521 --i 1
+New Question: "What is the derivative of e^x?"
+New Answer: "e^x"
+```
+
