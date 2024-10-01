@@ -24,4 +24,13 @@ public class Card {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    public String toWritableString() {
+        return question + "," + answer;
+    }
+
+    @Override
+    public String toString() {
+        return question + ": /n" + answer;
+    }
 }

@@ -4,9 +4,11 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Storage {
@@ -17,7 +19,7 @@ public class Storage {
         createDir();
     }
 
-    public void createDir() {
+    private void createDir() {
         try {
             if(!directory.exists()){
                 if(!directory.mkdirs()){
@@ -29,7 +31,7 @@ public class Storage {
         }
     }
 
-    public Card cardFormatter(String line){
+    private Card cardFormatter(String line){
         String[] lineArgs = line.split(",");
         return new Card(lineArgs[0],lineArgs[1]);
     }
@@ -48,6 +50,34 @@ public class Storage {
             throw new IOException("An error occurred while reading from the file.");
         }
         return new FlashCardSet(module,cards);
+    }
+
+    private void createFile(File file) {
+        try {
+            if(!file.exists()){
+                if(!file.createNewFile()){
+                    throw new IOException("Could not create file");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeFlashCardToFile(HashMap<String, FlashCardSet> flashCard){
+        flashCard.forEach((module,flashCardSet)-> {
+            File flashCardSetFile = new File(directory, module+".txt");
+            createFile(flashCardSetFile);
+            try {
+                FileWriter fileWriter = new FileWriter(flashCardSetFile.getPath());
+                for (Card card : flashCardSet.getFlashCardSet()) {
+                    fileWriter.write(card.toWritableString()+"\n");
+                }
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("An error occurred while writing to the file. ");
+            }
+        });
     }
 
     public HashMap<String, FlashCardSet> readFlashCardsFromFile() throws IOException {
