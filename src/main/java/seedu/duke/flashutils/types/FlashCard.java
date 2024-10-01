@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 public class FlashCard {
 
-    private final HashMap<String, ArrayList<Card>> flashCards;
+    private final HashMap<String, FlashCardSet> flashCards;
 
     FlashCard(){
         this.flashCards = new HashMap<>();
     }
 
-    FlashCard(HashMap<String, ArrayList<Card>> flashCards){
+    FlashCard(HashMap<String, FlashCardSet> flashCards){
         this.flashCards = flashCards;
     }
 
