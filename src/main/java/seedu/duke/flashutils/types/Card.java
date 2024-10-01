@@ -4,7 +4,7 @@ public class Card {
     private String question;
     private String answer;
 
-    Card(String question, String answer) {
+    public Card(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }
@@ -23,5 +23,14 @@ public class Card {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String toWritableString() {
+        return question + "," + answer;
+    }
+
+    @Override
+    public String toString() {
+        return question + ": /n" + answer;
     }
 }
