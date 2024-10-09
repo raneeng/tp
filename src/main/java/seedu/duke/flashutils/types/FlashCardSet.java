@@ -25,5 +25,7 @@ public class FlashCardSet {
         return this.flashCardSet;
     }
 
-    // TODO addCard(Card toAdd) {}
+    public void addCard(Card toAdd) {
+        // TODO
+    }
 }

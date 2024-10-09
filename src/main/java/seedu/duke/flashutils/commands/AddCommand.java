@@ -14,12 +14,16 @@ public class AddCommand extends Command {
     public static final String SUCCESS_MESSAGE = "Successfully added flashcard: %1$s";
 
     private Card toAdd;
-    private FlashCardSet targetSet;
 
     // Constructor
     public AddCommand(String Question, String Answer, FlashCardSet targetSet) {
         this.toAdd = new Card(Question, Answer);
-        // targetSet.addCard(toAdd);
+        this.targetSet = targetSet;
+    }
+
+    public CommandResult execute() {
+        targetSet.addCard(toAdd);
+        return new CommandResult();
     }
 
 }
