@@ -16,14 +16,18 @@ public class AddCommand extends Command {
     private Card toAdd;
 
     // Constructor
-    public AddCommand(String Question, String Answer, FlashCardSet targetSet) {
+    public AddCommand(String Question, String Answer) {
         this.toAdd = new Card(Question, Answer);
-        this.targetSet = targetSet;
     }
 
+    public AddCommand(Card toAdd) {
+        this.toAdd = toAdd;
+    }
+
+    @Override
     public CommandResult execute() {
         targetSet.addCard(toAdd);
-        return new CommandResult();
+        return new CommandResult(String.format(SUCCESS_MESSAGE, toAdd));
     }
 
 }

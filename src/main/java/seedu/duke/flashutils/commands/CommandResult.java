@@ -6,8 +6,10 @@ package seedu.duke.flashutils.commands;
 public class CommandResult {
 
     // The feedback message displayed to user after command is executed
+    public String feedbackToUser;
 
-
-    // The flashcard set produced by the command
+    public CommandResult(String feedbackToUser) {
+        this.feedbackToUser = feedbackToUser;
+    }
 
 }
