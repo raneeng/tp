@@ -24,4 +24,8 @@ public class FlashCardSet {
     public ArrayList<Card> getFlashCardSet() {
         return this.flashCardSet;
     }
+
+    public void addCard(Card toAdd) {
+        // TODO
+    }
 }
