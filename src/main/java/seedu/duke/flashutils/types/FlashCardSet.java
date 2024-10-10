@@ -28,4 +28,8 @@ public class FlashCardSet {
     public void addCard(Card toAdd) {
         // TODO
     }
+
+    public void removeCard(Card toRemove) {
+        // TODO
+    }
 }
