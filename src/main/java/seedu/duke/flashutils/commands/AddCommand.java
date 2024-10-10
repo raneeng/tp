@@ -1,5 +1,6 @@
 package seedu.duke.flashutils.commands;
 
+import seedu.duke.Flashbang;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 
@@ -15,7 +16,7 @@ public class AddCommand extends Command {
 
     private Card toAdd;
 
-    // Constructor
+    // Constructors
     public AddCommand(String Question, String Answer) {
         this.toAdd = new Card(Question, Answer);
     }
