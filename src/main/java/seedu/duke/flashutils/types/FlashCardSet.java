@@ -32,4 +32,9 @@ public class FlashCardSet {
     public void removeCard(Card toRemove) {
         // TODO
     }
+
+    // Displays all flashcards (view command) in FLashCardSet
+    public void viewFlashCards() {
+        // TODO
+    }
 }
