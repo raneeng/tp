@@ -7,6 +7,8 @@ public class FlashCardSet {
     private final ArrayList<Card> flashCardSet;
     private final String module;
 
+    public final static String DIVIDER = "___________________________________________________";
+
     public FlashCardSet(String module) {
         this.module = module;
         this.flashCardSet = new ArrayList<>();
@@ -36,5 +38,16 @@ public class FlashCardSet {
     // Displays all flashcards (view command) in FLashCardSet
     public void viewFlashCards() {
         // TODO
+        System.out.println(DIVIDER);
+
+        for (Card card : flashCardSet) {
+            System.out.println(card);
+            System.out.println(DIVIDER);
+        }
     }
+
+    public void flashBang() {
+        // TODO
+    }
+
 }
