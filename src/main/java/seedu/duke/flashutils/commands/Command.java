@@ -6,7 +6,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
 /**
  * Represents an executable command.
  */
-public class Command {
+public abstract class Command {
 
     protected FlashCardSet targetSet;
     private int targetIndex = -1;

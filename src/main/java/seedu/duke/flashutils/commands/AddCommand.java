@@ -17,7 +17,8 @@ public class AddCommand extends Command {
     private Card toAdd;
 
     // Constructors
-    public AddCommand(String Question, String Answer) {
+    public AddCommand(FlashCardSet targetSet, String Question, String Answer) {
+        this.targetSet = targetSet;
         this.toAdd = new Card(Question, Answer);
     }
 
