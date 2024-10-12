@@ -1,4 +1,4 @@
-package commands;
+package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.FlashCard;
 

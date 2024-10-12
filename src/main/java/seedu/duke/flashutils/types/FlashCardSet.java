@@ -24,4 +24,17 @@ public class FlashCardSet {
     public ArrayList<Card> getFlashCardSet() {
         return this.flashCardSet;
     }
+
+    public void addCard(Card toAdd) {
+        // TODO
+    }
+
+    public void removeCard(Card toRemove) {
+        // TODO
+    }
+
+    // Displays all flashcards (view command) in FLashCardSet
+    public void viewFlashCards() {
+        // TODO
+    }
 }
