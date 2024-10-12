@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Storage {
     private final File directory;
 
-    Storage(String directoryPath) {
+    public Storage(String directoryPath) {
         this.directory = new File(directoryPath);
         createDir();
     }

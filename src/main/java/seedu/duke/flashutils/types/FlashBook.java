@@ -1,5 +1,6 @@
 package seedu.duke.flashutils.types;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,12 +10,16 @@ public class FlashBook {
 
     private final HashMap<String, FlashCardSet> allFlashCardSets;
 
-    FlashBook(){
+    public FlashBook(){
         this.allFlashCardSets = new HashMap<>();
     }
 
-    FlashBook(HashMap<String, FlashCardSet> flashCards){
+    public FlashBook(HashMap<String, FlashCardSet> flashCards){
         this.allFlashCardSets = flashCards;
+    }
+
+    public void addFlashCardSet(String module) {
+        allFlashCardSets.put(module, new FlashCardSet(module));
     }
 
     public FlashCardSet getFlashCardSet(String module) {
