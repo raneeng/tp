@@ -1,8 +1,8 @@
 package seedu.duke.flashutils.utils;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.InvalidCommand;
+import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.Command;
+import seedu.duke.flashutils.commands.InvalidCommand;
 
 public class Parser {
     public static Command parseUserInput(String input) {
