@@ -1,6 +1,5 @@
 package seedu.duke.flashutils.types;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

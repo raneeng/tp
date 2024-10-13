@@ -11,16 +11,18 @@ public class Parser {
         switch (splitInput[0].toLowerCase()) {
         case "add":
             return prepareAdd(input, flashBook);
-        default: return new InvalidCommand();
+        default:
+            return new InvalidCommand();
         }
     }
+
     private static Command prepareAdd(String input, FlashBook flashBook) {
-            String module = input.substring(input.indexOf("--m") + 3, input.indexOf("--q") - 1);
-            String question = input.substring(input.indexOf("--q") + 3, input.indexOf("--a") - 1);
-            String answer = input.substring(input.indexOf("--a") + 3);
-            if (flashBook.getFlashCardSet(module) == null) {
-                flashBook.addFlashCardSet(module);
-            }
-            return new AddCommand(flashBook.getFlashCardSet(module), question, answer);
+        String module = input.substring(input.indexOf("--m") + 3, input.indexOf("--q") - 1);
+        String question = input.substring(input.indexOf("--q") + 3, input.indexOf("--a") - 1);
+        String answer = input.substring(input.indexOf("--a") + 3);
+        if (flashBook.getFlashCardSet(module) == null) {
+            flashBook.addFlashCardSet(module);
+        }
+        return new AddCommand(flashBook.getFlashCardSet(module), question, answer);
     }
 }
