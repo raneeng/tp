@@ -8,13 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Storage {
     private final File directory;
 
-    Storage(String directoryPath) {
+    public Storage(String directoryPath) {
         this.directory = new File(directoryPath);
         createDir();
     }

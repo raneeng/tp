@@ -1,6 +1,5 @@
 package seedu.duke.flashutils.commands;
 
-import java.lang.annotation.Target;
 
 /**
  * Displays flashcards for specified flashcard set.

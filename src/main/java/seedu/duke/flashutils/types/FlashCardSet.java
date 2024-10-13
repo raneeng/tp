@@ -2,6 +2,9 @@ package seedu.duke.flashutils.types;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of flashcards of the same module
+ */
 public class FlashCardSet {
 
     private final ArrayList<Card> flashCardSet;
@@ -27,10 +30,12 @@ public class FlashCardSet {
 
     public void addCard(Card toAdd) {
         // TODO
+        flashCardSet.add(toAdd);
     }
 
     public void removeCard(Card toRemove) {
         // TODO
+        flashCardSet.remove(toRemove);
     }
 
     // Displays all flashcards (view command) in FLashCardSet

@@ -6,12 +6,10 @@ import seedu.duke.flashutils.types.FlashCardSet;
 /**
  * Represents an executable command.
  */
-public class Command {
-
+public abstract class Command {
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
     protected FlashCardSet targetSet;
     private int targetIndex = -1;
-
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     // Constructors
     protected Command(int targetIndex) {
@@ -39,7 +37,7 @@ public class Command {
     }
 
     public Card getTargetCard() throws IndexOutOfBoundsException {
-       return targetSet.getFlashCardSet().get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
+        return targetSet.getFlashCardSet().get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
     /**
@@ -48,5 +46,4 @@ public class Command {
     public CommandResult execute() {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
-
 }
