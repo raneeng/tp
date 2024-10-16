@@ -18,6 +18,6 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute() {
         targetSet.viewFlashCards();
-        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.getModuleName()));
     }
 }
