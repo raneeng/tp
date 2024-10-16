@@ -1,6 +1,7 @@
 package seedu.duke.flashutils.utils;
 
 import seedu.duke.flashutils.types.Card;
+import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 import java.io.File;
@@ -63,8 +64,8 @@ public class Storage {
         }
     }
 
-    public void writeFlashCardToFile(HashMap<String, FlashCardSet> flashCard){
-        flashCard.forEach((module,flashCardSet)-> {
+    public void writeFlashBookToFile(FlashBook flashBook){
+        flashBook.getAllFlashCardSets().forEach((module, flashCardSet)-> {
             File flashCardSetFile = new File(directory, module+".txt");
             createFile(flashCardSetFile);
             try {
@@ -85,7 +86,7 @@ public class Storage {
 
         if (files != null && files.length > 0) {
             for (File file : files) {
-                String module = file.getName().split(".")[0];
+                String module = file.getName().split("\\.")[0];
                 flashCard.put(module,readFlashCardSetFromFile(module, file));
             }
         } else {

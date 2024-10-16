@@ -1,6 +1,7 @@
 package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.FlashCardSet;
+import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Displays flashcards for specified flashcard set.
@@ -16,7 +17,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(Storage storage) {
         targetSet.viewFlashCards();
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
