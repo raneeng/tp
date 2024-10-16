@@ -31,13 +31,13 @@ public class Parser {
     public static Command parseCommand(String input) {
         CommandType commandType = parseCommandType(input);
         return switch (commandType) {
-            case Add -> createAddCommand(input);
-            case Delete -> createDeleteCommand(input);
-            case Edit -> createEditCommand(input);
-            case View -> createViewCommand(input);
-            case FlashBang -> createFlashbangCommand(input);
-            case Quit -> createQuitCommand();
-            default -> new InvalidCommand();
+        case Add -> createAddCommand(input);
+        case Delete -> createDeleteCommand(input);
+        case Edit -> createEditCommand(input);
+        case View -> createViewCommand(input);
+        case FlashBang -> createFlashbangCommand(input);
+        case Quit -> createQuitCommand();
+        default -> new InvalidCommand();
         };
     }
 
