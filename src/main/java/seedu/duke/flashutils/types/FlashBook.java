@@ -7,14 +7,27 @@ import java.util.HashMap;
  */
 public class FlashBook {
 
+    private static FlashBook instance = new FlashBook();
+
     private final HashMap<String, FlashCardSet> allFlashCardSets;
 
-    public FlashBook(){
+    private FlashBook() {
         this.allFlashCardSets = new HashMap<>();
     }
 
-    public FlashBook(HashMap<String, FlashCardSet> flashCards){
+    private FlashBook(HashMap<String, FlashCardSet> flashCards) {
         this.allFlashCardSets = flashCards;
+    }
+
+    public static FlashBook getInstance() {
+        if (instance == null) {
+            instance = new FlashBook();
+        }
+        return instance;
+    }
+
+    public static void setInstance(HashMap<String, FlashCardSet> flashCards) {
+        instance = new FlashBook(flashCards);
     }
 
     public void addFlashCardSet(String module) {
@@ -22,6 +35,9 @@ public class FlashBook {
     }
 
     public FlashCardSet getFlashCardSet(String module) {
+        if (allFlashCardSets.get(module) == null) {
+            return new FlashCardSet(module);
+        }
         return allFlashCardSets.get(module);
     }
 

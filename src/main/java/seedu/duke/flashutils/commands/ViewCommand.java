@@ -1,17 +1,20 @@
 package seedu.duke.flashutils.commands;
 
 
+import seedu.duke.flashutils.types.FlashBook;
+import seedu.duke.flashutils.types.FlashCardSet;
+
 /**
  * Displays flashcards for specified flashcard set.
  */
 public class ViewCommand extends Command {
-
-    public static final String COMMAND_WORD = "view";
-
     // Confirmation message to be displayed to user, with placeholder for flashCardSet details
     public static final String SUCCESS_MESSAGE = "All flashcards have been displayed for set: %1$s";
 
-    public ViewCommand() {
+    private FlashCardSet targetSet;
+
+    public ViewCommand(FlashCardSet module) {
+        this.targetSet = module;
     }
 
     @Override
