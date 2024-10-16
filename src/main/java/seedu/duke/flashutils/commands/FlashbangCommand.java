@@ -1,6 +1,7 @@
 package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.FlashCardSet;
+import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Starts a FlashBang session, where questions for each flashcard are displayed
@@ -15,7 +16,7 @@ public class FlashbangCommand extends Command {
 
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(Storage storage) {
         return new CommandResult("Flashbang successfully executed");
     }
 }

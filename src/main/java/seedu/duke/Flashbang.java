@@ -34,7 +34,7 @@ public class Flashbang {
         while (!input.equals("quit")) {
             input = ui.getRequest();
             Command command = Parser.parseCommand(input);
-            CommandResult result = command.execute();
+            CommandResult result = command.execute(storage);
             ui.printResponse(result.feedbackToUser);
         }
     }

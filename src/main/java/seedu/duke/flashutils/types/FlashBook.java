@@ -30,13 +30,17 @@ public class FlashBook {
         instance = new FlashBook(flashCards);
     }
 
+    public HashMap<String, FlashCardSet> getAllFlashCardSets() {
+        return allFlashCardSets;
+    }
+
     public void addFlashCardSet(String module) {
         allFlashCardSets.put(module, new FlashCardSet(module));
     }
 
     public FlashCardSet getFlashCardSet(String module) {
         if (allFlashCardSets.get(module) == null) {
-            return new FlashCardSet(module);
+            addFlashCardSet(module);
         }
         return allFlashCardSets.get(module);
     }

@@ -2,6 +2,7 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
+import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Updates information in an existing flashcard.
@@ -21,7 +22,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(Storage storage) {
         cardToEdit.setQuestion(newCard.getQuestion());
         cardToEdit.setAnswer(newCard.getAnswer());
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));
