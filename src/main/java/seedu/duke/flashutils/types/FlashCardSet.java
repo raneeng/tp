@@ -46,8 +46,14 @@ public class FlashCardSet {
     }
 
     // Displays all flashcards (view command) in FLashCardSet
-    public void viewFlashCards() {
-        // TODO
-
+    public void viewFlashCards(String module) {
+        String currentModule = getModuleName(); 
+        if (currentModule.equals(module)) {
+            for (Card flashCard : flashCardSet) {
+                System.out.println(flashCard); 
+            }
+        } else {
+            System.out.println("No flashcards found for this module."); 
+        }
     }
 }
