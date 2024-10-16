@@ -22,6 +22,14 @@ public class AddCommand extends Command {
         this.cardToAdd = toAdd;
     }
 
+    public Card getCardToAdd() {
+        return cardToAdd;
+    }
+
+    public FlashCardSet getTargetSet() {
+        return targetSet;
+    }
+
     @Override
     public CommandResult execute() {
         targetSet.addCard(cardToAdd);
