@@ -8,7 +8,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
  */
 public class EditCommand extends Command {
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully edited flashcard: %1$s";
+    public static final String SUCCESS_MESSAGE = "Successfully edited flashcard: \n%1$s";
 
     private Card cardToEdit;
     private Card newCard;
