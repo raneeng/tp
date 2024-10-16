@@ -16,13 +16,13 @@ public class Parser {
         Matcher matcher = COMMAND_PATTERN.matcher(input);
         if (matcher.find()) {
             return switch (matcher.group(1).toLowerCase()) {
-                case "add" -> CommandType.Add;
-                case "delete" -> CommandType.Delete;
-                case "edit" -> CommandType.Edit;
-                case "view" -> CommandType.View;
-                case "flashbang" -> CommandType.FlashBang;
-                case "quit" -> CommandType.Quit;
-                default -> CommandType.Invalid;
+            case "add" -> CommandType.Add;
+            case "delete" -> CommandType.Delete;
+            case "edit" -> CommandType.Edit;
+            case "view" -> CommandType.View;
+            case "flashbang" -> CommandType.FlashBang;
+            case "quit" -> CommandType.Quit;
+            default -> CommandType.Invalid;
             };
         }
         return CommandType.Invalid;
