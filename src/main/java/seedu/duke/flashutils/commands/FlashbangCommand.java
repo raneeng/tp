@@ -1,7 +1,9 @@
 package seedu.duke.flashutils.commands;
 
+import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
+import seedu.duke.flashutils.utils.Ui;
 
 /**
  * Starts a FlashBang session, where questions for each flashcard are displayed
@@ -14,9 +16,18 @@ public class FlashbangCommand extends Command {
         this.targetSet = targetSet;
     }
 
-
     @Override
     public CommandResult execute(Storage storage) {
-        return new CommandResult("Flashbang successfully executed");
+        int no = 0;
+        for (Card card : targetSet) {
+            Ui.printResponse("Flashcard no." + no + "\n\t" + card.getQuestion());
+            Ui.printResponse("Reveal the answer? (y/n)");
+            String ans = Ui.getRequest();
+            if (ans.equals("y")) {
+                Ui.printResponse("Answer:\n\t" + card.getAnswer());
+            }
+            no++;
+        }
+        return new CommandResult("Successful flashbang.");
     }
 }

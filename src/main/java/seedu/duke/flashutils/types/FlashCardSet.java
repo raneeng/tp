@@ -1,11 +1,12 @@
 package seedu.duke.flashutils.types;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Represents the list of flashcards of the same module
  */
-public class FlashCardSet {
+public class FlashCardSet implements Iterable<Card> {
 
     private final ArrayList<Card> flashCardSet;
     private final String moduleName;
@@ -55,5 +56,11 @@ public class FlashCardSet {
         } else {
             System.out.println("No flashcards found for this module."); 
         }
+    }
+
+
+    @Override
+    public Iterator<Card> iterator() {
+        return flashCardSet.iterator();
     }
 }

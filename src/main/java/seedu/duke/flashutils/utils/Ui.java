@@ -21,7 +21,7 @@ public class Ui {
      *
      * @param text The message to be printed.
      */
-    public void printResponse(String text) {
+    public static void printResponse(String text) {
         String lineSeparator = "____________________________________________________________";
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
@@ -33,7 +33,7 @@ public class Ui {
      *
      * @return The raw string input from the user.
      */
-    public String getRequest() {
+    public static String getRequest() {
         return scanner.nextLine();
     }
 }

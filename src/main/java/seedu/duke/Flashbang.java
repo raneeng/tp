@@ -32,10 +32,10 @@ public class Flashbang {
     private void run() {
         String input = "";
         while (!input.equals("quit")) {
-            input = ui.getRequest();
+            input = Ui.getRequest();
             Command command = Parser.parseCommand(input);
             CommandResult result = command.execute(storage);
-            ui.printResponse(result.feedbackToUser);
+            Ui.printResponse(result.feedbackToUser);
         }
     }
 
