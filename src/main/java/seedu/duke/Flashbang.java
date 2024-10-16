@@ -5,29 +5,41 @@ import seedu.duke.flashutils.commands.CommandResult;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.utils.Parser;
 import seedu.duke.flashutils.utils.Storage;
+import seedu.duke.flashutils.utils.Ui;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Flashbang {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        Storage storage = new Storage("./data");
-        FlashBook flashBook = new FlashBook();
+
+    private Ui ui;
+    private Storage storage;
+    private FlashBook flashBook;
+
+    private Flashbang(String dataPath) {
+        ui = new Ui();
+        storage = new Storage(dataPath);
         try {
-            flashBook = new FlashBook(storage.readFlashCardsFromFile());
+            FlashBook.setInstance(storage.readFlashCardsFromFile());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        flashBook = FlashBook.getInstance();
+    }
+
+    private void run() {
         String input = "";
         while (!input.equals("quit")) {
-            input = scan.nextLine();
-            Command command = Parser.parseUserInput(input, flashBook);
+            input = ui.getRequest();
+            Command command = Parser.parseCommand(input);
             CommandResult result = command.execute();
-            System.out.println(result.feedbackToUser);
+            ui.printResponse(result.feedbackToUser);
         }
+    }
+
+    public static void main(String[] args) {
+        new Flashbang("./data").run();
     }
 }

@@ -8,24 +8,31 @@ import java.util.ArrayList;
 public class FlashCardSet {
 
     private final ArrayList<Card> flashCardSet;
-    private final String module;
+    private final String moduleName;
 
     public FlashCardSet(String module) {
-        this.module = module;
+        this.moduleName = module;
         this.flashCardSet = new ArrayList<>();
     }
 
     public FlashCardSet(String module, ArrayList<Card> flashCardSet) {
-        this.module = module;
+        this.moduleName = module;
         this.flashCardSet = flashCardSet;
     }
 
-    public String getModule() {
-        return this.module;
+    public String getModuleName() {
+        return this.moduleName;
     }
 
     public ArrayList<Card> getFlashCardSet() {
         return this.flashCardSet;
+    }
+
+    public Card getCard(int cardIndex) {
+        if (cardIndex >= this.flashCardSet.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return this.flashCardSet.get(cardIndex);
     }
 
     public void addCard(Card toAdd) {
