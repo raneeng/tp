@@ -31,6 +31,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return question + ": /n" + answer;
+        return question + ": \n" + answer;
     }
 }
