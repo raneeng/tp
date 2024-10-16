@@ -1,6 +1,14 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.*;
+import seedu.duke.flashutils.commands.Command;
+import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.DeleteCommand;
+import seedu.duke.flashutils.commands.EditCommand;
+import seedu.duke.flashutils.commands.FlashbangCommand;
+import seedu.duke.flashutils.commands.InvalidCommand;
+import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.ViewCommand;
+
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
@@ -10,10 +18,10 @@ import java.util.regex.Pattern;
 public class Parser {
     private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid }
 
-    private static final Pattern COMMAND_PATTERN = Pattern.compile("^(add|delete|edit|view|flashbang|quit)", Pattern.CASE_INSENSITIVE);
-
     private static CommandType parseCommandType(String input) {
-        Matcher matcher = COMMAND_PATTERN.matcher(input);
+        String commandKeyword = "^(add|delete|edit|view|flashbang|quit)";
+        Pattern commandPattern = Pattern.compile(commandKeyword);
+        Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
             return switch (matcher.group(1).toLowerCase()) {
             case "add" -> CommandType.Add;

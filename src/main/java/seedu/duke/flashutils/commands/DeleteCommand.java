@@ -1,7 +1,6 @@
 package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
-import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 /**

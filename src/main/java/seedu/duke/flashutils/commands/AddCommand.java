@@ -1,19 +1,17 @@
 package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
-import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 /**
  * Adds a flashcard to flashcard set.
  */
 public class AddCommand extends Command {
-    private Card cardToAdd;
-    private FlashCardSet targetSet;
-
     // Confirmation message to be displayed to user, with placeholder for flashcard details
     public static final String SUCCESS_MESSAGE = "Successfully added flashcard: %1$s";
 
+    private Card cardToAdd;
+    private FlashCardSet targetSet;
 
     public AddCommand(FlashCardSet module, String question, String answer) {
         cardToAdd = new Card(question, answer);

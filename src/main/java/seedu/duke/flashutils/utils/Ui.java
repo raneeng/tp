@@ -12,9 +12,7 @@ public class Ui {
     /**
      * Initializes the scanner object for reading user input.
      */
-    public Ui() {
-        scanner = new Scanner(System.in);
-    }
+    public Ui() { scanner = new Scanner(System.in); }
 
     /**
      * Prints a formatted response to the console with line separators.
@@ -33,7 +31,5 @@ public class Ui {
      *
      * @return The raw string input from the user.
      */
-    public String getRequest() {
-        return scanner.nextLine();
-    }
+    public String getRequest() { return scanner.nextLine(); }
 }
