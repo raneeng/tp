@@ -36,4 +36,16 @@ public class Ui {
     public static String getRequest() {
         return scanner.nextLine();
     }
+
+    public static void displayGetNewPromptFromUser(String prompt) {
+        System.out.println("Enter new "+prompt" :");
+    }
+
+    public static void displayConfirmationQuestion(String prompt) {
+        System.out.println("Do you want to change "+prompt+" (y/n):");
+    }
+
+    public static void displayOldStoredValue(String prompt, String value) {
+        System.out.println("Old "+prompt+" : "+value);
+    }
 }
