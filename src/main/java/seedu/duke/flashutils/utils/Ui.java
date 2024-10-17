@@ -38,7 +38,7 @@ public class Ui {
     }
 
     public static void displayGetNewPromptFromUser(String prompt) {
-        System.out.println("Enter new "+prompt" :");
+        System.out.println("Enter new "+prompt+" :");
     }
 
     public static void displayConfirmationQuestion(String prompt) {
