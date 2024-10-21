@@ -9,12 +9,16 @@ import seedu.duke.flashutils.types.FlashCardSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Scanner;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
+    private final String directoryPath = "./data";
+    private final File testFile = new File(directoryPath+"/FunModule.txt");
 
     @Test
     void writeAndReadFlashCardsTest() throws IOException {
@@ -24,7 +28,6 @@ class StorageTest {
         FlashCardSet testSet = flashBook.getFlashCardSet("FunModule");
         testSet.addCard(new Card("is water wet?", "no?"));
         storage.writeFlashBookToFile(flashBook);
-        File testFile = new File("./data/FunModule.txt");
         assertTrue(testFile.exists());
         Scanner scanner;
         try {
@@ -44,5 +47,10 @@ class StorageTest {
         assertTrue(testSet2.getCard(0).getAnswer().equals(actualSet.getCard(0).getAnswer())
                 && testSet2.getCard(0).getQuestion().equals(actualSet.getCard(0).getQuestion()));
         scanner.close();
+        if (Files.deleteIfExists(testFile.toPath())) {
+            System.out.println("file deleted successfully");
+        } else {
+            System.out.println("error");
+        }
     }
 }
