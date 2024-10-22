@@ -14,7 +14,7 @@ public class AddCommandTest {
         String testQuestion = "Some question";
         String testAnswer = "Some answer";
         FlashCardSet testModule = new FlashCardSet("Some module");
-        AddCommand command = new AddCommand(testModule, testQuestion, testAnswer);
+        AddCommand command = new AddCommand(testModule, new Card(testQuestion, testAnswer));
 
         assertEquals(testQuestion, command.getCardToAdd().getQuestion());
         assertEquals(testAnswer, command.getCardToAdd().getAnswer());

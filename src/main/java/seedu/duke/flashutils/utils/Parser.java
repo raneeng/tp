@@ -9,6 +9,7 @@ import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.commands.QuitCommand;
 import seedu.duke.flashutils.commands.ViewCommand;
 
+import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
@@ -50,14 +51,18 @@ public class Parser {
     }
 
     public static Command createAddCommand(String input) {
-        Pattern addPattern = Pattern.compile("--m\\s+(.+?)\\s+--q\\s+(.+?)\\s+--a\\s+(.+)");
+        Pattern addPattern = Pattern.compile("--m\\s+(.+?)(?:\\s+--t\\s+(.+))?\\s+--q\\s+(.+?)\\s+--a\\s+(.+)");
         Matcher matcher = addPattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
+            String topic = matcher.group(2);
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            String question = matcher.group(2);
-            String answer = matcher.group(3);
-            return new AddCommand(module, question, answer);
+            String question = matcher.group(3);
+            String answer = matcher.group(4);
+            if (topic == null) {
+                topic = "";
+            }
+            return new AddCommand(module, new Card(question, answer, topic));
         } else {
             return new InvalidCommand();
         }

@@ -26,7 +26,7 @@ class StorageTest {
         FlashBook flashBook = FlashBook.getInstance();
         flashBook.addFlashCardSet("FunModule");
         FlashCardSet testSet = flashBook.getFlashCardSet("FunModule");
-        testSet.addCard(new Card("is water wet?", "no?"));
+        testSet.addCard(new Card("is water wet?", "no?", "wetness"));
         storage.writeFlashBookToFile(flashBook);
         assertTrue(testFile.exists());
         Scanner scanner;
@@ -35,7 +35,7 @@ class StorageTest {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        assertEquals("is water wet?,no?", scanner.nextLine());
+        assertEquals("is water wet? | no? | wetness", scanner.nextLine());
         HashMap<String, FlashCardSet> testBook;
         try {
             testBook = storage.readFlashCardsFromFile();

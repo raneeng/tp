@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Storage {
     private final File directory;
@@ -31,9 +33,17 @@ public class Storage {
         }
     }
 
-    private Card cardFormatter(String line){
-        String[] lineArgs = line.split(",");
-        return new Card(lineArgs[0],lineArgs[1]);
+    private Card cardFormatter(String line) {
+        Pattern cardPattern = Pattern.compile(
+                "(.+?)\\s*\\|\\s*(.+?)\\s*\\|\\s*(.+?)?");
+        Matcher cardMatcher = cardPattern.matcher(line);
+        if (cardMatcher.matches()) {
+            String question = cardMatcher.group(1);
+            String answer = cardMatcher.group(2);
+            String topic = cardMatcher.group(3);
+            return new Card(question, answer, topic);
+        }
+        return null;
     }
 
     private FlashCardSet readFlashCardSetFromFile(String module, File flashCardSetFile) throws IOException {

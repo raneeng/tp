@@ -41,5 +41,6 @@ public class Flashbang {
 
     public static void main(String[] args) {
         new Flashbang("./data").run();
+
     }
 }
