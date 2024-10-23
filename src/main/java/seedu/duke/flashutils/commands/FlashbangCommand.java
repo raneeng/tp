@@ -30,4 +30,8 @@ public class FlashbangCommand extends Command {
         }
         return new CommandResult("Successful flashbang.");
     }
+
+    public FlashCardSet getTargetSet() {
+        return targetSet;
+    }
 }
