@@ -87,4 +87,12 @@ public class EditCommand extends Command {
         cardToEdit.setAnswer(newCard.getAnswer());
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));
     }
+
+    public FlashCardSet getTargetSet() {
+        return targetSet;
+    }
+
+    public Card getCardToAdd() {
+        return cardToEdit;
+    }
 }
