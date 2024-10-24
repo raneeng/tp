@@ -1,6 +1,5 @@
 package seedu.duke.flashutils.types;
 
-import seedu.duke.flashutils.commands.CommandResult;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
@@ -62,16 +61,39 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public void performFlashBang() {
-        int i = 0;
+        int num = 0;
+        int correctAnswers = 0;
+        int wrongAnswers = 0;
+
         for (Card card : flashCardSet) {
-            Ui.printResponse("Flashcard no." + i + "\n\t" + card.getQuestion());
+            Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
-            String ans = Ui.getRequest();
-            if (ans.equals("y")) {
+            String revealAnswer = Ui.getRequest();
+            if (revealAnswer.equals("y")) {
                 Ui.printResponse("Answer:\n\t" + card.getAnswer());
             }
-            i++;
+
+            // For tracking of correct/wrong answers
+            Ui.printResponse("Did you get the correct answer? (y/n)");
+            String answerCorrect = Ui.getRequest();
+            if (answerCorrect.equals("y")) {
+                correctAnswers++;
+
+            } else if (answerCorrect.equals("n")) {
+                wrongAnswers++;
+
+            } else {
+                Ui.printResponse("Please enter 'y' or 'n'.");
+
+            }
+
+            num++;
         }
+
+        // Calculate percentage of right/wrong answers
+        int totalAnswers = correctAnswers + wrongAnswers;
+        double correctPercentage = (double) correctAnswers / totalAnswers * 100;
+        Ui.printResponse("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
     }
 
     @Override
