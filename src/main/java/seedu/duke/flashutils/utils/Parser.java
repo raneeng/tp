@@ -62,6 +62,7 @@ public class Parser {
             if (topic == null) {
                 topic = "";
             }
+            assert !(module == null || question == null || answer == null);
             return new AddCommand(module, new Card(question, answer, topic));
         } else {
             return new InvalidCommand();

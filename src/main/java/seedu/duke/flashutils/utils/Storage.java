@@ -37,6 +37,8 @@ public class Storage {
         Pattern cardPattern = Pattern.compile(
                 "(.+?)\\s*\\|\\s*(.+?)\\s*\\|\\s*(.+?)?");
         Matcher cardMatcher = cardPattern.matcher(line);
+        boolean isMatch = cardMatcher.matches();
+        assert isMatch: "Text Format Problem in File";
         if (cardMatcher.matches()) {
             String question = cardMatcher.group(1);
             String answer = cardMatcher.group(2);
