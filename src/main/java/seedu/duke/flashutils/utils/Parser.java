@@ -57,6 +57,7 @@ public class Parser {
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
             String question = matcher.group(2);
             String answer = matcher.group(3);
+            assert !(module == null || question == null || answer == null);
             return new AddCommand(module, question, answer);
         } else {
             return new InvalidCommand();

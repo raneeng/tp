@@ -15,6 +15,7 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
+    private final File testFile = new File("./data/FunModule.txt");
 
     @Test
     void writeAndReadFlashCardsTest() throws IOException {
@@ -24,7 +25,6 @@ class StorageTest {
         FlashCardSet testSet = flashBook.getFlashCardSet("FunModule");
         testSet.addCard(new Card("is water wet?", "no?"));
         storage.writeFlashBookToFile(flashBook);
-        File testFile = new File("./data/FunModule.txt");
         assertTrue(testFile.exists());
         Scanner scanner;
         try {
@@ -44,5 +44,11 @@ class StorageTest {
         assertTrue(testSet2.getCard(0).getAnswer().equals(actualSet.getCard(0).getAnswer())
                 && testSet2.getCard(0).getQuestion().equals(actualSet.getCard(0).getQuestion()));
         scanner.close();
+    }
+    @AfterEach
+    public void cleanFile() throws IOException {
+        if (!testFile.delete()) {
+            System.out.println("error");
+        }
     }
 }
