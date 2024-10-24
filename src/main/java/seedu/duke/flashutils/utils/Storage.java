@@ -46,6 +46,7 @@ public class Storage {
                 Card card = cardFormatter(scanner.nextLine());
                 cards.add(card);
             }
+            scanner.close();
         } catch (IOException e) {
             throw new IOException("An error occurred while reading from the file.");
         }
