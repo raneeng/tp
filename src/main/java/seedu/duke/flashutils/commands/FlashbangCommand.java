@@ -12,23 +12,18 @@ import seedu.duke.flashutils.utils.Ui;
 public class FlashbangCommand extends Command {
     private FlashCardSet targetSet;
 
+    // Confirmation message to be displayed to user, with placeholder for flashcard details
+    public static final String SUCCESS_MESSAGE = "Successful FlashBang for flashcard set: \n%1$s";
+
     public FlashbangCommand(FlashCardSet targetSet) {
         this.targetSet = targetSet;
     }
 
     @Override
     public CommandResult execute(Storage storage) {
-        int no = 0;
-        for (Card card : targetSet) {
-            Ui.printResponse("Flashcard no." + no + "\n\t" + card.getQuestion());
-            Ui.printResponse("Reveal the answer? (y/n)");
-            String ans = Ui.getRequest();
-            if (ans.equals("y")) {
-                Ui.printResponse("Answer:\n\t" + card.getAnswer());
-            }
-            no++;
-        }
-        return new CommandResult("Successful flashbang.");
+        targetSet.performFlashBang();
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
+
     }
 
     public FlashCardSet getTargetSet() {
