@@ -18,10 +18,17 @@ public class DeleteCommand extends Command {
         targetCard = targetSet.getCard(cardIndex);
     }
 
+    public FlashCardSet getTargetSet() {
+        return targetSet;
+    }
+
+    public Card getTargetCard() {
+        return targetCard;
+    }
+
     @Override
     public CommandResult execute(Storage storage) {
         targetSet.removeCard(targetCard);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
     }
-
 }

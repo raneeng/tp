@@ -27,4 +27,8 @@ public class ViewCommand extends Command {
         targetSet.viewFlashCards(currentModule);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
+
+    public FlashCardSet getTargetSet() {
+        return targetSet;
+    }
 }
