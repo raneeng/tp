@@ -32,10 +32,14 @@ public class Flashbang {
     private void run() {
         String input = "";
         while (!input.equals("quit")) {
-            input = Ui.getRequest();
-            Command command = Parser.parseCommand(input);
-            CommandResult result = command.execute(storage);
-            Ui.printResponse(result.feedbackToUser);
+            try {
+                input = Ui.getRequest();
+                Command command = Parser.parseCommand(input);
+                CommandResult result = command.execute(storage);
+                Ui.printResponse(result.feedbackToUser);
+            } catch (IllegalArgumentException e) {
+                Ui.printResponse(e.getMessage());
+            }
         }
     }
 

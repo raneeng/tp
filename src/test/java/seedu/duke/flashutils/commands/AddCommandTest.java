@@ -5,7 +5,6 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddCommandTest {
 
