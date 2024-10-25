@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
@@ -22,7 +21,7 @@ class StorageTest {
 
     @Test
     void writeAndReadFlashCardsTest() throws IOException {
-        Storage storage = new Storage("./data");
+        Storage storage = new Storage(directoryPath);
         FlashBook flashBook = FlashBook.getInstance();
         flashBook.addFlashCardSet("FunModule");
         FlashCardSet testSet = flashBook.getFlashCardSet("FunModule");
@@ -47,6 +46,9 @@ class StorageTest {
         assertTrue(testSet2.getCard(0).getAnswer().equals(actualSet.getCard(0).getAnswer())
                 && testSet2.getCard(0).getQuestion().equals(actualSet.getCard(0).getQuestion()));
         scanner.close();
+    }
+    @AfterEach
+    public void cleanFile() throws IOException {
         if (Files.deleteIfExists(testFile.toPath())) {
             System.out.println("file deleted successfully");
         } else {
