@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Flashbang {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.duke.Flashbang application.
      */
 
     private Ui ui;
@@ -40,6 +40,9 @@ public class Flashbang {
         }
     }
 
+    /**
+     * Main function to run the Flashbang app
+     */
     public static void main(String[] args) {
         new Flashbang("./data").run();
     }

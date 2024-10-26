@@ -7,6 +7,13 @@ import seedu.duke.flashutils.utils.Storage;
  * Terminates the program.
  */
 public class QuitCommand extends Command {
+    
+    /**
+     * Prints result of the command, 
+     * which includes the success message
+     * 
+     * @return The result of the command
+     */
     @Override
     public CommandResult execute(Storage storage) {
         storage.writeFlashBookToFile(FlashBook.getInstance());

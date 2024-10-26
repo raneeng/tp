@@ -37,7 +37,8 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message
+     * Prints welcome message when users enter the app 
+     * The welcome message includes the app's logo and introduction
      */
     public static void welcomeMessage() {
         String logo = "FlashBang"; 
@@ -68,14 +69,27 @@ public class Ui {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints the announcement to get the prompt from user
+     * @param prompt
+     */
     public static void displayGetNewPromptFromUser(String prompt) {
         System.out.println("Enter new "+prompt+" :");
     }
 
+    /**
+     * Prints the confirmation question
+     * @param prompt
+     */
     public static void displayConfirmationQuestion(String prompt) {
         System.out.println("Do you want to change "+prompt+" (y/n):");
     }
 
+    /**
+     * Prints the old value
+     * @param prompt
+     * @param value
+     */
     public static void displayOldStoredValue(String prompt, String value) {
         System.out.println("Old "+prompt+" : "+value);
     }
