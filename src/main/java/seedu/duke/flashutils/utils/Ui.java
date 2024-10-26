@@ -17,6 +17,36 @@ public class Ui {
     }
 
     /**
+     * Displays all available commands for users
+     */
+    public static void displayCommands() {
+        String availableCommands = "Available Commands: \n" 
+                                + " 1. Add a flashcard: \n"
+                                + " \t add --m [Module Name] --q [Question] --a [Answer] \n" 
+                                + " 2. View all flashcards of a module: \n"
+                                + " \t view --m [Module Name] \n"
+                                + " 3. Delete a flashcard: \n"
+                                + " \t delete --m [Module Name] --i [Index] \n"
+                                + " 4. Edit a flashcard: \n"
+                                + " \t edit --m [Module Name] --i [Index] —-q [New Question] —-a [New Answer] \n"
+                                + " 5. Flashbang - view all the flashcards of a module without seeing the answers: \n" 
+                                + "\t flashbang --m [Module Name] \n"
+                                + " 6. Quit the app: \n"
+                                + " \t quit \n"; 
+        System.out.println(availableCommands);
+    }
+
+    /**
+     * Prints welcome message
+     */
+    public static void welcomeMessage() {
+        String logo = "FlashBang"; 
+        String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n"; 
+        System.out.println(logo + "\n" + intro); 
+        displayCommands();
+    }
+
+    /**
      * Prints a formatted response to the console with line separators.
      *
      * @param text The message to be printed.
@@ -26,6 +56,7 @@ public class Ui {
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
         System.out.print(formattedText);
+        displayCommands();
     }
 
     /**
@@ -48,4 +79,5 @@ public class Ui {
     public static void displayOldStoredValue(String prompt, String value) {
         System.out.println("Old "+prompt+" : "+value);
     }
+
 }
