@@ -49,7 +49,7 @@ public class FlashCardSet implements Iterable<Card> {
     // Displays all flashcards (view command) in FLashCardSet
     public void viewFlashCards(String module) {
         String currentModule = getModuleName(); 
-        if (currentModule.equals(module)) {
+        if ((currentModule != null) && (currentModule.equals(module))) {
             for (Card flashCard : flashCardSet) {
                 System.out.println(flashCard); 
             }
@@ -57,7 +57,6 @@ public class FlashCardSet implements Iterable<Card> {
             System.out.println("No flashcards found for this module."); 
         }
     }
-
 
     @Override
     public Iterator<Card> iterator() {
