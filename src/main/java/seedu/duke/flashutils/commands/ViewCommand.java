@@ -24,6 +24,7 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Storage storage) {
+        getModuleToView(); 
         targetSet.viewFlashCards(currentModule);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }

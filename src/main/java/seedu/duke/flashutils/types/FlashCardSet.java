@@ -50,13 +50,13 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     // Displays all flashcards (view command) in FLashCardSet
-    public void viewFlashCards(String moduleName) {
-        String currentModuleName = getModuleName();
-        if (currentModuleName.equals(moduleName)) {
+    public void viewFlashCards(String module) {
+        String currentModule = getModuleName(); 
+        if ((currentModule != null) && (currentModule.equals(module)) && (!flashCardSet.isEmpty())) {
             for (Card flashCard : flashCardSet) {
                 System.out.println(flashCard); 
             }
-        } else {
+        } else if (flashCardSet.isEmpty()) {
             System.out.println("No flashcards found for this module."); 
         }
     }
