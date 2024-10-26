@@ -31,10 +31,12 @@ public class AddCommand extends Command {
     /**
      * Constructs a new Add Command that add an existing card into the module
      * 
-     * @param toAdd
+     * @param cardToAdd 
+     * @param module 
      */
-    public AddCommand(Card toAdd) {
-        this.cardToAdd = toAdd;
+    public AddCommand(FlashCardSet module, Card cardToAdd) {
+        this.cardToAdd = cardToAdd;
+        this.targetSet = module;
     }
 
     /**

@@ -5,7 +5,6 @@ import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
 
 import static seedu.duke.flashutils.utils.Ui.*;
-import static seedu.duke.flashutils.utils.Ui.getRequest;
 
 /**
  * Updates information in an existing flashcard.
