@@ -30,6 +30,7 @@ public class Flashbang {
     }
 
     private void run() {
+        Ui.welcomeMessage(); 
         String input = "";
         while (!input.equals("quit")) {
             input = Ui.getRequest();
