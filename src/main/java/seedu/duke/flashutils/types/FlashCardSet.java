@@ -1,5 +1,8 @@
 package seedu.duke.flashutils.types;
 
+import seedu.duke.flashutils.commands.CommandResult;
+import seedu.duke.flashutils.utils.Ui;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -55,6 +58,19 @@ public class FlashCardSet implements Iterable<Card> {
             }
         } else if (flashCardSet.isEmpty()) {
             System.out.println("No flashcards found for this module."); 
+        }
+    }
+
+    public void performFlashBang() {
+        int i = 0;
+        for (Card card : flashCardSet) {
+            Ui.printResponse("Flashcard no." + i + "\n\t" + card.getQuestion());
+            Ui.printResponse("Reveal the answer? (y/n)");
+            String ans = Ui.getRequest();
+            if (ans.equals("y")) {
+                Ui.printResponse("Answer:\n\t" + card.getAnswer());
+            }
+            i++;
         }
     }
 
