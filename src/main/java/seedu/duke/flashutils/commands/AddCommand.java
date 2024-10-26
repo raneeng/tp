@@ -14,13 +14,9 @@ public class AddCommand extends Command {
     private Card cardToAdd;
     private FlashCardSet targetSet;
 
-    public AddCommand(FlashCardSet module, String question, String answer) {
-        cardToAdd = new Card(question, answer);
+    public AddCommand(FlashCardSet module, Card cardToAdd) {
+        this.cardToAdd = cardToAdd;
         this.targetSet = module;
-    }
-
-    public AddCommand(Card toAdd) {
-        this.cardToAdd = toAdd;
     }
 
     public Card getCardToAdd() {
