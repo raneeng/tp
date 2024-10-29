@@ -1,6 +1,8 @@
 package seedu.duke.flashutils.types;
 
+import com.sun.nio.sctp.InvalidStreamException;
 import seedu.duke.flashutils.commands.CommandResult;
+import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
@@ -72,26 +74,26 @@ public class FlashCardSet implements Iterable<Card> {
             Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
             String revealAnswer = Ui.getRequest();
-            if (revealAnswer.equals("y")) {
-                Ui.printResponse("Answer:\n\t" + card.getAnswer());
+
+            boolean validInput = false;
+            while (!validInput) {
+                Ui.printResponse("Did you get the correct answer? (y/n)");
+                String answerCorrect = Ui.getRequest();
+
+                if (answerCorrect.equals("y")) {
+                    correctAnswers++;
+                    validInput = true;
+
+                } else if (answerCorrect.equals("n")) {
+                    wrongAnswers++;
+                    validInput = true;
+
+                } else {
+                    Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
+                }
             }
 
-            // For tracking of correct/wrong answers
-            Ui.printResponse("Did you get the correct answer? (y/n)");
-            String answerCorrect = Ui.getRequest();
-            if (answerCorrect.equals("y")) {
-                correctAnswers++;
-                num++;
-
-            } else if (answerCorrect.equals("n")) {
-                wrongAnswers++;
-                num++;
-
-            } else {
-                Ui.printResponse("Please enter 'y' or 'n'.");
-
-            }
-
+            num++;
         }
 
         // Calculate percentage of right/wrong answers
@@ -105,4 +107,5 @@ public class FlashCardSet implements Iterable<Card> {
     public Iterator<Card> iterator() {
         return flashCardSet.iterator();
     }
+
 }
