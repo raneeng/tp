@@ -15,6 +15,14 @@ public class FlashbangCommand extends Command {
     private final FlashCardSet targetSet;
     private long timerThreshold;
 
+    // Confirmation message to be displayed to user, with placeholder for flashcard details
+    public static final String SUCCESS_MESSAGE = "Successful FlashBang for flashcard set: \n%1$s";
+
+    /**
+     * Constructs the Flashbang Comman with specified target set (module)
+     * 
+     * @param targetSet
+     */
     public FlashbangCommand(FlashCardSet targetSet) {
         this.targetSet = targetSet;
     }
@@ -51,6 +59,17 @@ public class FlashbangCommand extends Command {
         }
 
         return new CommandResult("Successful flashbang.");
+
+    /**
+     * Prints result of the command, 
+     * which includes the success message and the module to be displayed
+     * 
+     * @return The result of the command
+     */
+    @Override
+    public CommandResult execute(Storage storage) {
+        targetSet.performFlashBang();
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
 
     public FlashCardSet getTargetSet() {
