@@ -8,6 +8,17 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Parser component
+Parser's role is to given user input create a command which then can be executed. This particular implementation follows 
+**Factory design pattern**. It exposes a general purpose method for parsing command `parseCommand(String input)` and then it determines
+command types and creates one of the type. Regular expressions are heavily used for extracting information from input.
+More details are presented on a sequence diagram someName.
+
+![Diagram Description](./diagrams/ParsingSequenceDiagram.png)
+
+#### Alternative approaches/Possible improvements:
+- Command factory could be moved to a separate class 
+- Creating a lexer object might be a desirable approach if the commands where much more complex
 
 ## Product scope
 ### Target user profile
