@@ -23,27 +23,80 @@ More details are presented on a sequence diagram someName.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+- Has a need to create flashcards for their studies
+- Needs to be able to test themselves on flashcard content
+- Needs to be able to track how well they understand the modules they take
+- can type fast
+- Prefers typing to mouse interactions
+- Is used to using CLI applications
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Give university students a simple and effective flashcard application which allows them to create flashcards for the
+many modules and topics they have for schools. Flashcards are used to test the student's knowledge and also organise the
+content of the module in a simple and clear way.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
+| Version | As a ... | I want to ...                                             | So that I can ...                                                                     |
+|---------|----------|-----------------------------------------------------------|---------------------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                    | refer to them when I forget how to use the application                                |
+| v1.0    | student  | view existing flashcards                                  | I can test my knowledge to study efficiently                                          |
+| v1.0    | student  | view existing flashcards                                  | I can review and learn material                                                       |
+| v1.0    | crammer  | delete flashcards which im confident at                   | I can focus on my areas of weakness                                                   |
+| v1.0    | student  | review flashcards that I have answered incorrectly        | I can identify my knowledge gaps                                                      |
+| v2.0    | student  | have a timer within the app                               | I am able to time myself taking the quizzes within the app itself for better learning |
+| v2.0    | student  | view all incorrect flashcards in previous quizzes         | I can focus more on my weak areas                                                     | 
+| v2.0    | user     | search for flashcards based on keyword and module         | to test myself on specific topics                                                     |
+| v2.0    | student  | keep track of how many right and wrong answers in quizzes | so I can focus on how well versed I am in a topic                                     |
+| v2.0    | student  | filter flashcards by difficulty                           | I can choose which ones to focus on based on my current level of understanding        |
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Should work on any mainstream OS as long as it has Java `17` or above installed
+* Should be able to handle any number of modules as long as there are no repeated module names
+* A user with strong typing ability should be able to use the application faster than with a mouse
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Flashcard** - a card containing a small amount of information as an aid to learning.
+Contains a question and an answer related to a topic.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+#### Initial launch
+1. Download the jar file and copy into an empty folder
+2. Open the jar file using your command line with the command:
+`java -jar {Path of File}`
+#### Shutdown
+1. Type `quit` to exit the application
+2. Quitting the application also saves all changes made by the user during runtime <br>
+Expected: Application exits and the text files in `./data` are updated accordingly
+#### Adding Flashcards
+1. Adding flashcards into the flash book
+   1. Test case: `add --m CS2113 --q What is OOP? --a Object-Oriented Programming` <br>
+    Expected: A Card with question "What is OOP" and answer "Object-Oriented Programming" in the module "CS2113"
+   2. Test case: `add` <br>
+   Expected: An error is thrown and caught printing out "uh oh bad command"
+   3. Other incorrect add commands to try: `add --q`, `add --a` (with missing fields or empty fields) <br>
+   Expected: Similar to previous
+#### Deleting Flashcards
+##### Prerequisites: There are a several flashcards in the flash book listed out using the view command
+1. Deleting flashcards from the flash book
+   1. Test case: `delete --m CS2113 --i 0` <br>
+   Expected: the first flashcard in the CS2113 flash card set is deleted. Details of the deleted card should be shown
+   2. Test case: `delete` <br>
+   Expected: An error is thrown and caught printing out "uh oh bad command"
+   3. Other incorrect variations to try: `delete --m ModuleNotInList --i 0`, `delete --m` 
+   (with missing fields or modules not in the flash book) <br>
+   Expected: Similar to previous
+#### Flashbang
+##### Prerequisites: There are a several flashcards and flashcard sets in the flash book
+1. Quizzing users on the flashcards in a module
+   1. Test case: `flashbang --m CS2113` <br>
+   Expected: Each question within the module is displayed sequentially 
+   where users are prompted to reveal the answer to the question with `y` or `n` 
+   2. Incorrect variation to try: `flashbang`, `flashbang --m` <br>
+   Expected: An error is thrown and caught printing out "uh oh bad command"
+   3. Other incorrect variations to try: `flashbang --m ModuleNotInList` <br>
+   Expected: An error is thrown and caught printing out "uh oh bad command"
