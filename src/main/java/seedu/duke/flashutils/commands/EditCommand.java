@@ -125,4 +125,11 @@ public class EditCommand extends Command {
     public Card getCardToAdd() {
         return cardToEdit;
     }
+
+    /**
+     * Gets the updated card
+     *
+     * @return The updated card
+     */
+    public Card getNewCard() { return newCard; }
 }
