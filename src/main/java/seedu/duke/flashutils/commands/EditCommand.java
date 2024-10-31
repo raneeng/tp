@@ -4,7 +4,10 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
 
-import static seedu.duke.flashutils.utils.Ui.*;
+import static seedu.duke.flashutils.utils.Ui.getRequest;
+import static seedu.duke.flashutils.utils.Ui.displayConfirmationQuestion;
+import static seedu.duke.flashutils.utils.Ui.displayOldStoredValue;
+import static seedu.duke.flashutils.utils.Ui.displayGetNewPromptFromUser;
 
 /**
  * Updates information in an existing flashcard.

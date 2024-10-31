@@ -2,13 +2,17 @@ package seedu.duke.flashutils.utils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.flashutils.commands.*;
+import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.Command;
+import seedu.duke.flashutils.commands.FlashbangCommand;
+import seedu.duke.flashutils.commands.InvalidCommand;
+import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.ViewCommand;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
-import java.util.HashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
