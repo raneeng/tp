@@ -17,4 +17,13 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
     }
 
+    /**
+     * Gets feedbackToUser
+     *
+     * @return feedbackToUser
+     */
+    public String getFeedbackToUser() {
+        return feedbackToUser;
+    }
+
 }
