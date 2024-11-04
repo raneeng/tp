@@ -3,11 +3,29 @@
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Formatting of Developer's Guide was done with reference to [AddressBook-Level3 developer guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#common-classes).
 
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Parser component
+API: `Parser.java`
+
+Below is a partial class diagram showing the interactions of the `Parser` class.
+![Parser class diagram](docs/diagrams/ParserPartialClassDiagram.jpg)
+
+The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
+![Sample delete call sequence diagram](docs/diagrams/ParserSequenceDiagram.png)
+
+How the `Parser` component works:
+The `Parser` receives the command input.
+It identifies the command type using `parseCommandType`.
+Depending on the command type, it creates the corresponding command object (e.g., `AddCommand`).
+The created command is executed, producing a `CommandResult`.
+The `CommandResult` is then used by `Ui` to provide feedback to the user.
+
+### Storage component
 API: `Storage.java`
 
 Below is a class diagram showing the interactions of the `Storage` class.
