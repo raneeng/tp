@@ -29,10 +29,10 @@ The `CommandResult` is then used by `Ui` to provide feedback to the user.
 API: `Storage.java`
 
 Below is a class diagram showing the interactions of the `Storage` class.
-![Storage class diagram](docs/diagrams/StorageClassDiagram.jpg)
+![Storage class diagram](/docs/diagrams/StorageClassDiagram.png)
 
 The sequence diagram below illustrates the interactions taking `writeFlashBookToFile()` and  `readFlashCardsFromFile()`.
-![Sample delete call sequence diagram](docs/diagrams/StorageSequenceDiagram.png)
+![Sample delete call sequence diagram](/docs/diagrams/StorageSequenceDiagram.png)
 
 How the `Storage` component works:
  The `Storage` component is initialized with a directory path where flashcard data will be stored.
