@@ -13,10 +13,10 @@ Formatting of Developer's Guide was done with reference to [AddressBook-Level3 d
 API: `Parser.java`
 
 Below is a partial class diagram showing the interactions of the `Parser` class.
-![Parser class diagram](docs/diagrams/ParserPartialClassDiagram.jpg)
+![Parser class diagram](diagrams/ParserPartialClassDiagram.jpg)
 
 The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
-![Sample delete call sequence diagram](docs/diagrams/ParserSequenceDiagram.png)
+![Sample delete call sequence diagram](diagrams/ParserSequenceDiagram.png)
 
 How the `Parser` component works:
 The `Parser` receives the command input.
