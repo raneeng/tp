@@ -25,7 +25,26 @@ Depending on the command type, it creates the corresponding command object (e.g.
 The created command is executed, producing a `CommandResult`.
 The `CommandResult` is then used by `Ui` to provide feedback to the user.
 
+### Storage component
+API: `Storage.java`
 
+Below is a class diagram showing the interactions of the `Storage` class.
+![Storage class diagram](docs/diagrams/StorageClassDiagram.jpg)
+
+The sequence diagram below illustrates the interactions taking `writeFlashBookToFile()` and  `readFlashCardsFromFile()`.
+![Sample delete call sequence diagram](docs/diagrams/StorageSequenceDiagram.png)
+
+How the `Storage` component works:
+ The `Storage` component is initialized with a directory path where flashcard data will be stored.
+    To save data:
+        `writeFlashBookToFile()` is called, iterating through each `FlashCardSet` in `FlashBook`.
+        For each `FlashCardSet`, a corresponding file is created in the directory, and each Card in the set is written to this file.
+    To load data:
+        `readFlashCardsFromFile()` checks the directory for flashcard files.
+        For each file found, `readFlashCardSetFromFile()` is called to read the cards and create a `FlashCardSet`.
+        The `FlashCardSet` is then added back to the `FlashBook`, reconstructing the flashcard library in memory.
+
+        
 ## Product scope
 ### Target user profile
 
