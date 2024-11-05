@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class FlashbangTest {
     @Test
-    public void testFlashbang() {
+    public void FlashBangTest () {
         assertTrue(true);
     }
 }

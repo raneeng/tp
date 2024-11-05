@@ -1,5 +1,10 @@
 package seedu.duke.flashutils.types;
 
+import com.sun.nio.sctp.InvalidStreamException;
+import seedu.duke.flashutils.commands.CommandResult;
+import seedu.duke.flashutils.commands.InvalidCommand;
+import seedu.duke.flashutils.utils.Ui;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -51,13 +56,50 @@ public class FlashCardSet implements Iterable<Card> {
     // Displays all flashcards (view command) in FLashCardSet
     public void viewFlashCards(String module) {
         String currentModule = getModuleName(); 
-        if (currentModule.equals(module)) {
+        if ((currentModule != null) && (currentModule.equals(module)) && (!flashCardSet.isEmpty())) {
             for (Card flashCard : flashCardSet) {
                 System.out.println(flashCard); 
             }
-        } else {
+        } else if (flashCardSet.isEmpty()) {
             System.out.println("No flashcards found for this module."); 
         }
+    }
+
+    public void performFlashBang() {
+        int num = 0;
+        int correctAnswers = 0;
+        int wrongAnswers = 0;
+
+        for (Card card : flashCardSet) {
+            Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
+            Ui.printResponse("Reveal the answer? (y/n)");
+            String revealAnswer = Ui.getRequest();
+
+            boolean validInput = false;
+            while (!validInput) {
+                Ui.printResponse("Did you get the correct answer? (y/n)");
+                String answerCorrect = Ui.getRequest();
+
+                if (answerCorrect.equals("y")) {
+                    correctAnswers++;
+                    validInput = true;
+
+                } else if (answerCorrect.equals("n")) {
+                    wrongAnswers++;
+                    validInput = true;
+
+                } else {
+                    Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
+                }
+            }
+
+            num++;
+        }
+
+        // Calculate percentage of right/wrong answers
+        int totalAnswers = correctAnswers + wrongAnswers;
+        double correctPercentage = (double) correctAnswers / totalAnswers * 100;
+        Ui.printResponse("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
     }
 
 
@@ -65,4 +107,5 @@ public class FlashCardSet implements Iterable<Card> {
     public Iterator<Card> iterator() {
         return flashCardSet.iterator();
     }
+
 }
