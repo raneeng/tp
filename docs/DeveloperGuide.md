@@ -12,12 +12,25 @@ Formatting of Developer's Guide was done with reference to [AddressBook-Level3 d
 ### Parser component
 API: `Parser.java`
 
+Parser's role is to given user input create a command which then can be executed. This particular implementation follows 
+**Factory design pattern**. It exposes a general purpose method for parsing command `parseCommand(String input)` and then it determines
+command types and creates one of the type. Regular expressions are heavily used for extracting information from input.
+More details are presented on a sequence diagram someName.
+
+![Diagram Description](./diagrams/ParsingSequenceDiagram.png)
+
+#### Alternative approaches/Possible improvements:
+- Command factory could be moved to a separate class 
+- Creating a lexer object might be a desirable approach if the commands where much more complex
+
+#### Structure
 Below is a partial class diagram showing the interactions of the `Parser` class.
 ![Parser class diagram](./diagrams/ParserPartialClassDiagram.jpg)
 
 The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
 ![Sample delete call sequence diagram](./diagrams/ParserDeleteSequenceDiagram.png)
 
+#### Example
 How the `Parser` component works:
 The `Parser` receives the command input.
 It identifies the command type using `parseCommandType`.
@@ -44,7 +57,7 @@ How the `Storage` component works:
         For each file found, `readFlashCardSetFromFile()` is called to read the cards and create a `FlashCardSet`.
         The `FlashCardSet` is then added back to the `FlashBook`, reconstructing the flashcard library in memory.
 
-        
+
 ## Product scope
 ### Target user profile
 
