@@ -159,9 +159,9 @@ public class Parser {
         String unit = parts[1];
 
         return switch (unit) {
-            case "second", "seconds" -> (long) (value * 1000);
-            case "minute", "minutes" -> (long) (value * 1000 * 60);
-            default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        case "second", "seconds" -> (long) (value * 1000);
+        case "minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
         };
     }
 
