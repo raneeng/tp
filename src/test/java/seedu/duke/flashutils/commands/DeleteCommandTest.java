@@ -5,7 +5,9 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeleteCommandTest {
     @Test
@@ -43,8 +45,10 @@ public class DeleteCommandTest {
         new AddCommand(testModule, testCard1).execute(new Storage("./data"));
         new AddCommand(testModule, testCard2).execute(new Storage("./data"));
 
-        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, -1).execute(new Storage("./data")));
-        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 2).execute(new Storage("./data")));
+        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, -1)
+                .execute(new Storage("./data")));
+        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 2)
+                .execute(new Storage("./data")));
     }
 
 }
