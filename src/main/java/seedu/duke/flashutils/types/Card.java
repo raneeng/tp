@@ -1,12 +1,23 @@
 package seedu.duke.flashutils.types;
 
+/**
+ * Represents an individual flashcard with a question, answer and topic
+ */
 public class Card {
     private String question;
     private String answer;
+    private String topic;
 
     public Card(String question, String answer) {
         this.question = question;
         this.answer = answer;
+        this.topic = "";
+    }
+
+    public Card(String question, String answer, String topic) {
+        this.question = question;
+        this.answer = answer;
+        this.topic = topic;
     }
 
     public String getQuestion() {
@@ -26,11 +37,11 @@ public class Card {
     }
 
     public String toWritableString() {
-        return question + "," + answer;
+        return String.format("%1$s | %2$s | %3$s", question, answer, topic);
     }
 
     @Override
     public String toString() {
-        return question + ": \n" + answer;
+        return String.format("%1$s: \n %2$s \n topic: %3$s", question, answer, topic);
     }
 }
