@@ -3,6 +3,7 @@ package seedu.duke.flashutils.commands;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
 
+
 /**
  * Starts a FlashBang session, where questions for each flashcard are displayed
  * and users can choose to display answers.
@@ -12,6 +13,8 @@ public class FlashbangCommand extends Command {
     public static final String SUCCESS_MESSAGE = "Successful FlashBang for flashcard set: \n%1$s";
     private final FlashCardSet targetSet;
     private long timerThreshold;
+
+
     /**
      * Constructs the Flashbang Command with specified target set (module)
      * 
@@ -37,7 +40,6 @@ public class FlashbangCommand extends Command {
         targetSet.performFlashBang();
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
-
     public FlashCardSet getTargetSet() {
         return targetSet;
     }

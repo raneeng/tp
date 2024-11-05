@@ -1,7 +1,6 @@
 package seedu.duke.flashutils.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.utils.Storage;
 import seedu.duke.flashutils.utils.StubStorage;
 

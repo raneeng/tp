@@ -134,5 +134,7 @@ public class EditCommand extends Command {
      *
      * @return The updated card
      */
-    public Card getNewCard() { return newCard; }
+    public Card getNewCard() {
+        return newCard;
+    }
 }
