@@ -99,7 +99,10 @@ public class FlashCardSet implements Iterable<Card> {
         Ui.printResponse("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
     }
 
-
+    public int getNumberOfFlashcards() {
+        return flashCardSet.size();
+    }
+    
     @Override
     public Iterator<Card> iterator() {
         return flashCardSet.iterator();
