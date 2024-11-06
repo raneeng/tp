@@ -32,7 +32,7 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public Card getCard(int cardIndex) {
-        if (cardIndex >= this.flashCardSet.size()) {
+        if (cardIndex < 0 || cardIndex >= this.flashCardSet.size()) {
             throw new IndexOutOfBoundsException();
         }
         return this.flashCardSet.get(cardIndex);
