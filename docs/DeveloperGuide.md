@@ -38,6 +38,19 @@ Depending on the command type, it creates the corresponding command object (e.g.
 The created command is executed, producing a `CommandResult`.
 The `CommandResult` is then used by `Ui` to provide feedback to the user.
 
+### Ui component
+API: `Ui.java`
+
+Below is a partical class diagram showing the interactions of the `Ui` class. 
+![Ui class diagram](/docs/diagrams/UIClassDiagram.png) 
+
+The sequence diagram below illustrates the interactions between the user and this class when the program is executed. 
+![Ui interactions sequence diagram](docs/diagrams/UISequenceDiagram.png)
+
+How the `Ui` component works: 
+The `Ui` serves as a centralized utility that handles all outputs. 
+When a user execute the app, this class displays the welcome message and all available commands. After that, based on users' inputs, it handles the output that is processed by other classes. 
+
 ### Storage component
 API: `Storage.java`
 
@@ -56,7 +69,6 @@ How the `Storage` component works:
         `readFlashCardsFromFile()` checks the directory for flashcard files.
         For each file found, `readFlashCardSetFromFile()` is called to read the cards and create a `FlashCardSet`.
         The `FlashCardSet` is then added back to the `FlashBook`, reconstructing the flashcard library in memory.
-
 
 ## Product scope
 ### Target user profile
