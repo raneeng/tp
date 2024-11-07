@@ -1,8 +1,5 @@
 package seedu.duke.flashutils.types;
 
-import com.sun.nio.sctp.InvalidStreamException;
-import seedu.duke.flashutils.commands.CommandResult;
-import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;

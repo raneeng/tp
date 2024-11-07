@@ -41,7 +41,9 @@ public class EditCommandTest {
     @Test
     public void testEditInvalidIndex() {
         FlashCardSet testModule = new FlashCardSet("Some module");
-        assertThrows(IndexOutOfBoundsException.class, () ->  new EditCommand(testModule, -1, "New Question", "New Answer"));
-        assertThrows(IndexOutOfBoundsException.class, () ->  new EditCommand(testModule, 1, "New Question", "New Answer"));
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                new EditCommand(testModule, -1, "New Question", "New Answer"));
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                new EditCommand(testModule, 1, "New Question", "New Answer"));
     }
 }

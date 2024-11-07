@@ -119,15 +119,50 @@ public class Parser {
     }
 
     public static Command createFlashbangCommand(String input) {
-        Pattern flashbangPattern = Pattern.compile("--m\\s+(.+)");
+        Pattern flashbangPattern = Pattern.compile("--m\\s+(.+?)\\s+(--t\\s+.+)?");
         Matcher matcher = flashbangPattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
+            String timer = matcher.group(2) != null ? matcher.group(2).trim() : "";
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+            if (!timer.isEmpty()) {
+                try{
+                    long milliseconds = parseTimer(timer);
+                    return new FlashbangCommand(module, milliseconds);
+                } catch (IllegalArgumentException e){
+                    Ui.printResponse(e.getMessage());
+                }
+            }
             return new FlashbangCommand(module);
         } else {
             return new InvalidCommand();
         }
+    }
+
+    private static long parseTimer(String timer) {
+        timer = timer.trim().toLowerCase();
+
+        String[] parts = timer.split(" ");
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("Invalid timer format. Expected format: '<number> <unit>'");
+        }
+
+        // Parse the number part
+        double value;
+        try {
+            value = Double.parseDouble(parts[0]);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid number format: " + parts[0]);
+        }
+
+        // Determine the unit part
+        String unit = parts[1];
+
+        return switch (unit) {
+        case "second", "seconds" -> (long) (value * 1000);
+        case "minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        };
     }
 
     public static Command createQuitCommand() {
