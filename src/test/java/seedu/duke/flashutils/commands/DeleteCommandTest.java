@@ -17,7 +17,7 @@ public class DeleteCommandTest {
         FlashCardSet testModule = new FlashCardSet("Some module");
         Card testCard = new Card(testQuestion, testAnswer);
         testModule.addCard(testCard);
-        DeleteCommand command = new DeleteCommand(testModule, 0);
+        DeleteCommand command = new DeleteCommand(testModule, 1);
 
         assertEquals(testCard, command.getTargetCard());
         assertEquals(testModule, command.getTargetSet());
@@ -31,7 +31,7 @@ public class DeleteCommandTest {
         Card testCard = new Card(testQuestion, testAnswer);
 
         testModule.addCard(testCard);
-        DeleteCommand command = new DeleteCommand(testModule, 0);
+        DeleteCommand command = new DeleteCommand(testModule, 1);
         command.execute(new Storage("./data"));
 
         assertFalse(testModule.getFlashCardSet().contains(testCard));
@@ -47,7 +47,7 @@ public class DeleteCommandTest {
 
         assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, -1)
                 .execute(new Storage("./data")));
-        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 2)
+        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 3)
                 .execute(new Storage("./data")));
     }
 
