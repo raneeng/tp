@@ -59,7 +59,6 @@ public class Ui {
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
         System.out.print(formattedText);
-        displayCommands();
     }
 
     /**
