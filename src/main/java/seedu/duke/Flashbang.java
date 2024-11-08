@@ -36,8 +36,9 @@ public class Flashbang {
             try {
                 input = Ui.getRequest();
                 Command command = Parser.parseCommand(input);
-                CommandResult result = command.execute(storage);
+                CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
+                storage.writeFlashBookToFile(FlashBook.getInstance());
             } catch (IllegalArgumentException e) {
                 Ui.printResponse(e.getMessage());
             }

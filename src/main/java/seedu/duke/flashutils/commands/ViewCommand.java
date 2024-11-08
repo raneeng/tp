@@ -34,7 +34,7 @@ public class ViewCommand extends Command {
      * which includes the success message and the flashcards under that module
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         getModuleToView(); 
         targetSet.viewFlashCards(currentModule);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));

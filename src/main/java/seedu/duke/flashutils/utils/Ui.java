@@ -25,13 +25,15 @@ public class Ui {
                                 + " \t add --m [Module Name] --q [Question] --a [Answer] \n" 
                                 + " 2. View all flashcards of a module: \n"
                                 + " \t view --m [Module Name] \n"
-                                + " 3. Delete a flashcard: \n"
+                                + " 3. View all flashcards: \n"
+                                + " \t view --all\n"
+                                + " 4. Delete a flashcard: \n"
                                 + " \t delete --m [Module Name] --i [Index] \n"
-                                + " 4. Edit a flashcard: \n"
+                                + " 5. Edit a flashcard: \n"
                                 + " \t edit --m [Module Name] --i [Index] —-q [New Question] —-a [New Answer] \n"
-                                + " 5. Flashbang - view all the flashcards of a module without seeing the answers: \n" 
-                                + "\t flashbang --m [Module Name] \n"
-                                + " 6. Quit the app: \n"
+                                + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
+                                + " \t flashbang --m [Module Name] --t [Time in ms]\n"
+                                + " 7. Quit the app: \n"
                                 + " \t quit \n"; 
         System.out.println(availableCommands);
     }
