@@ -1,5 +1,6 @@
 package seedu.duke.flashutils.commands;
 
+import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
@@ -15,7 +16,9 @@ public class ViewAllCommand extends Command {
 
         for (Map.Entry<String, FlashCardSet> entry : sets.entrySet()) {
             sb.append("MODULE NAME: ").append(entry.getKey()).append("\n");
-            sb.append("\tcontains ").append(entry.getValue().getNumberOfFlashcards()).append(" flashcards\n");
+            for (Card card : entry.getValue()) {
+                sb.append(card.toString()).append("\n\n");
+            }
         }
 
         return new CommandResult(sb.toString());
