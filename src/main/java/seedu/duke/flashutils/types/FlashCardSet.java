@@ -109,7 +109,10 @@ public class FlashCardSet implements Iterable<Card> {
         }
     }
 
-
+    public int getNumberOfFlashcards() {
+        return flashCardSet.size();
+    }
+    
     @Override
     public Iterator<Card> iterator() {
         return flashCardSet.iterator();
