@@ -42,10 +42,10 @@ The `CommandResult` is then used by `Ui` to provide feedback to the user.
 API: `Ui.java`
 
 Below is a partical class diagram showing the interactions of the `Ui` class. 
-![Ui class diagram](/docs/diagrams/UIClassDiagram.png) 
+![Ui class diagram](./diagrams/UIClassDiagram.png) 
 
 The sequence diagram below illustrates the interactions between the user and this class when the program is executed. 
-![Ui interactions sequence diagram](docs/diagrams/UISequenceDiagram.png)
+![Ui interactions sequence diagram](./diagrams/UISequenceDiagram.png)
 
 How the `Ui` component works: 
 The `Ui` serves as a centralized utility that handles all outputs. 
