@@ -8,6 +8,7 @@ import seedu.duke.flashutils.utils.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddCommandTest {
     @Test
@@ -19,16 +20,36 @@ public class AddCommandTest {
 
         assertEquals(testQuestion, command.getCardToAdd().getQuestion());
         assertEquals(testAnswer, command.getCardToAdd().getAnswer());
-
         assertEquals(testModule, command.getTargetSet());
     }
+
+    @Test public void testFlashcardActuallyAdded() {
+        FlashCardSet testModule = new FlashCardSet("Some module");
+        Card testCard = new Card("Some question", "Some answer");
+        AddCommand command = new AddCommand(testModule, testCard);
+        command.execute(new Storage("./data"));
+        assertTrue(testModule.getFlashCardSet().contains(testCard));
+    }
+
+    @Test public void testAddMultipleFlashcards() {
+        FlashCardSet testModule = new FlashCardSet("Some module");
+        Card testCard1 = new Card("Question 1", "Answer 1");
+        Card testCard2 = new Card("Question 2", "Answer 2");
+        new AddCommand(testModule, testCard1).execute(new Storage("./data"));
+        new AddCommand(testModule, testCard2).execute(new Storage("./data"));
+        assertEquals(2, testModule.getFlashCardSet().size());
+    }
+
     @Test
     public void testInvalidAddCommand() {
         Storage storage = new Storage("./data");
         String testString = "add --m  --t  --q  --a  ";
-        assertThrows(IllegalArgumentException.class,() -> Parser.parseCommand(testString).execute(storage));
-
+        assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand(testString).execute(storage));
     }
 
-
+    @Test public void testAddCommandNullFields() {
+        FlashCardSet testModule = new FlashCardSet("Some module");
+        assertThrows(NullPointerException.class, () -> new AddCommand(testModule, null, "Answer"));
+        assertThrows(NullPointerException.class, () -> new AddCommand(testModule, "Question", null));
+    }
 }

@@ -1,13 +1,6 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.Command;
-import seedu.duke.flashutils.commands.AddCommand;
-import seedu.duke.flashutils.commands.DeleteCommand;
-import seedu.duke.flashutils.commands.EditCommand;
-import seedu.duke.flashutils.commands.FlashbangCommand;
-import seedu.duke.flashutils.commands.InvalidCommand;
-import seedu.duke.flashutils.commands.QuitCommand;
-import seedu.duke.flashutils.commands.ViewCommand;
+import seedu.duke.flashutils.commands.*;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
@@ -109,10 +102,14 @@ public class Parser {
     public static Command createViewCommand(String input) {
         Pattern viewModulePattern = Pattern.compile("--m\\s+(.+)");
         Matcher matcher = viewModulePattern.matcher(input);
+        Pattern viewAllModulePattern = Pattern.compile("--all");
+        Matcher matcherAll = viewAllModulePattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
             return new ViewCommand(module);
+        } else if (matcherAll.find()) {
+            return new ViewAllCommand();
         } else {
             return new InvalidCommand();
         }

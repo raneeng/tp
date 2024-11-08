@@ -12,6 +12,9 @@
 1. Down the latest version of `FlashBang` from [here](http://link.to/duke).
 
 ## Features
+The app allows for creating and managing flashcards each of which contains
+a question and an answer. Flashcards are organized into modules. Following 
+is a list of command which are supported with examples.
 
 ### Adding flashcards: `add`
 
@@ -50,7 +53,7 @@ delete --m CS1010          # Deletes all flashcards in the module CS1010
 ```
 
 ### Viewing all flashcards: `view`
-
+Lists all flashcards for every module.
 ```bash
 view --all
 ```
@@ -82,7 +85,6 @@ Bye!!
 ```
 
 ### Filter flashcards by module: `view`
-
 ```bash
 view --m [MODULE NAME]
 ```

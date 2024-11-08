@@ -24,6 +24,10 @@ public class AddCommand extends Command {
      * @param answer
      */
     public AddCommand(FlashCardSet module, String question, String answer) {
+        if (module == null || question == null || answer == null) {
+            throw new NullPointerException();
+        }
+
         cardToAdd = new Card(question, answer);
         this.targetSet = module;
     }
