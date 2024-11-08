@@ -68,7 +68,7 @@ public class AddCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         targetSet.addCard(cardToAdd);
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToAdd));
     }

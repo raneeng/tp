@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         targetSet.removeCard(targetCard);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
     }
