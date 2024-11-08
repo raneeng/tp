@@ -4,6 +4,7 @@ import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents the list of flashcards of the same module
@@ -67,6 +68,8 @@ public class FlashCardSet implements Iterable<Card> {
         int correctAnswers = 0;
         int wrongAnswers = 0;
 
+        List<Card> mistakes = new ArrayList<>();
+
         for (Card card : flashCardSet) {
             Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
@@ -83,6 +86,7 @@ public class FlashCardSet implements Iterable<Card> {
 
                 } else if (answerCorrect.equals("n")) {
                     wrongAnswers++;
+                    mistakes.add(card); // Add card to the mistake list
                     validInput = true;
 
                 } else {
@@ -96,7 +100,13 @@ public class FlashCardSet implements Iterable<Card> {
         // Calculate percentage of right/wrong answers
         int totalAnswers = correctAnswers + wrongAnswers;
         double correctPercentage = (double) correctAnswers / totalAnswers * 100;
-        Ui.printResponse("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
+        System.out.println("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
+
+        // Print mistakes list
+        System.out.println("You answered the following flashcards incorrectly:\n");
+        for (Card card : mistakes) {
+            System.out.println(card);
+        }
     }
 
 
