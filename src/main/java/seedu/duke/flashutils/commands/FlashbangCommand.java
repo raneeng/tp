@@ -1,7 +1,9 @@
 package seedu.duke.flashutils.commands;
 
+import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 import seedu.duke.flashutils.utils.Storage;
+import seedu.duke.flashutils.utils.Ui;
 
 
 import java.util.Date;
@@ -26,38 +28,14 @@ public class FlashbangCommand extends Command {
         this.targetSet = targetSet;
     }
     
-    public FlashbangCommand(FlashCardSet targetSet,long timerThreshold) {
+    public FlashbangCommand(FlashCardSet targetSet, long timerThreshold) {
         this.targetSet = targetSet;
         this.timerThreshold = timerThreshold;
     }
 
-    @Override
-    public CommandResult execute(Storage storage) {
-        Date start = new Date();
-        Date recurring = new Date();
-        int flashcardCounter = 0;
-        for (Card card : targetSet) {
-            Ui.printResponse("Flashcard no." + flashcardCounter + "\n\t" + card.getQuestion());
-            Ui.printResponse("Reveal the answer? (y/n)");
-            String ans = Ui.getRequest();
-            if (ans.equals("y")) {
-                Ui.printResponse("Answer:\n\t" + card.getAnswer());
-            }
-            flashcardCounter++;
-
-            Date current = new Date();
-            double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
-            Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
-            recurring = current;
-
-            if(timerThreshold>0) {
-                if (recurring.getTime() - start.getTime() > timerThreshold) {
-                    Ui.printResponse("Oops You've run out of time! ");
-                }
-            }
-        }
-
-        return new CommandResult("Successful flashbang.");
+    public long getTimerThreshold() {
+        return timerThreshold;
+    }
 
     /**
      * Prints result of the command, 
@@ -66,8 +44,8 @@ public class FlashbangCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
-        targetSet.performFlashBang();
+    public CommandResult execute() {
+        targetSet.performFlashBang(timerThreshold);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
       

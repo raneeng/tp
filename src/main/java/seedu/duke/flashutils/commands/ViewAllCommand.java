@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ViewAllCommand extends Command {
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         HashMap<String, FlashCardSet> sets = FlashBook.getInstance().getAllFlashCardSets();
         StringBuilder sb = new StringBuilder();
 

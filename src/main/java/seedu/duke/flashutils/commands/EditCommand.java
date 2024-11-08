@@ -105,7 +105,7 @@ public class EditCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         cardToEdit.setQuestion(newCard.getQuestion());
         cardToEdit.setAnswer(newCard.getAnswer());
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));

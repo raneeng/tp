@@ -15,8 +15,7 @@ public class QuitCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
-        storage.writeFlashBookToFile(FlashBook.getInstance());
+    public CommandResult execute() {
         return new CommandResult("Quit Flash Session");
     }
 }
