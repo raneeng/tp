@@ -3,6 +3,7 @@ package seedu.duke.flashutils.types;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -63,11 +64,13 @@ public class FlashCardSet implements Iterable<Card> {
         }
     }
 
-    public void performFlashBang() {
+    public void performFlashBang(long timerThreshold) {
         int num = 0;
         int correctAnswers = 0;
         int wrongAnswers = 0;
-
+        Date start = new Date();
+        Date recurring = new Date();
+        int flashcardCounter = 0;
         List<Card> mistakes = new ArrayList<>();
 
         for (Card card : flashCardSet) {
@@ -92,8 +95,17 @@ public class FlashCardSet implements Iterable<Card> {
                 } else {
                     Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
                 }
-            }
+                Date current = new Date();
+                double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
+                Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
+                recurring = current;
 
+                if(timerThreshold>0) {
+                    if (recurring.getTime() - start.getTime() > timerThreshold) {
+                        Ui.printResponse("Oops You've run out of time! ");
+                    }
+                }
+            }
             num++;
         }
 
