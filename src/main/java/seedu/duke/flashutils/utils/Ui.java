@@ -44,7 +44,6 @@ public class Ui {
         String logo = "FlashBang"; 
         String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n"; 
         System.out.println(logo + "\n" + intro); 
-        displayCommands();
     }
 
     /**
@@ -57,7 +56,6 @@ public class Ui {
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
         System.out.print(formattedText);
-        displayCommands();
     }
 
     /**
