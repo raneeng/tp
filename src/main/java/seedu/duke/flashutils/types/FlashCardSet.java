@@ -1,7 +1,5 @@
 package seedu.duke.flashutils.types;
 
-import seedu.duke.flashutils.commands.CommandResult;
-import seedu.duke.flashutils.utils.Storage;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
@@ -69,17 +67,13 @@ public class FlashCardSet implements Iterable<Card> {
     public void performFlashBang(long timerThreshold) {
         Date start = new Date();
         Date recurring = new Date();
-        int flashcardCounter = 0;
         int num = 0;
         int correctAnswers = 0;
         int wrongAnswers = 0;
-
         List<Card> mistakes = new ArrayList<>();
-
         for (Card card : flashCardSet) {
             Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
-            String revealAnswer = Ui.getRequest();
 
             boolean validInput = false;
             Date current = new Date();
@@ -100,7 +94,6 @@ public class FlashCardSet implements Iterable<Card> {
                     Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
                 }
             }
-
             double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
             Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
             recurring = current;
@@ -110,15 +103,12 @@ public class FlashCardSet implements Iterable<Card> {
                     Ui.printResponse("Oops You've run out of time! ");
                 }
             }
-
             num++;
         }
-
         // Calculate percentage of right/wrong answers
         int totalAnswers = correctAnswers + wrongAnswers;
         double correctPercentage = (double) correctAnswers / totalAnswers * 100;
         System.out.println("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
-
         // Print mistakes list
         System.out.println("You answered the following flashcards incorrectly:\n");
         for (Card card : mistakes) {

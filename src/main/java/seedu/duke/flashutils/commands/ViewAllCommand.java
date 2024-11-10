@@ -3,7 +3,6 @@ package seedu.duke.flashutils.commands;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 import java.util.HashMap;
 import java.util.Map;

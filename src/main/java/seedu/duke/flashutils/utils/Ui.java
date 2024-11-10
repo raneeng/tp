@@ -46,7 +46,6 @@ public class Ui {
         String logo = "FlashBang"; 
         String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n"; 
         System.out.println(logo + "\n" + intro); 
-        displayCommands();
     }
 
     /**

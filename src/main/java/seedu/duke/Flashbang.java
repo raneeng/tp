@@ -9,6 +9,8 @@ import seedu.duke.flashutils.utils.Ui;
 
 import java.io.IOException;
 
+import static seedu.duke.flashutils.utils.Ui.displayCommands;
+
 public class Flashbang {
     /**
      * Main entry-point for the java.duke.Flashbang application.
@@ -41,6 +43,8 @@ public class Flashbang {
                 storage.writeFlashBookToFile(FlashBook.getInstance());
             } catch (IllegalArgumentException e) {
                 Ui.printResponse(e.getMessage());
+                displayCommands();
+
             }
         }
     }

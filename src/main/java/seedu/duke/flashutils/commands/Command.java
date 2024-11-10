@@ -1,6 +1,5 @@
 package seedu.duke.flashutils.commands;
 
-import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Represents an executable command.

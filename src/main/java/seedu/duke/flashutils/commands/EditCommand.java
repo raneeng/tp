@@ -2,7 +2,6 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 import static seedu.duke.flashutils.utils.Ui.getRequest;
 import static seedu.duke.flashutils.utils.Ui.displayConfirmationQuestion;
