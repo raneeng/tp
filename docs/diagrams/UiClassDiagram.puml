@@ -1,5 +1,6 @@
 @startuml
-!include docs/diagrams/Style.puml
+skinparam classAttributeIconSize 0 
+
 title UI - Class Diagram
 class Ui {
     - scanner: Scanner
