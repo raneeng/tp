@@ -1,8 +1,5 @@
 package seedu.duke.flashutils.commands;
 
-import seedu.duke.flashutils.types.FlashBook;
-import seedu.duke.flashutils.utils.Storage;
-
 /**
  * Terminates the program.
  */

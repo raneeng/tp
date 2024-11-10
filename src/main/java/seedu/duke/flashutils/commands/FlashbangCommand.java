@@ -1,12 +1,6 @@
 package seedu.duke.flashutils.commands;
 
-import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
-import seedu.duke.flashutils.utils.Ui;
-
-
-import java.util.Date;
 
 /**
  * Starts a FlashBang session, where questions for each flashcard are displayed
@@ -22,7 +16,7 @@ public class FlashbangCommand extends Command {
     /**
      * Constructs the Flashbang Command with specified target set (module)
      * 
-     * @param targetSet
+     * @param targetSet represents the FlashCardSet to be tested on
      */
     public FlashbangCommand(FlashCardSet targetSet) {
         this.targetSet = targetSet;
