@@ -3,7 +3,6 @@ package seedu.duke.flashutils.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -31,7 +30,7 @@ public class EditCommandTest {
 
         testModule.addCard(testCard);
         EditCommand command = new EditCommand(testModule, 0, newQuestion, newAnswer);
-        command.execute(new Storage("./data"));
+        command.execute();
 
         Card editedCard = testModule.getCard(0);
         assertEquals(newQuestion, editedCard.getQuestion());

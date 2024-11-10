@@ -3,7 +3,6 @@ package seedu.duke.flashutils.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,7 +31,7 @@ public class DeleteCommandTest {
 
         testModule.addCard(testCard);
         DeleteCommand command = new DeleteCommand(testModule, 1);
-        command.execute(new Storage("./data"));
+        command.execute();
 
         assertFalse(testModule.getFlashCardSet().contains(testCard));
     }
@@ -42,13 +41,13 @@ public class DeleteCommandTest {
         FlashCardSet testModule = new FlashCardSet("Some module");
         Card testCard1 = new Card("Question 1", "Answer 1");
         Card testCard2 = new Card("Question 2", "Answer 2");
-        new AddCommand(testModule, testCard1).execute(new Storage("./data"));
-        new AddCommand(testModule, testCard2).execute(new Storage("./data"));
+        new AddCommand(testModule, testCard1).execute();
+        new AddCommand(testModule, testCard2).execute();
 
         assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, -1)
-                .execute(new Storage("./data")));
+                .execute());
         assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 3)
-                .execute(new Storage("./data")));
+                .execute());
     }
 
 }
