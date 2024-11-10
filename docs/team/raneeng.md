@@ -5,7 +5,7 @@ FlashBang is a CLI app designed to provide students with a smart way of studying
 
 ## Summary of Contributions
 ### Code contributed
-![Click here to view](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+[Click here to view](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 ### Enhancements implemented:
 Command classes
@@ -14,11 +14,11 @@ Show flashbang percentage
 Show flashbang mistakes
 
 ### Contributions to User Guide 
-![UG](https://ay2425s1-cs2113-t11-2.github.io/tp/UserGuide.html)
+[UG](https://ay2425s1-cs2113-t11-2.github.io/tp/UserGuide.html)
 Wrote feature sections: `add`, `delete`, `flashbang`
 
 ### Contributions to Developer’s Guide 
-![DG](https://ay2425s1-cs2113-t11-2.github.io/tp/DeveloperGuide.html)
+[DG](https://ay2425s1-cs2113-t11-2.github.io/tp/DeveloperGuide.html)
 Wrote ‘Parser component’ section
 Made Parser Partial Class Diagram
 Made Parser Delete Sequence Diagram
@@ -29,11 +29,11 @@ Maintaining the issue tracker
 Updating user docs – documenting the target user profile
 
 ### Review/mentoring contributions:
-![Example 1](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
-![Example 2](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/146)
+[Example 1](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
+[Example 2](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/146)
 
 ### Contributions beyond the project team:
-![Bugs reported in other team's products](https://github.com/raneeng/ped/issues)
+[Bugs reported in other team's products](https://github.com/raneeng/ped/issues)
 
 ## DG extract
 #### Structure
