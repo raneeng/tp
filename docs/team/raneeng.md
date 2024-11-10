@@ -14,11 +14,11 @@ Show flashbang percentage
 Show flashbang mistakes
 
 ### Contributions to User Guide 
-![UG] (https://ay2425s1-cs2113-t11-2.github.io/tp/UserGuide.html)
+![UG](https://ay2425s1-cs2113-t11-2.github.io/tp/UserGuide.html)
 Wrote feature sections: `add`, `delete`, `flashbang`
 
 ### Contributions to Developer’s Guide 
-![DG] (https://ay2425s1-cs2113-t11-2.github.io/tp/DeveloperGuide.html)
+![DG](https://ay2425s1-cs2113-t11-2.github.io/tp/DeveloperGuide.html)
 Wrote ‘Parser component’ section
 Made Parser Partial Class Diagram
 Made Parser Delete Sequence Diagram
@@ -29,11 +29,11 @@ Maintaining the issue tracker
 Updating user docs – documenting the target user profile
 
 ### Review/mentoring contributions:
-![Example 1] (https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
-![Example 2] (https://github.com/AY2425S1-CS2113-T11-2/tp/pull/146)
+![Example 1](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
+![Example 2](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/146)
 
 ### Contributions beyond the project team:
-![Bugs reported in other team's products] (https://github.com/raneeng/ped/issues)
+![Bugs reported in other team's products](https://github.com/raneeng/ped/issues)
 
 ## DG extract
 #### Structure
