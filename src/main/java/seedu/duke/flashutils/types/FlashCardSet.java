@@ -65,20 +65,18 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public void performFlashBang(long timerThreshold) {
+        Date start = new Date();
+        Date recurring = new Date();
         int num = 0;
         int correctAnswers = 0;
         int wrongAnswers = 0;
-        Date start = new Date();
-        Date recurring = new Date();
-        int flashcardCounter = 0;
         List<Card> mistakes = new ArrayList<>();
-
         for (Card card : flashCardSet) {
             Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
-            String revealAnswer = Ui.getRequest();
 
             boolean validInput = false;
+            Date current = new Date();
             while (!validInput) {
                 Ui.printResponse("Did you get the correct answer? (y/n)");
                 String answerCorrect = Ui.getRequest();
@@ -95,25 +93,22 @@ public class FlashCardSet implements Iterable<Card> {
                 } else {
                     Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
                 }
-                Date current = new Date();
-                double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
-                Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
-                recurring = current;
+            }
+            double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
+            Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
+            recurring = current;
 
-                if(timerThreshold>0) {
-                    if (recurring.getTime() - start.getTime() > timerThreshold) {
-                        Ui.printResponse("Oops You've run out of time! ");
-                    }
+            if(timerThreshold > 0) {
+                if (recurring.getTime() - start.getTime() > timerThreshold) {
+                    Ui.printResponse("Oops You've run out of time! ");
                 }
             }
             num++;
         }
-
         // Calculate percentage of right/wrong answers
         int totalAnswers = correctAnswers + wrongAnswers;
         double correctPercentage = (double) correctAnswers / totalAnswers * 100;
         System.out.println("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
-
         // Print mistakes list
         System.out.println("You answered the following flashcards incorrectly:\n");
         for (Card card : mistakes) {

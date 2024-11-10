@@ -1,6 +1,15 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.*;
+import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.Command;
+import seedu.duke.flashutils.commands.DeleteCommand;
+import seedu.duke.flashutils.commands.EditCommand;
+import seedu.duke.flashutils.commands.FlashbangCommand;
+import seedu.duke.flashutils.commands.InvalidCommand;
+import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.ViewAllCommand;
+import seedu.duke.flashutils.commands.ViewCommand;
+
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
@@ -156,9 +165,9 @@ public class Parser {
         String unit = parts[1];
 
         return switch (unit) {
-            case "second", "seconds" -> (long) (value * 1000);
-            case "minute", "minutes" -> (long) (value * 1000 * 60);
-            default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        case "second", "seconds" -> (long) (value * 1000);
+        case "minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
         };
     }
 

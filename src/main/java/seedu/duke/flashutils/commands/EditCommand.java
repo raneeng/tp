@@ -2,7 +2,6 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 import static seedu.duke.flashutils.utils.Ui.getRequest;
 import static seedu.duke.flashutils.utils.Ui.displayConfirmationQuestion;
@@ -105,7 +104,7 @@ public class EditCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         cardToEdit.setQuestion(newCard.getQuestion());
         cardToEdit.setAnswer(newCard.getAnswer());
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));

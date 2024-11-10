@@ -1,7 +1,6 @@
 package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Starts a FlashBang session, where questions for each flashcard are displayed
@@ -23,10 +22,15 @@ public class FlashbangCommand extends Command {
         this.targetSet = targetSet;
     }
     
-    public FlashbangCommand(FlashCardSet targetSet,long timerThreshold) {
+    public FlashbangCommand(FlashCardSet targetSet, long timerThreshold) {
         this.targetSet = targetSet;
         this.timerThreshold = timerThreshold;
     }
+
+    public long getTimerThreshold() {
+        return timerThreshold;
+    }
+
     /**
      * Prints result of the command, 
      * which includes the success message and the module to be displayed
@@ -34,7 +38,7 @@ public class FlashbangCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         targetSet.performFlashBang(timerThreshold);
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
     }
