@@ -6,7 +6,7 @@
 ## Summary of Contributions
 
 ### Code Contributed
-[Click here to view](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+[RepSense Link](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 ### Enhancements Implemented
 1. **Command Classes:**
@@ -67,17 +67,18 @@
 
 ## DG Extract
 
-### Structure
+#### Structure
 Below is a partial class diagram showing the interactions of the `Parser` class.
 ![Parser class diagram](./diagrams/ParserPartialClassDiagram.jpg)
 
 The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
 ![Sample delete call sequence diagram](./diagrams/ParserDeleteSequenceDiagram.png)
 
-### Example
+#### Example
 How the `Parser` component works:
 1. The `Parser` receives the command input.
 2. It identifies the command type using `parseCommandType`.
 3. Depending on the command type, it creates the corresponding command object (e.g., `AddCommand`).
 4. The created command is executed, producing a `CommandResult`.
 5. The `CommandResult` is then used by `Ui` to provide feedback to the user.
+
