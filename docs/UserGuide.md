@@ -4,14 +4,28 @@
 
 **FlashBang** is a CLI app designed to provide students with a smart way of studying for their modules. The app will manage a limited number of flashcards for a small number of modules, optimized for users who prefer a CLI.
 
+## Target User Profile
+
+NUS students who want to review their modules using flashcards. 
+
+## Value Propositions
+
+The app will provide NUS students with a smart way of studying for their modules. The app will manage a limited number of flashcards for a small number of modules, optimized for users who prefer a CLI.
+
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `FlashBang` from [here](http://link.to/duke).
+
+2. Down the latest version of `FlashBang` from [here](https://github.com/AY2425S1-CS2113-T11-2/tp/releases).
+
+3. Copy the jar file into an empty folder.
+
+4. Open a command window in that folder.
+
+5. Run the command java -jar {filename}.jar e.g., java -jar Duke.jar (i.e., run the command in the same folder as the jar file).
 
 ## Features
+
 The app allows for creating and managing flashcards each of which contains
 a question and an answer. Flashcards are organized into modules. Following 
 is a list of command which are supported with examples.
@@ -125,4 +139,15 @@ edit --m MA1521 --i 1
 New Question: "What is the derivative of e^x?"
 New Answer: "e^x"
 ```
+## Command summary
+
+| Command | Description |
+| --- | --- |
+| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]``` |
+| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]``` |
+| Delete all flashcards in a set | ```delete --m [MODULE NAME]``` |
+| View all flashcards in every module | ```view --all``` |
+| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME``` |
+| Filter flashcards by module | ```view --m [MODULE NAME]``` |
+| Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
 
