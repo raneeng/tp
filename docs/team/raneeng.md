@@ -5,7 +5,7 @@ FlashBang is a CLI app designed to provide students with a smart way of studying
 
 ## Summary of Contributions
 ### Code contributed
-![Click here to view] (https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+![Click here to view](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=raneeng&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 ### Enhancements implemented:
 Command classes
