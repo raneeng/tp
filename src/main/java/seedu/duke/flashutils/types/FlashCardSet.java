@@ -50,6 +50,13 @@ public class FlashCardSet implements Iterable<Card> {
         assert !flashCardSet.contains(toRemove);
     }
 
+    public void removeALlCards() {
+        flashCardSet.clear();
+//        FlashBook flashBook = FlashBook.getInstance();
+//        flashBook.removeFlashCardSet(flashCardSet.getModuleName());
+        assert flashCardSet.isEmpty();
+    }
+
     // Displays all flashcards (view command) in FLashCardSet
     public void viewFlashCards(String module) {
         String currentModule = getModuleName(); 
