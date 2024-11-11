@@ -25,7 +25,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(FlashCardSet module, String question, String answer) {
         if (module == null || question == null || answer == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Please enter a valid input");
         }
         
         String currentModuleName = module.getModuleName(); 

@@ -56,10 +56,21 @@ public class Parser {
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             String topic = matcher.group(2);
-            if (!moduleName.contains("--m")) {
+            if (!(moduleName.contains("--m") || moduleName.trim().isEmpty())) {
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 String question = matcher.group(3);
                 String answer = matcher.group(4);
+                
+                if (question.contains("|") && answer.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another pair of question and answer. Valid question and answer cannot include '|' "); 
+                }    
+                if (question.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another question. A valid question cannot include '|' "); 
+                }    
+                if (answer.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another answer. A valid answer cannot include '|' "); 
+                }    
+
                 if (topic == null) {
                     topic = "";
                 } 
