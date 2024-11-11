@@ -126,7 +126,7 @@ public class Parser {
 
     public static Command createEditCommand(String input) {
         try {
-            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
+            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)(?:\\s+--q\\s+(.+?)\\s+--a\\s+(.+))?$");
             Matcher matcher = editPattern.matcher(input);
 
             if (matcher.find()) {

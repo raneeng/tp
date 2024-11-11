@@ -45,7 +45,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         this.targetSet = module;
-        this.cardToEdit = targetSet.getCard(cardIndex);
+        this.cardToEdit = targetSet.getCard(cardIndex  - INDEX_OFFSET);
         this.newCard = getUpdatedQuestionAnswerFromUser(cardToEdit);
     }
 
