@@ -32,10 +32,15 @@ is a list of command which are supported with examples.
 
 ### Adding flashcards: `add`
 
-Add a flashcard to a flashcard set.
+Add a flashcard to a flashcard set. <br>
+Topics are optional fields that are used to enhance organisation
 
 ```bash
 add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
+```
+or
+```bash
+add --m [MODULE NAME] --t [TOPIC NAME] --q [QUESTION] --a [ANSWER]
 ```
 
 **Examples:**
@@ -43,6 +48,7 @@ add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
 add --m CS2113 --q "What is OOP?" --a "Object-Oriented Programming"
 add --m CS1010 --q "What is a variable?" --a "A storage location in memory with a name"
 add --m MA1521 --q "What is the derivative of sin(x)?" --a "cos(x)"
+add --m CS2113 --t OOP --q "What is an Object?" --a "An entity with state and behaviour"
 ```
 
 ### Deleting flashcards: `delete`

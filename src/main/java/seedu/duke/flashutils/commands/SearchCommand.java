@@ -3,11 +3,20 @@ package seedu.duke.flashutils.commands;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
 
+/**
+ * Represents searching for flashcards which match the term
+ */
 public class SearchCommand extends Command {
     private final String searchTerm;
     private final boolean byTopic;
     private final FlashCardSet targetSet;
 
+    /**
+     * Constructs a search command
+     * @param searchTerm represents the term that all found cards must contain
+     * @param byTopic represents whether the search term only checks topics
+     * @param targetSet represents the module being searched from
+     */
     public SearchCommand(String searchTerm, boolean byTopic, FlashCardSet targetSet) {
         this.searchTerm = searchTerm;
         this.byTopic = byTopic;

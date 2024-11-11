@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     private FlashCardSet targetSet;
 
     /**
-     * Constructs a Delete Command wirh specified module and card index
+     * Constructs a Delete Command with specified module and card index
      * 
      * @param module
      * @param cardIndex

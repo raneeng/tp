@@ -56,6 +56,17 @@ class StorageTest {
                 && testSet2.getCard(0).getQuestion().equals(actualSet.getCard(0).getQuestion()));
         scanner.close();
     }
+
+    private class StubCard extends Card {
+        public StubCard(Card card) {
+            super(card.getQuestion(), card.getAnswer(), card.getTopic());
+        }
+        public boolean isEqual(Card card) {
+            return this.getQuestion().equals(card.getQuestion())
+                    && this.getAnswer().equals(card.getAnswer())
+                    && this.getTopic().equals(card.getTopic());
+        }
+    }
     @Test
     public void readAndWriteMultipleCards() throws IOException {
         FlashCardSet set1 = new FlashCardSet("CS2113");
@@ -72,11 +83,10 @@ class StorageTest {
         HashMap<String, FlashCardSet> actualMap = storage.readFlashCardsFromFile();
         FlashCardSet actualList = actualMap.get("CS2113");
         for (int i = 0; i < testList.size(); i++) {
-            Card actualCard = actualList.getCard(i);
-            Card expectedCard = testList.get(i);
-            assertEquals(expectedCard.toString(), actualCard.toString());
+            StubCard actualCard = new StubCard(actualList.getCard(i));
+            StubCard expectedCard =new StubCard(testList.get(i));
+            assertTrue(actualCard.isEqual(expectedCard));
         }
-
     }
     @AfterEach
     public void cleanFile() throws IOException {
