@@ -30,7 +30,7 @@ public class Ui {
                                 + " 4. Delete a flashcard: \n"
                                 + " \t delete --m [Module Name] --i [Index] \n"
                                 + " 5. Edit a flashcard: \n"
-                                + " \t edit --m [Module Name] --i [Index] —-q [New Question] —-a [New Answer] \n"
+                                + " \t edit --m [Module Name] --i [Index] --q [New Question] --a [New Answer] \n"
                                 + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
                                 + " \t flashbang --m [Module Name] --t [Time in ms]\n"
                                 + " 7. Search for flashcards: \n"
