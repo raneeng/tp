@@ -16,6 +16,8 @@ public class EditCommand extends Command {
     // Confirmation message to be displayed to user, with placeholder for flashcard details
     public static final String SUCCESS_MESSAGE = "Successfully edited flashcard: \n%1$s";
 
+    public static final int INDEX_OFFSET = 1;
+
     private Card cardToEdit;
     private Card newCard;
     private FlashCardSet targetSet;
@@ -30,7 +32,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(FlashCardSet module, int cardIndex, String newQuestion, String newAnswer) {
         this.targetSet = module;
-        this.cardToEdit = targetSet.getCard(cardIndex);
+        this.cardToEdit = targetSet.getCard(cardIndex  - INDEX_OFFSET);
         this.newCard = new Card(newQuestion, newAnswer);
     }
 
@@ -41,7 +43,7 @@ public class EditCommand extends Command {
      * @param module
      * @param cardIndex
      */
-    public EditCommand(FlashCardSet module, int cardIndex) {
+    public EditCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         this.targetSet = module;
         this.cardToEdit = targetSet.getCard(cardIndex);
         this.newCard = getUpdatedQuestionAnswerFromUser(cardToEdit);

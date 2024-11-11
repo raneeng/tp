@@ -96,27 +96,34 @@ public class Parser {
 
 
     public static Command createEditCommand(String input) {
-        Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
-        Matcher matcher = editPattern.matcher(input);
+        try {
+            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
+            Matcher matcher = editPattern.matcher(input);
 
-        if (matcher.find()) {
-            String moduleName = matcher.group(1);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            int index = Integer.parseInt(matcher.group(2));
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                int index = Integer.parseInt(matcher.group(2));
 
-            // Check if new question and answer are provided in the input
-            if (matcher.group(4) != null && matcher.group(5) != null) {
-                // Use the provided question and answer
-                String newQuestion = matcher.group(4);
-                String newAnswer = matcher.group(5);
-                return new EditCommand(module, index, newQuestion, newAnswer);
+                // Check if new question and answer are provided in the input
+                if (matcher.group(4) != null && matcher.group(5) != null) {
+                    // Use the provided question and answer
+                    String newQuestion = matcher.group(4);
+                    String newAnswer = matcher.group(5);
+                    return new EditCommand(module, index, newQuestion, newAnswer);
+                } else {
+                    // No question and answer provided; create EditCommand with prompts
+                    return new EditCommand(module, index);
+                }
             } else {
-                // No question and answer provided; create EditCommand with prompts
-                return new EditCommand(module, index);
+                Ui.printResponse("Please enter a valid index");
+                return new InvalidCommand();
             }
-        } else {
+        } catch (IndexOutOfBoundsException e) {
+
             return new InvalidCommand();
         }
+
     }
 
     public static Command createViewCommand(String input) {
