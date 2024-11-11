@@ -1,15 +1,6 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.AddCommand;
-import seedu.duke.flashutils.commands.Command;
-import seedu.duke.flashutils.commands.DeleteCommand;
-import seedu.duke.flashutils.commands.EditCommand;
-import seedu.duke.flashutils.commands.FlashbangCommand;
-import seedu.duke.flashutils.commands.InvalidCommand;
-import seedu.duke.flashutils.commands.QuitCommand;
-import seedu.duke.flashutils.commands.SearchCommand;
-import seedu.duke.flashutils.commands.ViewAllCommand;
-import seedu.duke.flashutils.commands.ViewCommand;
+import seedu.duke.flashutils.commands.*;
 
 
 import seedu.duke.flashutils.types.Card;
@@ -20,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid, Search }
+    private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
                 "|\\bsearch\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
@@ -31,6 +22,7 @@ public class Parser {
             return switch (matcher.group(1).toLowerCase()) {
             case "add" -> CommandType.Add;
             case "delete" -> CommandType.Delete;
+            case "deleteall" -> CommandType.DeleteAll;
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
@@ -47,6 +39,7 @@ public class Parser {
         return switch (commandType) {
         case Add -> createAddCommand(input);
         case Delete -> createDeleteCommand(input);
+        case DeleteAll -> createDeleteAllCommand(input);
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
@@ -98,6 +91,19 @@ public class Parser {
         }
     }
 
+    public static Command createDeleteAllCommand(String input) {
+        Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
+        Matcher matcher = deleteAllPattern.matcher(input);
+
+        if (matcher.find()) {
+            String moduleName = matcher.group(1);
+            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+            return new DeleteAllCommand(module);
+
+        } else {
+            return new InvalidCommand();
+        }
+    }
 
     public static Command createEditCommand(String input) {
         try {

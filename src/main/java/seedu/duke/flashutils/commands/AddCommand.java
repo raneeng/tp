@@ -10,7 +10,7 @@ import seedu.duke.flashutils.utils.Ui;
 public class AddCommand extends Command {
     
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully added flashcard: \n%1$s";
+    public static final String SUCCESS_MESSAGE = "Successfully added flashcard to module '%1$s': \n%2$s";
 
     private Card cardToAdd;
     private FlashCardSet targetSet;
@@ -80,6 +80,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() {
         targetSet.addCard(cardToAdd);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, cardToAdd));
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.getModuleName(), cardToAdd));
     }
 }
