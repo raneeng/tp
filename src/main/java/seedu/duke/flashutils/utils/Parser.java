@@ -1,15 +1,6 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.AddCommand;
-import seedu.duke.flashutils.commands.Command;
-import seedu.duke.flashutils.commands.DeleteCommand;
-import seedu.duke.flashutils.commands.EditCommand;
-import seedu.duke.flashutils.commands.FlashbangCommand;
-import seedu.duke.flashutils.commands.InvalidCommand;
-import seedu.duke.flashutils.commands.QuitCommand;
-import seedu.duke.flashutils.commands.SearchCommand;
-import seedu.duke.flashutils.commands.ViewAllCommand;
-import seedu.duke.flashutils.commands.ViewCommand;
+import seedu.duke.flashutils.commands.*;
 
 
 import seedu.duke.flashutils.types.Card;
@@ -20,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid, Search }
+    private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
                 "|\\bsearch\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
@@ -31,6 +22,7 @@ public class Parser {
             return switch (matcher.group(1).toLowerCase()) {
             case "add" -> CommandType.Add;
             case "delete" -> CommandType.Delete;
+            case "deleteall" -> CommandType.DeleteAll;
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
@@ -47,6 +39,7 @@ public class Parser {
         return switch (commandType) {
         case Add -> createAddCommand(input);
         case Delete -> createDeleteCommand(input);
+        case DeleteAll -> createDeleteAllCommand(input);
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
@@ -62,54 +55,85 @@ public class Parser {
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             String topic = matcher.group(2);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            String question = matcher.group(3);
-            String answer = matcher.group(4);
-            if (topic == null) {
-                topic = "";
+            if (!moduleName.contains("--m")) {
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                String question = matcher.group(3);
+                String answer = matcher.group(4);
+                if (topic == null) {
+                    topic = "";
+                } 
+                assert !(module == null || question == null || answer == null);
+                return new AddCommand(module, new Card(question, answer, topic));
+            } else {
+                throw new IllegalArgumentException("Please enter a valid module name"); 
             }
-            assert !(module == null || question == null || answer == null);
-            return new AddCommand(module, new Card(question, answer, topic));
         } else {
             return new InvalidCommand();
         }
     }
 
     public static Command createDeleteCommand(String input) {
-        Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
-        Matcher matcher = deletePattern.matcher(input);
+        try {
+            Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
+            Matcher matcher = deletePattern.matcher(input);
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                int index = Integer.parseInt(matcher.group(2));
+                return new DeleteCommand(module, index);
+            } else {
+                return new InvalidCommand();
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printResponse("Please enter a valid index");
+            return new InvalidCommand();
+        }
+    }
+
+    public static Command createDeleteAllCommand(String input) {
+        Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
+        Matcher matcher = deleteAllPattern.matcher(input);
+
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            int index = Integer.parseInt(matcher.group(2));
-            return new DeleteCommand(module, index);
+            return new DeleteAllCommand(module);
+
         } else {
             return new InvalidCommand();
         }
     }
 
     public static Command createEditCommand(String input) {
-        Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
-        Matcher matcher = editPattern.matcher(input);
+        try {
+            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
+            Matcher matcher = editPattern.matcher(input);
 
-        if (matcher.find()) {
-            String moduleName = matcher.group(1);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            int index = Integer.parseInt(matcher.group(2));
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                int index = Integer.parseInt(matcher.group(2));
 
-            // Check if new question and answer are provided in the input
-            if (matcher.group(4) != null && matcher.group(5) != null) {
-                // Use the provided question and answer
-                String newQuestion = matcher.group(4);
-                String newAnswer = matcher.group(5);
-                return new EditCommand(module, index, newQuestion, newAnswer);
+                // Check if new question and answer are provided in the input
+                if (matcher.group(4) != null && matcher.group(5) != null) {
+                    // Use the provided question and answer
+                    String newQuestion = matcher.group(4);
+                    String newAnswer = matcher.group(5);
+                    return new EditCommand(module, index, newQuestion, newAnswer);
+                } else {
+                    // No question and answer provided; create EditCommand with prompts
+                    return new EditCommand(module, index);
+                }
             } else {
-                // No question and answer provided; create EditCommand with prompts
-                return new EditCommand(module, index);
+                Ui.printResponse("Please enter a valid index");
+                return new InvalidCommand();
             }
-        } else {
+        } catch (IndexOutOfBoundsException e) {
+
             return new InvalidCommand();
         }
+
     }
 
     public static Command createViewCommand(String input) {

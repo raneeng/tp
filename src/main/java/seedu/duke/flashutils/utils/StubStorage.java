@@ -12,6 +12,7 @@ public class StubStorage extends Storage {
 
     @Override
     public void writeFlashBookToFile(FlashBook flashBook) {
+        super.writeFlashBookToFile(flashBook);
         isWriteFlashBookToFileCalled = true;
     }
 

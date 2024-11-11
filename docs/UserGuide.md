@@ -32,10 +32,15 @@ is a list of command which are supported with examples.
 
 ### Adding flashcards: `add`
 
-Add a flashcard to a flashcard set.
+Add a flashcard to a flashcard set. <br>
+Topics are optional fields that are used to enhance organisation
 
 ```bash
 add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
+```
+or
+```bash
+add --m [MODULE NAME] --t [TOPIC NAME] --q [QUESTION] --a [ANSWER]
 ```
 
 **Examples:**
@@ -43,9 +48,10 @@ add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
 add --m CS2113 --q "What is OOP?" --a "Object-Oriented Programming"
 add --m CS1010 --q "What is a variable?" --a "A storage location in memory with a name"
 add --m MA1521 --q "What is the derivative of sin(x)?" --a "cos(x)"
+add --m CS2113 --t OOP --q "What is an Object?" --a "An entity with state and behaviour"
 ```
 
-### Deleting flashcards: `delete`
+### Deleting flashcards: `delete`, `deleteall`
 
 To delete one flashcard:
 
@@ -56,14 +62,14 @@ delete --m [MODULE NAME] --i [INDEX]
 To delete all flashcards in a set:
 
 ```bash
-delete --m [MODULE NAME]
+deleteall --m [MODULE NAME]
 ```
 
 **Examples:**
 ```bash
 delete --m CS2113 --i 2    # Deletes second flashcard in the module CS2113
 delete --m MA1521 --i 5    # Deletes fifth flashcard in the module MA1521
-delete --m CS1010          # Deletes all flashcards in the module CS1010
+deleteall --m CS1010          # Deletes all flashcards in the module CS1010
 ```
 
 ### Viewing all flashcards: `view`
@@ -177,13 +183,13 @@ search --m CS2113 /t --s OOP
 
 ## Command summary
 
-| Command | Description |
-| --- | --- |
-| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]``` |
-| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]``` |
-| Delete all flashcards in a set | ```delete --m [MODULE NAME]``` |
-| View all flashcards in every module | ```view --all``` |
-| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME``` |
-| Filter flashcards by module | ```view --m [MODULE NAME]``` |
+| Command | Description                                                                  |
+| --- |------------------------------------------------------------------------------|
+| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]```                      |
+| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]```                                   |
+| Delete all flashcards in a set | ```deleteall --m [MODULE NAME]```                                            |
+| View all flashcards in every module | ```view --all```                                                             |
+| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME```                                             |
+| Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
 | Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
 

@@ -2,6 +2,7 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
+import seedu.duke.flashutils.utils.Ui;
 
 /**
  * Adds a flashcard to flashcard set.
@@ -9,7 +10,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
 public class AddCommand extends Command {
     
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully added flashcard: \n%1$s";
+    public static final String SUCCESS_MESSAGE = "Successfully added flashcard to module '%1$s': \n%2$s";
 
     private Card cardToAdd;
     private FlashCardSet targetSet;
@@ -26,6 +27,11 @@ public class AddCommand extends Command {
         if (module == null || question == null || answer == null) {
             throw new NullPointerException();
         }
+        
+        String currentModuleName = module.getModuleName(); 
+        if (currentModuleName.contains("--m") || currentModuleName.trim().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
 
         cardToAdd = new Card(question, answer);
         this.targetSet = module;
@@ -38,6 +44,11 @@ public class AddCommand extends Command {
      * @param module 
      */
     public AddCommand(FlashCardSet module, Card cardToAdd) {
+        String currentModuleName = module.getModuleName(); 
+        if (currentModuleName.contains("--m") || currentModuleName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Please enter a valid module name");
+        }
+
         this.cardToAdd = cardToAdd;
         this.targetSet = module;
     }
@@ -69,6 +80,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() {
         targetSet.addCard(cardToAdd);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, cardToAdd));
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.getModuleName(), cardToAdd));
     }
 }

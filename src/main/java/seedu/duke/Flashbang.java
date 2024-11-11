@@ -33,20 +33,20 @@ public class Flashbang {
     }
 
     private void run() {
-        Ui.welcomeMessage(); 
+        Ui.welcomeMessage();
+        displayCommands();
         String input = "";
         Command command = null;
         while (!(command instanceof QuitCommand)) {
             try {
-                input = Ui.getRequest();
+                input = Ui.getRequest().trim();
                 command = Parser.parseCommand(input);
                 CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());
             } catch (IllegalArgumentException e) {
-                Ui.printResponse(e.getMessage());
+                Ui.printResponse("Please enter a valid command");
                 displayCommands();
-
             }
         }
     }

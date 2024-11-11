@@ -15,7 +15,7 @@ public class ViewCommand extends Command {
 
     /**
      * Constructs a ViewCommand with a specified module
-     * @param module
+     * @param module FlashCardSet to view
      */
     public ViewCommand(FlashCardSet module) {
         this.targetSet = module;
@@ -36,7 +36,7 @@ public class ViewCommand extends Command {
     public CommandResult execute() {
         getModuleToView(); 
         targetSet.viewFlashCards(currentModule);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.getModuleName()));
     }
 
     /**

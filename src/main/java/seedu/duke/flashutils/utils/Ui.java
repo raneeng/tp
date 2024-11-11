@@ -20,9 +20,9 @@ public class Ui {
      * Displays all available commands for users
      */
     public static void displayCommands() {
-        String availableCommands = "Available Commands: \n" 
+        String availableCommands = "Available Commands: \n"
                                 + " 1. Add a flashcard: \n"
-                                + " \t add --m [Module Name] --q [Question] --a [Answer] \n" 
+                                + " \t add --m [Module Name] {--t [Topic] (optional)} --q [Question] --a [Answer] \n"
                                 + " 2. View all flashcards of a module: \n"
                                 + " \t view --m [Module Name] \n"
                                 + " 3. View all flashcards: \n"
@@ -33,8 +33,10 @@ public class Ui {
                                 + " \t edit --m [Module Name] --i [Index] —-q [New Question] —-a [New Answer] \n"
                                 + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
                                 + " \t flashbang --m [Module Name] --t [Time in ms]\n"
-                                + " 7. Quit the app: \n"
-                                + " \t quit \n"; 
+                                + " 7. Search for flashcards: \n"
+                                + " \t search --m [Module Name] {/t (optional)} --s [Search Term] \n"
+                                + " 8. Quit the app: \n"
+                                + " \t quit \n";
         System.out.println(availableCommands);
     }
 
@@ -54,7 +56,7 @@ public class Ui {
      * @param text The message to be printed.
      */
     public static void printResponse(String text) {
-        String lineSeparator = "____________________________________________________________";
+        String lineSeparator = "_".repeat(50);
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
         System.out.print(formattedText);
