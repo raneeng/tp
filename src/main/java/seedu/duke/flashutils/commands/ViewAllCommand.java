@@ -12,7 +12,6 @@ public class ViewAllCommand extends Command {
     public CommandResult execute() {
         HashMap<String, FlashCardSet> sets = FlashBook.getInstance().getAllFlashCardSets();
         StringBuilder sb = new StringBuilder();
-
         for (Map.Entry<String, FlashCardSet> entry : sets.entrySet()) {
             sb.append("MODULE NAME: ").append(entry.getKey()).append("\n");
             for (Card card : entry.getValue()) {

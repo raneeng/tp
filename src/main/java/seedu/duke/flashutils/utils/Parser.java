@@ -96,8 +96,7 @@ public class Parser {
             return new InvalidCommand();
 
         } catch (FlashCardSetDoesNotExistException e) {
-            Ui.printResponse("No such module exists");
-            return new InvalidCommand();
+            return new InvalidCommand("No such module exists");
         }
     }
 
@@ -119,9 +118,9 @@ public class Parser {
             } else {
                 return new InvalidCommand();
             }
+
         }  catch (FlashCardSetDoesNotExistException e) {
-            Ui.printResponse("No such module exists");
-            return new InvalidCommand();
+            return new InvalidCommand("No such module exists");
         }
     }
 
@@ -151,15 +150,13 @@ public class Parser {
                     return new EditCommand(module, index);
                 }
             } else {
-                Ui.printResponse("Please enter a valid index");
-                return new InvalidCommand();
+                return new InvalidCommand("Please enter a valid index");
             }
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand();
 
         } catch (FlashCardSetDoesNotExistException e) {
-            Ui.printResponse("No such module exists");
-            return new InvalidCommand();
+            return new InvalidCommand("No such module exists");
         }
 
     }
@@ -210,7 +207,7 @@ public class Parser {
             assert (!(module == null || searchTerm == null));
             return new SearchCommand(searchTerm, byTopic, FlashBook.getInstance().getFlashCardSet(module));
         } else {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid format for search =.=");
         }
     }
 
@@ -226,6 +223,7 @@ public class Parser {
         double value;
         try {
             value = Double.parseDouble(parts[0]);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format: " + parts[0]);
         }
