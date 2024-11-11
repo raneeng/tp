@@ -8,6 +8,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static Scanner scanner;
+    private static final String LINE_SEPARATOR = "_".repeat(50);
 
     /**
      * Initializes the scanner object for reading user input.
@@ -32,7 +33,7 @@ public class Ui {
                                 + " 5. Edit a flashcard: \n"
                                 + " \t edit --m [Module Name] --i [Index] —-q [New Question] —-a [New Answer] \n"
                                 + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
-                                + " \t flashbang --m [Module Name] --t [Time in ms]\n"
+                                + " \t flashbang --m [Module Name] --t [time] [unit(second/seconds/minute/minutes]\n"
                                 + " 7. Search for flashcards: \n"
                                 + " \t search --m [Module Name] {/t (optional)} --s [Search Term] \n"
                                 + " 8. Quit the app: \n"
@@ -46,8 +47,10 @@ public class Ui {
      */
     public static void welcomeMessage() {
         String logo = "FlashBang"; 
-        String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n"; 
-        System.out.println(logo + "\n" + intro); 
+        String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n";
+        System.out.println(LINE_SEPARATOR);
+        System.out.println(logo + "\n" + intro);
+        System.out.println(LINE_SEPARATOR);
     }
 
     /**
@@ -56,10 +59,8 @@ public class Ui {
      * @param text The message to be printed.
      */
     public static void printResponse(String text) {
-        String lineSeparator = "_".repeat(50);
-        text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
-        String formattedText = text.replaceAll("(?m)^", "\t");
-        System.out.print(formattedText);
+        text = LINE_SEPARATOR +  "\n" + text + "\n" + LINE_SEPARATOR + "\n";
+        System.out.print(text);
     }
 
     /**
@@ -68,6 +69,7 @@ public class Ui {
      * @return The raw string input from the user.
      */
     public static String getRequest() {
+        System.out.print("> ");
         return scanner.nextLine();
     }
 

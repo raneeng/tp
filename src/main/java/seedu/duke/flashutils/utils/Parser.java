@@ -153,11 +153,11 @@ public class Parser {
     }
 
     public static Command createFlashbangCommand(String input) {
-        Pattern flashbangPattern = Pattern.compile("--m\\s+(.+?)\\s+(--t\\s+.+)?");
+        Pattern flashbangPattern = Pattern.compile("--m\\s+(\\S+)(?:\\s+--t\\s+(\\d+)\\s+(second|seconds|minute|minutes))?$");
         Matcher matcher = flashbangPattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
-            String timer = matcher.group(2) != null ? matcher.group(2).trim() : "";
+            String timer = matcher.group(2) != null ? input.substring(input.indexOf("--t")+3).trim() : "";
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
             if (!timer.isEmpty()) {
                 try{
@@ -206,9 +206,9 @@ public class Parser {
         String unit = parts[1];
 
         return switch (unit) {
-        case "second", "seconds" -> (long) (value * 1000);
-        case "minute", "minutes" -> (long) (value * 1000 * 60);
-        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        case "s","second", "seconds" -> (long) (value * 1000);
+        case "min","minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit+ "supported time units are second,seconds,minute,minutes");
         };
     }
 
