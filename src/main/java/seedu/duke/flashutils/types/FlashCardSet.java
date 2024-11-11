@@ -78,46 +78,56 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public void performFlashBang(long timerThreshold) {
+        //start keeps track of time spent in answering all questions, recurring keeps track of time spent in answering each question
         Date start = new Date();
         Date recurring = new Date();
-        int num = 0;
+        // variables to store the number of correct and wrong answers
+        int flashCardIndex = 0;
         int correctAnswers = 0;
         int wrongAnswers = 0;
+
         List<Card> mistakes = new ArrayList<>();
         for (Card card : flashCardSet) {
-            Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
+            Ui.printResponse("Flashcard no." + flashCardIndex + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
+            String reveal = Ui.getRequest();
 
-            boolean validInput = false;
-            Date current = new Date();
-            while (!validInput) {
-                Ui.printResponse("Did you get the correct answer? (y/n)");
-                String answerCorrect = Ui.getRequest();
-
-                if (answerCorrect.equals("y")) {
-                    correctAnswers++;
-                    validInput = true;
-
-                } else if (answerCorrect.equals("n")) {
-                    wrongAnswers++;
-                    mistakes.add(card); // Add card to the mistake list
-                    validInput = true;
-
-                } else {
-                    Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
-                }
+            while (!reveal.equalsIgnoreCase("y") && !reveal.equalsIgnoreCase("n")) {
+                Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
+                reveal = Ui.getRequest();
             }
-            double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
-            Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
-            recurring = current;
+            if (reveal.equals("y")) {
+                System.out.println("Answer : "+card.getAnswer());
+            }
+
+            Ui.printResponse("Did you get the correct answer? (y/n)");
+            String answerCorrect = Ui.getRequest();
+
+            while (!answerCorrect.equalsIgnoreCase("y") && !answerCorrect.equalsIgnoreCase("n")) {
+                Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
+                answerCorrect = Ui.getRequest();
+            }
+
+            if (answerCorrect.equals("y")) {
+                correctAnswers+=1;
+            } else if (answerCorrect.equals("n")) {
+                wrongAnswers+=1;
+                mistakes.add(card); // Add card to the mistake list
+            }
+
+            double timeSpentPerQuestion = Math.round(((new Date()).getTime()-recurring.getTime())/1000.00);
+
+            Ui.printResponse("You spent "+timeSpentPerQuestion+" seconds reviewing this flashcard.");
+            recurring = new Date();
 
             if(timerThreshold > 0) {
                 if (recurring.getTime() - start.getTime() > timerThreshold) {
                     Ui.printResponse("Oops You've run out of time! ");
                 }
             }
-            num++;
+            flashCardIndex++;
         }
+
         // Calculate percentage of right/wrong answers
         int totalAnswers = correctAnswers + wrongAnswers;
         double correctPercentage = (double) correctAnswers / totalAnswers * 100;
@@ -125,43 +135,7 @@ public class FlashCardSet implements Iterable<Card> {
         // Print mistakes list
         System.out.println("You answered the following flashcards incorrectly:\n");
         for (Card card : mistakes) {
-            System.out.println(card);
-        }
-    }
-
-    public void performFlashBang() {
-        int num = 0;
-        int correctAnswers = 0;
-        int wrongAnswers = 0;
-        List<Card> mistakes = new ArrayList<>();
-        for (Card card : flashCardSet) {
-            Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
-            Ui.printResponse("Reveal the answer? (y/n)");
-
-            boolean validInput = false;
-            Date current = new Date();
-            while (!validInput) {
-                Ui.printResponse("Did you get the correct answer? (y/n)");
-                String answerCorrect = Ui.getRequest();
-
-                if (answerCorrect.equals("y")) {
-                    correctAnswers++;
-                    validInput = true;
-
-                } else if (answerCorrect.equals("n")) {
-                    wrongAnswers++;
-                    mistakes.add(card); // Add card to the mistake list
-                    validInput = true;
-
-                } else {
-                    Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
-                }
-            }
-            num++;
-        }
-        System.out.println("You answered the following flashcards incorrectly:\n");
-        for (Card card : mistakes) {
-            System.out.println(card);
+            System.out.println(card.toString());
         }
     }
 

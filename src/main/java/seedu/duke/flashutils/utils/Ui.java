@@ -33,12 +33,13 @@ public class Ui {
                                 + " 5. Edit a flashcard: \n"
                                 + " \t edit --m [Module Name] --i [Index] --q [New Question] --a [New Answer] \n"
                                 + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
-                                + " \t flashbang --m [Module Name] --t [time] [unit(second/seconds/minute/minutes]\n"
+                                + " \t flashbang --m [Module Name] --t [time] [unit (second/seconds/minute/minutes)]\n"
                                 + " 7. Search for flashcards: \n"
                                 + " \t search --m [Module Name] {/t (optional)} --s [Search Term] \n"
                                 + " 8. Quit the app: \n"
                                 + " \t quit \n";
-        System.out.println(availableCommands);
+        System.out.print(availableCommands);
+        System.out.println(LINE_SEPARATOR);
     }
 
     /**
@@ -47,8 +48,7 @@ public class Ui {
      */
     public static void welcomeMessage() {
         String logo = "FlashBang"; 
-        String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards \n";
-        System.out.println(LINE_SEPARATOR);
+        String intro = "Welcome to the FlashBang app - learning your modules through engaging flashcards";
         System.out.println(logo + "\n" + intro);
         System.out.println(LINE_SEPARATOR);
     }
