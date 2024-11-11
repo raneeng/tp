@@ -10,24 +10,16 @@
 
 ### Enhancements Implemented
 1. **Command Classes:**
-    - **What**: Developed various command classes to handle user input and execute corresponding actions.
     - **How**: Implemented classes such as `AddCommand`, `DeleteCommand`, `FlashBangCommand`, etc.
-    - **Why**: These classes are essential for the app's functionality, ensuring that user commands are processed accurately and efficiently.
 
 2. **Command Class Testing:**
-    - **What**: Created unit tests for command classes to ensure they work correctly.
     - **How**: Used JUnit framework to write tests covering different scenarios and edge cases.
-    - **Why**: Ensures the reliability and correctness of command implementations, leading to a robust application.
 
 3. **Show FlashBang Percentage:**
-    - **What**: Implemented a feature to show the percentage of correctly answered flashcards.
     - **How**: Added methods to calculate and display the percentage based on user performance.
-    - **Why**: Provides users with immediate feedback on their study progress, enhancing the learning experience.
 
 4. **Show FlashBang Mistakes:**
-    - **What**: Added functionality to display the mistakes made by users during flashcard sessions.
     - **How**: Implemented methods to track incorrect answers and present them to the user.
-    - **Why**: Helps users identify areas that need improvement, fostering more effective studying.
 
 ### Contributions to User Guide (UG)
 [UG](https://ay2425s1-cs2113-t11-2.github.io/tp/UserGuide.html)
@@ -46,17 +38,9 @@
     - Illustrated the sequence of operations for the delete command.
 
 ### Contributions to Team-Based Tasks
-1. **Conducting Code Reviews and Providing Feedback:**
-    - Reviewed pull requests to ensure code quality and adherence to project standards.
-    - Provided constructive feedback to team members, facilitating improvements and learning.
-
-2. **Maintaining the Issue Tracker:**
-    - Managed the issue tracker by organizing and prioritizing tasks.
-    - Ensured that issues were addressed promptly and efficiently.
-
-3. **Updating User Docs:**
-    - Documented the target user profile and other essential information for user documentation.
-    - Ensured that the documentation was clear, concise, and helpful for end-users.
+1. Conducting Code Reviews and Providing Feedback
+2. Maintaining the Issue Tracker
+3. Updating User Docs
 
 ### Review/Mentoring Contributions:
 [Example 1](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
