@@ -25,10 +25,10 @@ public class EditCommand extends Command {
     /**
      * Constructs an Edit Command with specified module, index, new question and new answer
      * 
-     * @param module
-     * @param cardIndex
-     * @param newQuestion
-     * @param newAnswer
+     * @param module FlashCardSet to perform EditCommand on
+     * @param cardIndex Index of card to edit
+     * @param newQuestion String to replace question of Card
+     * @param newAnswer String to replace answer of Card
      */
     public EditCommand(FlashCardSet module, int cardIndex, String newQuestion, String newAnswer) {
         this.targetSet = module;
@@ -40,8 +40,8 @@ public class EditCommand extends Command {
      * Construct an Edit Command with specified module and index
      * The new question and answer will be collected from user later on
      * 
-     * @param module
-     * @param cardIndex
+     * @param module FlashCardSet to perform EditCommand on
+     * @param cardIndex Index of card to edit
      */
     public EditCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         this.targetSet = module;

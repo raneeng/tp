@@ -17,10 +17,10 @@ public class DeleteCommand extends Command {
     private FlashCardSet targetSet;
 
     /**
-     * Constructs a Delete Command wirh specified module and card index
+     * Constructs a Delete Command with specified module and card index
      * 
-     * @param module
-     * @param cardIndex
+     * @param module FlashCardSet to perform DeleteCommand on
+     * @param cardIndex Index of card to delete
      */
     public DeleteCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         targetSet = module;
