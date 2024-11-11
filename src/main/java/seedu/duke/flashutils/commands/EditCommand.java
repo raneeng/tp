@@ -14,7 +14,7 @@ import static seedu.duke.flashutils.utils.Ui.displayGetNewPromptFromUser;
 public class EditCommand extends Command {
 
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully edited flashcard: \n%1$s";
+    public static final String SUCCESS_MESSAGE = "Successfully edited flashcard";
 
     public static final int INDEX_OFFSET = 1;
 
@@ -109,7 +109,7 @@ public class EditCommand extends Command {
     public CommandResult execute() {
         cardToEdit.setQuestion(newCard.getQuestion());
         cardToEdit.setAnswer(newCard.getAnswer());
-        return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));
+        return new CommandResult(SUCCESS_MESSAGE);
     }
 
     /**

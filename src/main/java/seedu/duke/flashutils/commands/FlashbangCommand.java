@@ -8,7 +8,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
  */
 public class FlashbangCommand extends Command {
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successful FlashBang for flashcard set: \n%1$s";
+    public static final String SUCCESS_MESSAGE = "Successful FlashBang for flashcard set: %1$s";
     private final FlashCardSet targetSet;
     private long timerThreshold;
 
@@ -40,7 +40,7 @@ public class FlashbangCommand extends Command {
     @Override
     public CommandResult execute() {
         targetSet.performFlashBang(timerThreshold);
-        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet));
+        return new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.getModuleName()));
     }
       
     public FlashCardSet getTargetSet() {
