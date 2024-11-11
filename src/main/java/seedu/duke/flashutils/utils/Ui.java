@@ -54,7 +54,7 @@ public class Ui {
      * @param text The message to be printed.
      */
     public static void printResponse(String text) {
-        String lineSeparator = "____________________________________________________________";
+        String lineSeparator = "_".repeat(50);
         text = lineSeparator +  "\n" + text + "\n" + lineSeparator + "\n";
         String formattedText = text.replaceAll("(?m)^", "\t");
         System.out.print(formattedText);
