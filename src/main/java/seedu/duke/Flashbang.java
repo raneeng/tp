@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.flashutils.commands.Command;
 import seedu.duke.flashutils.commands.CommandResult;
+import seedu.duke.flashutils.commands.QuitCommand;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.utils.Parser;
 import seedu.duke.flashutils.utils.Storage;
@@ -34,10 +35,11 @@ public class Flashbang {
     private void run() {
         Ui.welcomeMessage(); 
         String input = "";
-        while (!input.equals("quit")) {
+        Command command = null;
+        while (!(command instanceof QuitCommand)) {
             try {
                 input = Ui.getRequest();
-                Command command = Parser.parseCommand(input);
+                command = Parser.parseCommand(input);
                 CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());

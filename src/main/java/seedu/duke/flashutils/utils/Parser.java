@@ -7,6 +7,7 @@ import seedu.duke.flashutils.commands.EditCommand;
 import seedu.duke.flashutils.commands.FlashbangCommand;
 import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.SearchCommand;
 import seedu.duke.flashutils.commands.ViewAllCommand;
 import seedu.duke.flashutils.commands.ViewCommand;
 
@@ -19,10 +20,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid }
+    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid, Search }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(add|delete|edit|view|flashbang|quit)";
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
+                "|\\bsearch\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
@@ -32,6 +34,7 @@ public class Parser {
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
+            case "search" -> CommandType.Search;
             case "quit" -> CommandType.Quit;
             default -> CommandType.Invalid;
             };
@@ -47,6 +50,7 @@ public class Parser {
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
+        case Search -> createSearchCommand(input);
         case Quit -> createQuitCommand();
         default -> new InvalidCommand();
         };
@@ -140,6 +144,20 @@ public class Parser {
                 }
             }
             return new FlashbangCommand(module);
+        } else {
+            return new InvalidCommand();
+        }
+    }
+    public static Command createSearchCommand(String input) {
+        Pattern searchPattern = Pattern.compile("--m\\s+(.+?)(\\s+/t)?\\s+--s\\s+(.+)");
+        Matcher searchMatcher = searchPattern.matcher(input);
+        if (searchMatcher.find()) {
+            String module = searchMatcher.group(1);
+            boolean byTopic = searchMatcher.group(2).trim().equals("/t");
+            System.out.println(searchMatcher.group(2));
+            String searchTerm = searchMatcher.group(3);
+            assert (!(module == null || searchTerm == null));
+            return new SearchCommand(searchTerm, byTopic, FlashBook.getInstance().getFlashCardSet(module));
         } else {
             return new InvalidCommand();
         }
