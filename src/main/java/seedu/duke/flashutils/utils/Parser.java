@@ -3,6 +3,7 @@ package seedu.duke.flashutils.utils;
 import seedu.duke.flashutils.commands.*;
 
 
+import seedu.duke.flashutils.exceptions.FlashCardSetDoesNotExistException;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
@@ -78,29 +79,48 @@ public class Parser {
             Matcher matcher = deletePattern.matcher(input);
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
+
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 int index = Integer.parseInt(matcher.group(2));
                 return new DeleteCommand(module, index);
             } else {
                 return new InvalidCommand();
             }
+
         } catch (IndexOutOfBoundsException e) {
             Ui.printResponse("Please enter a valid index");
             return new InvalidCommand();
+
+        } catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
         }
     }
 
     public static Command createDeleteAllCommand(String input) {
-        Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
-        Matcher matcher = deleteAllPattern.matcher(input);
+        try {
+            Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
+            Matcher matcher = deleteAllPattern.matcher(input);
 
-        if (matcher.find()) {
-            String moduleName = matcher.group(1);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            return new DeleteAllCommand(module);
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
 
-        } else {
-            return new InvalidCommand();
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                return new DeleteAllCommand(module);
+
+            } else {
+                return new InvalidCommand();
+            }
+
+        }  catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
         }
     }
 
@@ -111,6 +131,11 @@ public class Parser {
 
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
+
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 int index = Integer.parseInt(matcher.group(2));
 
@@ -125,11 +150,13 @@ public class Parser {
                     return new EditCommand(module, index);
                 }
             } else {
-                Ui.printResponse("Please enter a valid index");
-                return new InvalidCommand();
+                return new InvalidCommand("Please enter a valid index");
             }
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand();
+
+        } catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
         }
 
     }
@@ -196,6 +223,7 @@ public class Parser {
         double value;
         try {
             value = Double.parseDouble(parts[0]);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format: " + parts[0]);
         }
