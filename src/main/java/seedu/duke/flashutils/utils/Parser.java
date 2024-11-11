@@ -84,7 +84,6 @@ public class Parser {
             } else {
                 return new InvalidCommand();
             }
-
         } catch (IndexOutOfBoundsException e) {
             Ui.printResponse("Please enter a valid index");
             return new InvalidCommand();
@@ -130,7 +129,6 @@ public class Parser {
                 return new InvalidCommand();
             }
         } catch (IndexOutOfBoundsException e) {
-
             return new InvalidCommand();
         }
 
@@ -182,7 +180,7 @@ public class Parser {
             assert (!(module == null || searchTerm == null));
             return new SearchCommand(searchTerm, byTopic, FlashBook.getInstance().getFlashCardSet(module));
         } else {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid format for search =.=");
         }
     }
 
