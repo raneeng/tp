@@ -38,11 +38,9 @@
     - Illustrated the sequence of operations for the delete command.
 
 ### Contributions to Team-Based Tasks
-1. Conducting Code Reviews and Providing Feedback:
-
-2. Maintaining the Issue Tracker:
-
-3. Updating User Docs:
+1. Conducting Code Reviews and Providing Feedback
+2. Maintaining the Issue Tracker
+3. Updating User Docs
 
 ### Review/Mentoring Contributions:
 [Example 1](https://github.com/AY2425S1-CS2113-T11-2/tp/pull/160)
