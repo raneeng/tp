@@ -25,7 +25,7 @@ More details are presented on a sequence diagram someName.
 
 #### Structure
 Below is a partial class diagram showing the interactions of the `Parser` class.
-![Parser class diagram](./diagrams/ParserPartialClassDiagram.jpg)
+![Parser class diagram](./diagrams/ParserPartialClassDiagram.png)
 
 The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
 ![Sample delete call sequence diagram](./diagrams/ParserDeleteSequenceDiagram.png)
