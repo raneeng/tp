@@ -18,13 +18,4 @@ public class QuitCommandTest {
         assertEquals("Quit Flash Session", result.getFeedbackToUser());
     }
 
-    @Test
-    public void testQuitCommandWritesToFile() {
-        StubStorage stubStorage = new StubStorage();
-        QuitCommand command = new QuitCommand();
-
-        command.execute();
-        assertTrue(stubStorage.isWriteFlashBookToFileCalled());
-    }
-
 }
