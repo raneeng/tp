@@ -45,4 +45,8 @@ public class FlashBook {
         return allFlashCardSets.get(module);
     }
 
+    public boolean flashCardSetExists(String module) {
+        return allFlashCardSets.get(module) != null;
+    }
+
 }
