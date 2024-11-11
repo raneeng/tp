@@ -193,3 +193,9 @@ search --m CS2113 /t --s OOP
 | Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
 | Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
 
+## FAQs
+Q: Can I add two flashcards same question but different answer.
+
+A: Yes. Adding the two flashcards with both the same answer and question will work.
+
+
