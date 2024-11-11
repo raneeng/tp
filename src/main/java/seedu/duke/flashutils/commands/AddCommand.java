@@ -2,7 +2,6 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
 /**
  * Adds a flashcard to flashcard set.
@@ -24,6 +23,10 @@ public class AddCommand extends Command {
      * @param answer
      */
     public AddCommand(FlashCardSet module, String question, String answer) {
+        if (module == null || question == null || answer == null) {
+            throw new NullPointerException();
+        }
+
         cardToAdd = new Card(question, answer);
         this.targetSet = module;
     }
@@ -64,7 +67,7 @@ public class AddCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         targetSet.addCard(cardToAdd);
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToAdd));
     }

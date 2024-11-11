@@ -1,13 +1,16 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.Command;
 import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.Command;
 import seedu.duke.flashutils.commands.DeleteCommand;
 import seedu.duke.flashutils.commands.EditCommand;
 import seedu.duke.flashutils.commands.FlashbangCommand;
 import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.SearchCommand;
+import seedu.duke.flashutils.commands.ViewAllCommand;
 import seedu.duke.flashutils.commands.ViewCommand;
+
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
@@ -17,10 +20,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid }
+    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid, Search }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(add|delete|edit|view|flashbang|quit)";
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
+                "|\\bsearch\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
@@ -30,6 +34,7 @@ public class Parser {
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
+            case "search" -> CommandType.Search;
             case "quit" -> CommandType.Quit;
             default -> CommandType.Invalid;
             };
@@ -45,6 +50,7 @@ public class Parser {
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
+        case Search -> createSearchCommand(input);
         case Quit -> createQuitCommand();
         default -> new InvalidCommand();
         };
@@ -109,10 +115,14 @@ public class Parser {
     public static Command createViewCommand(String input) {
         Pattern viewModulePattern = Pattern.compile("--m\\s+(.+)");
         Matcher matcher = viewModulePattern.matcher(input);
+        Pattern viewAllModulePattern = Pattern.compile("--all");
+        Matcher matcherAll = viewAllModulePattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
             return new ViewCommand(module);
+        } else if (matcherAll.find()) {
+            return new ViewAllCommand();
         } else {
             return new InvalidCommand();
         }
@@ -138,6 +148,19 @@ public class Parser {
             return new InvalidCommand();
         }
     }
+    public static Command createSearchCommand(String input) {
+        Pattern searchPattern = Pattern.compile("--m\\s+(.+?)(?:\\s+(/t))?\\s+--s\\s+(.+)");
+        Matcher searchMatcher = searchPattern.matcher(input);
+        if (searchMatcher.find()) {
+            String module = searchMatcher.group(1);
+            boolean byTopic = searchMatcher.group(2) != null && searchMatcher.group(2).equals("/t");
+            String searchTerm = searchMatcher.group(3);
+            assert (!(module == null || searchTerm == null));
+            return new SearchCommand(searchTerm, byTopic, FlashBook.getInstance().getFlashCardSet(module));
+        } else {
+            return new InvalidCommand();
+        }
+    }
 
     private static long parseTimer(String timer) {
         timer = timer.trim().toLowerCase();
@@ -159,9 +182,9 @@ public class Parser {
         String unit = parts[1];
 
         return switch (unit) {
-            case "second", "seconds" -> (long) (value * 1000);
-            case "minute", "minutes" -> (long) (value * 1000 * 60);
-            default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        case "second", "seconds" -> (long) (value * 1000);
+        case "minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
         };
     }
 
