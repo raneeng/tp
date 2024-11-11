@@ -61,19 +61,16 @@ public class FlashCardSet implements Iterable<Card> {
     public void viewFlashCards(String module) {
         String currentModule = getModuleName(); 
         if ((currentModule != null) && (currentModule.equals(module)) && (!flashCardSet.isEmpty())) {
-            int index = 1;
+            int flashCardIndex = 1;
 
             System.out.println("_".repeat(50));
 
             for (Card flashCard : flashCardSet) {
-
-                System.out.println(index + ". " + flashCard);
-
-                System.out.println("_".repeat(50));
-                index++;
+                System.out.println("#"+flashCardIndex + " -> " + flashCard);
+                flashCardIndex++;
             }
         } else if (flashCardSet.isEmpty()) {
-            System.out.println("No flashcards found for this module."); 
+            Ui.printResponse("No flashcards found for this module.");
         }
     }
 
