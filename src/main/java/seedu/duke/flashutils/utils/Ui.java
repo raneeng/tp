@@ -34,8 +34,8 @@ public class Ui {
                                 + " 6. Flashbang - view all the flashcards of a module without seeing the answers: \n"
                                 + " \t flashbang --m [Module Name] --t [Time in ms]\n"
                                 + " 7. Search for flashcards: \n"
-                                + " \t search --m [Module Name] {/t (optional)} --s [Search Term]"
-                                + " 7. Quit the app: \n"
+                                + " \t search --m [Module Name] {/t (optional)} --s [Search Term] \n"
+                                + " 8. Quit the app: \n"
                                 + " \t quit \n";
         System.out.println(availableCommands);
     }
