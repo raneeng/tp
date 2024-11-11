@@ -46,6 +46,9 @@ public class Card {
 
     @Override
     public String toString() {
+        if(topic.trim().isEmpty()){
+           return String.format("%1$s: \n %2$s", question, answer, topic);
+        }
         return String.format("%1$s: \n %2$s \n topic: %3$s", question, answer, topic);
     }
 }
