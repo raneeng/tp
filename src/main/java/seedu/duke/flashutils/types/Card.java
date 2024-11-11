@@ -24,6 +24,10 @@ public class Card {
         return question;
     }
 
+    public String getTopic() {
+        return topic;
+    }
+
     public void setQuestion(String question) {
         this.question = question;
     }
