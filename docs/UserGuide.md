@@ -139,6 +139,42 @@ edit --m MA1521 --i 1
 New Question: "What is the derivative of e^x?"
 New Answer: "e^x"
 ```
+
+### Search for flashcards in a module by topic or by a search term
+Searches for existing flashcards that contain the search term or have topics that contain the search term.
+<br>
+To search by topic, add the `/t` flag after the module name.
+<br>
+When searching, the search term is case-sensitive.
+```bash
+search --m [MODULE NAME] /t --s [SEARCH TERM]
+```
+*or*
+```bash
+search --m [MODULE NAME] --s [SEARCH TERM]
+```
+**Examples:**
+```bash
+search --m CS2113 --s state
+	____________________________________________________________
+	1. WHAT is an Object: 
+	 An entity with a state and a behaviour 
+	 topic: OOP
+	
+	____________________________________________________________
+search --m CS2113 /t --s OOP
+	____________________________________________________________
+	1. What is OOP: 
+	 Object-Oriented Programing 
+	 topic: OOP
+	2. WHAT is an Object: 
+	 An entity with a state and a behaviour 
+	 topic: OOP
+	
+	____________________________________________________________
+
+```
+
 ## Command summary
 
 | Command | Description |

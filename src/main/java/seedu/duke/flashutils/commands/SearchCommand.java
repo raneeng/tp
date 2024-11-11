@@ -17,11 +17,12 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute() {
         StringBuilder matchingCards = new StringBuilder();
+        int counter = 0;
         for (Card card : targetSet) {
-            if (byTopic && card.getTopic().contains(searchTerm)) {
-                matchingCards.append(card).append("\n");
-            } else if (card.getAnswer().contains(searchTerm) || card.getQuestion().contains(searchTerm)) {
-                matchingCards.append(card);
+            if ((byTopic && card.getTopic().contains(searchTerm))
+                    || (card.getAnswer().toLowerCase().contains(searchTerm)
+                    || card.getQuestion().toLowerCase().contains(searchTerm))) {
+                matchingCards.append(++counter).append(". ").append(card).append("\n");
             }
         }
         if (matchingCards.isEmpty()) {

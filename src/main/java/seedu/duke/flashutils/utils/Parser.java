@@ -149,12 +149,11 @@ public class Parser {
         }
     }
     public static Command createSearchCommand(String input) {
-        Pattern searchPattern = Pattern.compile("--m\\s+(.+?)(\\s+/t)?\\s+--s\\s+(.+)");
+        Pattern searchPattern = Pattern.compile("--m\\s+(.+?)(?:\\s+(/t))?\\s+--s\\s+(.+)");
         Matcher searchMatcher = searchPattern.matcher(input);
         if (searchMatcher.find()) {
             String module = searchMatcher.group(1);
-            boolean byTopic = searchMatcher.group(2).trim().equals("/t");
-            System.out.println(searchMatcher.group(2));
+            boolean byTopic = searchMatcher.group(2) != null && searchMatcher.group(2).equals("/t");
             String searchTerm = searchMatcher.group(3);
             assert (!(module == null || searchTerm == null));
             return new SearchCommand(searchTerm, byTopic, FlashBook.getInstance().getFlashCardSet(module));
