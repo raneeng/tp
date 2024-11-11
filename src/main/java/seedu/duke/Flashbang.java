@@ -44,9 +44,8 @@ public class Flashbang {
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());
             } catch (IllegalArgumentException e) {
-                Ui.printResponse(e.getMessage());
+                Ui.printResponse("Please enter a valid index");
                 displayCommands();
-
             }
         }
     }

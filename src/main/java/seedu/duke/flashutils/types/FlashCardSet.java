@@ -33,21 +33,19 @@ public class FlashCardSet implements Iterable<Card> {
         return this.flashCardSet;
     }
 
-    public Card getCard(int cardIndex) {
-        if (cardIndex < 0 || cardIndex >= this.flashCardSet.size()) {
+    public Card getCard(int cardIndex) throws IndexOutOfBoundsException {
+        if (!indexIsValid(cardIndex)) {
             throw new IndexOutOfBoundsException();
         }
         return this.flashCardSet.get(cardIndex);
     }
 
     public void addCard(Card toAdd) {
-        // TODO
         flashCardSet.add(toAdd);
         assert flashCardSet.contains(toAdd);
     }
 
     public void removeCard(Card toRemove) {
-        // TODO
         flashCardSet.remove(toRemove);
         assert !flashCardSet.contains(toRemove);
     }
@@ -154,6 +152,10 @@ public class FlashCardSet implements Iterable<Card> {
 
     public int getNumberOfFlashcards() {
         return flashCardSet.size();
+    }
+
+    public boolean indexIsValid(int index) {
+        return index >= 0 && index < flashCardSet.size();
     }
     
     @Override
