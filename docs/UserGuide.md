@@ -193,6 +193,8 @@ search --m CS2113 /t --s OOP
 | Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
 | Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
 
+Note that specifying multiple command keywords in the input will be understood as command of the first type.
+
 ## FAQs
 Q: Can I add two flashcards same question but different answer.
 
