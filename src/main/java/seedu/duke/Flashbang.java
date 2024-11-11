@@ -44,8 +44,10 @@ public class Flashbang {
                 CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());
+
             } catch (IllegalArgumentException e) {
-                Ui.printResponse("Please enter a valid command");
+
+                Ui.printResponse(e.getMessage());
                 displayCommands();
             }
         }

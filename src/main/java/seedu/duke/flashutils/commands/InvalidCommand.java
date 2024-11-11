@@ -6,6 +6,7 @@ public class InvalidCommand extends Command {
     public InvalidCommand() {
         this.errorMessage = "uh oh bad command";
     }
+
     public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }
