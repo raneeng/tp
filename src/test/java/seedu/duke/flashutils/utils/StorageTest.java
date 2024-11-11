@@ -84,7 +84,7 @@ class StorageTest {
         FlashCardSet actualList = actualMap.get("CS2113");
         for (int i = 0; i < testList.size(); i++) {
             StubCard actualCard = new StubCard(actualList.getCard(i));
-            StubCard expectedCard =new StubCard(testList.get(i));
+            StubCard expectedCard = new StubCard(testList.get(i));
             assertTrue(actualCard.isEqual(expectedCard));
         }
     }
