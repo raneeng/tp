@@ -74,7 +74,9 @@ public class Storage {
             Scanner scanner = new Scanner(flashCardSetFile);
             while (scanner.hasNext()) {
                 Card card = cardFormatter(scanner.nextLine());
-                cards.add(card);
+                if (card != null) {
+                    cards.add(card);
+                }
             }
             scanner.close();
         } catch (IOException e) {
