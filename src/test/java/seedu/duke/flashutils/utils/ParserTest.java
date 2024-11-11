@@ -7,13 +7,11 @@ import seedu.duke.flashutils.commands.Command;
 import seedu.duke.flashutils.commands.FlashbangCommand;
 import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.SearchCommand;
 import seedu.duke.flashutils.commands.ViewCommand;
-import seedu.duke.flashutils.types.FlashBook;
-import seedu.duke.flashutils.types.FlashCardSet;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class ParserTest {
 
@@ -61,5 +59,13 @@ public class ParserTest {
         String input = "invalid --m SampleModule";
         Command command = Parser.parseCommand(input);
         assertInstanceOf(InvalidCommand.class, command);
+    }
+
+    @Test
+    public void testParseSearchCommand() {
+        String input = "search --m SampleModule --s SearchTerm";
+        Command command = Parser.parseCommand(input);
+        assertInstanceOf(SearchCommand.class, command);
+
     }
 }
