@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param module
      * @param cardIndex
      */
-    public DeleteCommand(FlashCardSet module, int cardIndex) {
+    public DeleteCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         targetSet = module;
         targetCard = targetSet.getCard(cardIndex - INDEX_OFFSET);
     }

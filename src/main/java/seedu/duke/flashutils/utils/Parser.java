@@ -76,17 +76,24 @@ public class Parser {
     }
 
     public static Command createDeleteCommand(String input) {
-        Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
-        Matcher matcher = deletePattern.matcher(input);
-        if (matcher.find()) {
-            String moduleName = matcher.group(1);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            int index = Integer.parseInt(matcher.group(2));
-            return new DeleteCommand(module, index);
-        } else {
+        try {
+            Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
+            Matcher matcher = deletePattern.matcher(input);
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                int index = Integer.parseInt(matcher.group(2));
+                return new DeleteCommand(module, index);
+            } else {
+                return new InvalidCommand();
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printResponse("Please enter a valid index");
             return new InvalidCommand();
         }
     }
+
 
     public static Command createEditCommand(String input) {
         Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
