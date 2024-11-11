@@ -41,13 +41,11 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public void addCard(Card toAdd) {
-        // TODO
         flashCardSet.add(toAdd);
         assert flashCardSet.contains(toAdd);
     }
 
     public void removeCard(Card toRemove) {
-        // TODO
         flashCardSet.remove(toRemove);
         assert !flashCardSet.contains(toRemove);
     }

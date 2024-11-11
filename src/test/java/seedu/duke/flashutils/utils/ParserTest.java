@@ -11,17 +11,11 @@ import seedu.duke.flashutils.commands.ViewCommand;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class ParserTest {
-
-    private FlashBook flashBook;
-
-    @BeforeEach
-    public void setUp() {
-        flashBook = FlashBook.getInstance();
-        FlashCardSet sampleSet = new FlashCardSet("SampleModule");
-    }
 
     @Test
     public void testParseAddCommand() {
