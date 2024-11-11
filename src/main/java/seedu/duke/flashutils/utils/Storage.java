@@ -13,6 +13,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Storage class is responsible for storing and reading data inputted from Flashbang
+ */
 public class Storage {
     private final File directory;
 
@@ -21,6 +24,9 @@ public class Storage {
         createDir();
     }
 
+    /**
+     * This function creates a directory at the file path of the class instance
+     */
     private void createDir() {
         try {
             if(!directory.exists()){
@@ -33,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This function formats lines from the txt file into appropriate strings for flashcards
+     * @param line represents a line from the txt file as a String
+     * @return a {@code Card} formatted from the file
+     */
     private Card cardFormatter(String line) {
         Pattern cardPattern = Pattern.compile(
                 "(.+?)\\s*\\|\\s*(.+?)\\s*\\|\\s*(.+?)?");
@@ -48,6 +59,13 @@ public class Storage {
         return null;
     }
 
+    /**
+     * Reads the txt file with the matching name as the module
+     * @param module represents the name of the module of the {@code FlashCardSet}
+     * @param flashCardSetFile represents the file containing the {@code Card} in the set
+     * @return a {@code FlashCardSet} read from the file
+     * @throws IOException when an input/output error occurs
+     */
     private FlashCardSet readFlashCardSetFromFile(String module, File flashCardSetFile) throws IOException {
 
         ArrayList<Card> cards = new ArrayList<>();
@@ -77,6 +95,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the {@code FlashBook} into a txt file
+     * @param flashBook represents the {@code FlashBook} instance to be written
+     */
     public void writeFlashBookToFile(FlashBook flashBook){
         flashBook.getAllFlashCardSets().forEach((module, flashCardSet)-> {
             File flashCardSetFile = new File(directory, module+".txt");
@@ -93,6 +115,12 @@ public class Storage {
         });
     }
 
+    /**
+     * Reads the all txt files within the directory
+     * @return a {@code HashMap<String, FlashCard Set>}. The key is a {@code String} which is the name of the txt file
+     *     and the value stored is the {@code FlashCardSet} read from the file.
+     * @throws IOException when an input/output error occurs
+     */
     public HashMap<String, FlashCardSet> readFlashCardsFromFile() throws IOException {
         HashMap<String, FlashCardSet> flashCard = new HashMap<>();
         File[] files = directory.listFiles((dir, name) -> name.endsWith(".txt"));

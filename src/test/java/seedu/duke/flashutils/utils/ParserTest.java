@@ -1,6 +1,5 @@
 package seedu.duke.flashutils.utils;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.flashutils.commands.AddCommand;
 import seedu.duke.flashutils.commands.Command;
