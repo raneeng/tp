@@ -2,9 +2,11 @@ package seedu.duke.flashutils.commands;
 
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashCardSet;
-import seedu.duke.flashutils.utils.Storage;
 
-import static seedu.duke.flashutils.utils.Ui.*;
+import static seedu.duke.flashutils.utils.Ui.getRequest;
+import static seedu.duke.flashutils.utils.Ui.displayConfirmationQuestion;
+import static seedu.duke.flashutils.utils.Ui.displayOldStoredValue;
+import static seedu.duke.flashutils.utils.Ui.displayGetNewPromptFromUser;
 
 /**
  * Updates information in an existing flashcard.
@@ -102,7 +104,7 @@ public class EditCommand extends Command {
      * @return The result of the command
      */
     @Override
-    public CommandResult execute(Storage storage) {
+    public CommandResult execute() {
         cardToEdit.setQuestion(newCard.getQuestion());
         cardToEdit.setAnswer(newCard.getAnswer());
         return new CommandResult(String.format(SUCCESS_MESSAGE, cardToEdit));
@@ -131,5 +133,7 @@ public class EditCommand extends Command {
      *
      * @return The updated card
      */
-    public Card getNewCard() { return newCard; }
+    public Card getNewCard() {
+        return newCard;
+    }
 }

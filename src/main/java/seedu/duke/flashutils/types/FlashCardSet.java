@@ -1,12 +1,11 @@
 package seedu.duke.flashutils.types;
 
-import com.sun.nio.sctp.InvalidStreamException;
-import seedu.duke.flashutils.commands.CommandResult;
-import seedu.duke.flashutils.commands.InvalidCommand;
 import seedu.duke.flashutils.utils.Ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents the list of flashcards of the same module
@@ -35,7 +34,7 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public Card getCard(int cardIndex) {
-        if (cardIndex >= this.flashCardSet.size()) {
+        if (cardIndex < 0 || cardIndex >= this.flashCardSet.size()) {
             throw new IndexOutOfBoundsException();
         }
         return this.flashCardSet.get(cardIndex);
@@ -65,17 +64,19 @@ public class FlashCardSet implements Iterable<Card> {
         }
     }
 
-    public void performFlashBang() {
+    public void performFlashBang(long timerThreshold) {
+        Date start = new Date();
+        Date recurring = new Date();
         int num = 0;
         int correctAnswers = 0;
         int wrongAnswers = 0;
-
+        List<Card> mistakes = new ArrayList<>();
         for (Card card : flashCardSet) {
             Ui.printResponse("Flashcard no." + num + "\n\t" + card.getQuestion());
             Ui.printResponse("Reveal the answer? (y/n)");
-            String revealAnswer = Ui.getRequest();
 
             boolean validInput = false;
+            Date current = new Date();
             while (!validInput) {
                 Ui.printResponse("Did you get the correct answer? (y/n)");
                 String answerCorrect = Ui.getRequest();
@@ -86,23 +87,39 @@ public class FlashCardSet implements Iterable<Card> {
 
                 } else if (answerCorrect.equals("n")) {
                     wrongAnswers++;
+                    mistakes.add(card); // Add card to the mistake list
                     validInput = true;
 
                 } else {
                     Ui.printResponse("Invalid input. Please enter 'y' or 'n'.");
                 }
             }
+            double timeSpentPerQuestion = Math.round((recurring.getTime()-current.getTime())/1000.00);
+            Ui.printResponse("You spent "+timeSpentPerQuestion+"seconds reviewing this flashcard.");
+            recurring = current;
 
+            if(timerThreshold > 0) {
+                if (recurring.getTime() - start.getTime() > timerThreshold) {
+                    Ui.printResponse("Oops You've run out of time! ");
+                }
+            }
             num++;
         }
-
         // Calculate percentage of right/wrong answers
         int totalAnswers = correctAnswers + wrongAnswers;
         double correctPercentage = (double) correctAnswers / totalAnswers * 100;
-        Ui.printResponse("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
+        System.out.println("Your score is: " + correctPercentage + "% (" + correctAnswers + "/" + totalAnswers + ")");
+        // Print mistakes list
+        System.out.println("You answered the following flashcards incorrectly:\n");
+        for (Card card : mistakes) {
+            System.out.println(card);
+        }
     }
 
-
+    public int getNumberOfFlashcards() {
+        return flashCardSet.size();
+    }
+    
     @Override
     public Iterator<Card> iterator() {
         return flashCardSet.iterator();

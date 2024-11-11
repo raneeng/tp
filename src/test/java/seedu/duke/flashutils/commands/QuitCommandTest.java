@@ -1,7 +1,6 @@
 package seedu.duke.flashutils.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.utils.Storage;
 import seedu.duke.flashutils.utils.StubStorage;
 
@@ -14,7 +13,7 @@ public class QuitCommandTest {
     public void testQuitCommandSuccessMessage() {
         Storage stubStorage = new StubStorage();
         QuitCommand command = new QuitCommand();
-        CommandResult result = command.execute(stubStorage);
+        CommandResult result = command.execute();
 
         assertEquals("Quit Flash Session", result.getFeedbackToUser());
     }
@@ -24,7 +23,7 @@ public class QuitCommandTest {
         StubStorage stubStorage = new StubStorage();
         QuitCommand command = new QuitCommand();
 
-        command.execute(stubStorage);
+        command.execute();
         assertTrue(stubStorage.isWriteFlashBookToFileCalled());
     }
 

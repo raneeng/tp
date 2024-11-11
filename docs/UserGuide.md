@@ -4,14 +4,31 @@
 
 **FlashBang** is a CLI app designed to provide students with a smart way of studying for their modules. The app will manage a limited number of flashcards for a small number of modules, optimized for users who prefer a CLI.
 
+## Target User Profile
+
+NUS students who want to review their modules using flashcards. 
+
+## Value Propositions
+
+The app will provide NUS students with a smart way of studying for their modules. The app will manage a limited number of flashcards for a small number of modules, optimized for users who prefer a CLI.
+
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `FlashBang` from [here](http://link.to/duke).
+
+2. Down the latest version of `FlashBang` from [here](https://github.com/AY2425S1-CS2113-T11-2/tp/releases).
+
+3. Copy the jar file into an empty folder.
+
+4. Open a command window in that folder.
+
+5. Run the command java -jar {filename}.jar e.g., java -jar Duke.jar (i.e., run the command in the same folder as the jar file).
 
 ## Features
+
+The app allows for creating and managing flashcards each of which contains
+a question and an answer. Flashcards are organized into modules. Following 
+is a list of command which are supported with examples.
 
 ### Adding flashcards: `add`
 
@@ -50,7 +67,7 @@ delete --m CS1010          # Deletes all flashcards in the module CS1010
 ```
 
 ### Viewing all flashcards: `view`
-
+Lists all flashcards for every module.
 ```bash
 view --all
 ```
@@ -82,7 +99,6 @@ Bye!!
 ```
 
 ### Filter flashcards by module: `view`
-
 ```bash
 view --m [MODULE NAME]
 ```
@@ -123,4 +139,51 @@ edit --m MA1521 --i 1
 New Question: "What is the derivative of e^x?"
 New Answer: "e^x"
 ```
+
+### Search for flashcards in a module by topic or by a search term
+Searches for existing flashcards that contain the search term or have topics that contain the search term.
+<br>
+To search by topic, add the `/t` flag after the module name.
+<br>
+When searching, the search term is case-sensitive.
+```bash
+search --m [MODULE NAME] /t --s [SEARCH TERM]
+```
+*or*
+```bash
+search --m [MODULE NAME] --s [SEARCH TERM]
+```
+**Examples:**
+```bash
+search --m CS2113 --s state
+	____________________________________________________________
+	1. WHAT is an Object: 
+	 An entity with a state and a behaviour 
+	 topic: OOP
+	
+	____________________________________________________________
+search --m CS2113 /t --s OOP
+	____________________________________________________________
+	1. What is OOP: 
+	 Object-Oriented Programing 
+	 topic: OOP
+	2. WHAT is an Object: 
+	 An entity with a state and a behaviour 
+	 topic: OOP
+	
+	____________________________________________________________
+
+```
+
+## Command summary
+
+| Command | Description |
+| --- | --- |
+| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]``` |
+| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]``` |
+| Delete all flashcards in a set | ```delete --m [MODULE NAME]``` |
+| View all flashcards in every module | ```view --all``` |
+| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME``` |
+| Filter flashcards by module | ```view --m [MODULE NAME]``` |
+| Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
 

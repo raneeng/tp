@@ -1,4 +1,6 @@
 @startuml
+skinparam classAttributeIconSize 0 
+
 title UI - Class Diagram
 class Ui {
     - scanner: Scanner

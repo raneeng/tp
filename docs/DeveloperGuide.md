@@ -12,12 +12,25 @@ Formatting of Developer's Guide was done with reference to [AddressBook-Level3 d
 ### Parser component
 API: `Parser.java`
 
+Parser's role is to given user input create a command which then can be executed. This particular implementation follows 
+**Factory design pattern**. It exposes a general purpose method for parsing command `parseCommand(String input)` and then it determines
+command types and creates one of the type. Regular expressions are heavily used for extracting information from input.
+More details are presented on a sequence diagram someName.
+
+![Diagram Description](./diagrams/ParsingSequenceDiagram.png)
+
+#### Alternative approaches/Possible improvements:
+- Command factory could be moved to a separate class 
+- Creating a lexer object might be a desirable approach if the commands where much more complex
+
+#### Structure
 Below is a partial class diagram showing the interactions of the `Parser` class.
-![Parser class diagram](/docs/diagrams/ParserPartialClassDiagram.jpg)
+![Parser class diagram](./diagrams/ParserPartialClassDiagram.jpg)
 
 The sequence diagram below illustrates the interactions taking `parseCommand(“delete --m cs2113 --i 1”)` as an example.
-![Sample delete call sequence diagram](/docs/diagrams/ParserSequenceDiagram.png)
+![Sample delete call sequence diagram](./diagrams/ParserDeleteSequenceDiagram.png)
 
+#### Example
 How the `Parser` component works:
 The `Parser` receives the command input.
 It identifies the command type using `parseCommandType`.
@@ -25,14 +38,27 @@ Depending on the command type, it creates the corresponding command object (e.g.
 The created command is executed, producing a `CommandResult`.
 The `CommandResult` is then used by `Ui` to provide feedback to the user.
 
+### Ui component
+API: `Ui.java`
+
+Below is a partical class diagram showing the interactions of the `Ui` class. 
+![Ui class diagram](./diagrams/UIClassDiagram.png) 
+
+The sequence diagram below illustrates the interactions between the user and this class when the program is executed. 
+![Ui interactions sequence diagram](./diagrams/UISequenceDiagram.png)
+
+How the `Ui` component works: 
+The `Ui` serves as a centralized utility that handles all outputs. 
+When a user execute the app, this class displays the welcome message and all available commands. After that, based on users' inputs, it handles the output that is processed by other classes. 
+
 ### Storage component
 API: `Storage.java`
 
 Below is a class diagram showing the interactions of the `Storage` class.
-![Storage class diagram](/docs/diagrams/StorageClassDiagram.png)
+![Storage class diagram](./diagrams/StorageClassDiagram.png)
 
 The sequence diagram below illustrates the interactions taking `writeFlashBookToFile()` and  `readFlashCardsFromFile()`.
-![Sample delete call sequence diagram](/docs/diagrams/StorageSequenceDiagram.png)
+![Sample delete call sequence diagram](./diagrams/StorageSequenceDiagram.png)
 
 How the `Storage` component works:
  The `Storage` component is initialized with a directory path where flashcard data will be stored.
@@ -44,7 +70,6 @@ How the `Storage` component works:
         For each file found, `readFlashCardSetFromFile()` is called to read the cards and create a `FlashCardSet`.
         The `FlashCardSet` is then added back to the `FlashBook`, reconstructing the flashcard library in memory.
 
-        
 ## Product scope
 ### Target user profile
 
