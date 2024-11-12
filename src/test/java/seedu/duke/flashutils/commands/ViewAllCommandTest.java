@@ -39,9 +39,13 @@ class ViewAllCommandTest {
         CommandResult result = command.execute();
 
         // Check that the command result contains flashcards for both modules
-        String expectedMessage = "MODULE NAME: CS1010\n#1 -> What is Java? : A programming language.\n" +
-                "#2 -> What is Python? : A programming language.\n\n" +
-                "MODULE NAME: CS2113\n#1 -> What is OOP? : Object-Oriented Programming.";
+        String expectedMessage = """
+                MODULE NAME: CS1010
+                #1 -> What is Java? : A programming language.
+                #2 -> What is Python? : A programming language.
+                
+                MODULE NAME: CS2113
+                #1 -> What is OOP? : Object-Oriented Programming.""";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -51,19 +55,24 @@ class ViewAllCommandTest {
         // Test handling of flashcards with lengthy content
         Card longCard = new Card("Describe the OSI model",
                 "The OSI model is a conceptual framework used to understand network interactions. " +
-                        "It has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application.");
+                        "It has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, " +
+                        "and Application.");
         flashBook.getFlashCardSet("CS1010").addCard(longCard);
 
         ViewAllCommand command = new ViewAllCommand();
         CommandResult result = command.execute();
 
-        String expectedMessage = "MODULE NAME: CS1010\n" +
-                "#1 -> What is Java? : A programming language.\n" +
-                "#2 -> What is Python? : A programming language.\n" +
-                "#3 -> Describe the OSI model : The OSI model is a conceptual framework used to understand network interactions. " +
-                "It has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application.\n\n" +
-                "MODULE NAME: CS2113\n" +
-                "#1 -> What is OOP? : Object-Oriented Programming.";
+        String expectedMessage = """
+                MODULE NAME: CS1010
+                #1 -> What is Java? : A programming language.
+                #2 -> What is Python? : A programming language.
+                #3 -> Describe the OSI model : The OSI model is a conceptual framework used to understand \
+                network interactions. \
+                It has 7 layers: Physical, Data Link, Network, Transport, Session, \
+                Presentation, and Application.
+                
+                MODULE NAME: CS2113
+                #1 -> What is OOP? : Object-Oriented Programming.""";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
