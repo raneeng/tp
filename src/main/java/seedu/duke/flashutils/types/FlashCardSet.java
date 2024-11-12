@@ -70,7 +70,7 @@ public class FlashCardSet implements Iterable<Card> {
                 index++;
             }
         } else if (flashCardSet.isEmpty()) {
-            System.out.println("No flashcards found for this module."); 
+            Ui.printResponse("No flashcards found for this module.");
         }
     }
 
