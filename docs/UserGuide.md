@@ -6,7 +6,14 @@
 
 ## Target User Profile
 
-NUS students who want to review their modules using flashcards. 
+NUS students who want to review their modules using flashcards. The user: 
+
+- Has a need to create flashcards for their studies
+- Needs to be able to test themselves on flashcard content
+- Needs to be able to track how well they understand the modules they take
+- Can type fast
+- Prefers typing to mouse interactions
+- Is used to using CLI applications
 
 ## Value Propositions
 
