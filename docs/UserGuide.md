@@ -59,7 +59,7 @@ add --m MA1521 --q "What is the derivative of sin(x)?" --a "cos(x)"
 add --m CS2113 --t OOP --q "What is an Object?" --a "An entity with state and behaviour"
 ```
 
-### Deleting flashcards: `delete`, `deleteall`
+### Deleting flashcards: `delete`
 
 To delete one flashcard:
 
@@ -70,14 +70,14 @@ delete --m [MODULE NAME] --i [INDEX]
 To delete all flashcards in a set:
 
 ```bash
-deleteall --m [MODULE NAME]
+delete --m [MODULE NAME]
 ```
 
 **Examples:**
 ```bash
 delete --m CS2113 --i 2    # Deletes second flashcard in the module CS2113
 delete --m MA1521 --i 5    # Deletes fifth flashcard in the module MA1521
-deleteall --m CS1010          # Deletes all flashcards in the module CS1010
+delete --m CS1010          # Deletes all flashcards in the module CS1010
 ```
 
 ### Viewing all flashcards: `view`
