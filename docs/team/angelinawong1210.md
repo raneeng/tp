@@ -31,7 +31,8 @@ Here is the link to my [RepoSense report](https://nus-cs2113-ay2425s1.github.io/
 - Fix minor cosmetics issue to enhance the readability. 
 
 ### Team-based tasks: 
-- Updated the Javadoc for some parts of the code base to improve readability. 
+- Updated the Javadoc for some parts of the code base to improve readability.
+- Used the issue tracker to manage the project implementation. 
 
 ### Review/mentoring contributions: 
 - Helped to review and merge the pull requests for other team members: [List of PRs reviewed by me](https://github.com/AY2425S1-CS2113-T11-2/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+is%3Aclosed)
