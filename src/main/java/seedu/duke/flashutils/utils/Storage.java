@@ -4,7 +4,6 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
-import javax.xml.namespace.QName;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

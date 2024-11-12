@@ -115,6 +115,9 @@ public class Parser {
                 int index;
                 if (matcher.group(2) != null) {
                     index = Integer.parseInt(matcher.group(2));
+                    if (index <= 0) {
+                        throw new IndexOutOfBoundsException();
+                    }
                 } else {
                     index = -1;
                 }

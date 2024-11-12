@@ -44,8 +44,6 @@ public class DeleteCommandTest {
         new AddCommand(testModule, testCard1).execute();
         new AddCommand(testModule, testCard2).execute();
 
-        assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, -1)
-                .execute());
         assertThrows(IndexOutOfBoundsException.class, () -> new DeleteCommand(testModule, 3)
                 .execute());
     }

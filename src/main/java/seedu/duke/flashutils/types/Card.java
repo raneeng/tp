@@ -47,7 +47,7 @@ public class Card {
     @Override
     public String toString() {
         if(topic==null || topic.isEmpty() || topic.equalsIgnoreCase("null")){
-           return String.format("%1$s : %2$s", question, answer);
+            return String.format("%1$s : %2$s", question, answer);
         }
         return String.format("%1$s : %2$s (Topic: %3$s)", question, answer, topic);
     }

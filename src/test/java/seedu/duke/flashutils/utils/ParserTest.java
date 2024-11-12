@@ -38,7 +38,7 @@ public class ParserTest {
 
     @Test
     public void testParseFlashbangCommand() {
-        String input = "flashbang --m SampleModule --t 100";
+        String input = "flashbang --m SampleModule --t 100 seconds";
         Command command = Parser.parseCommand(input);
         assertInstanceOf(FlashbangCommand.class, command);
 
