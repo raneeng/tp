@@ -6,7 +6,14 @@
 
 ## Target User Profile
 
-NUS students who want to review their modules using flashcards. 
+NUS students who want to review their modules using flashcards. The user: 
+
+- Has a need to create flashcards for their studies
+- Needs to be able to test themselves on flashcard content
+- Needs to be able to track how well they understand the modules they take
+- Can type fast
+- Prefers typing to mouse interactions
+- Is used to using CLI applications
 
 ## Value Propositions
 
@@ -34,6 +41,7 @@ is a list of command which are supported with examples.
 
 Add a flashcard to a flashcard set. <br>
 Topics are optional fields that are used to enhance organisation
+**Note* It is not allowed to have the delimiter " | " in the questions and answers.
 
 ```bash
 add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]
@@ -138,12 +146,22 @@ App: New Answer: [NEW ANSWER]
 ```bash
 edit --m CS1010 --i 2 --q "What is a constant?" --a "A value that cannot be changed once initialized."
 edit --m MA1521 --i 3 --q "What is the integral of 1/x?" --a "ln|x| + C"
-edit --m CS2040 --i 4
-New Question: "What is a graph?"
-New Answer: "A data structure consisting of vertices and edges."
-edit --m MA1521 --i 1
-New Question: "What is the derivative of e^x?"
-New Answer: "e^x"
+
+__________________________________________________
+> edit --m CS2113 --i 1
+Old Question : Question 2
+Do you want to change Question (y/n):
+> y
+Enter new Question :
+> What does OOP stand for?
+Old Answer : Answer for question 2
+Do you want to change Answer (y/n):
+> y
+Enter new Answer :
+> Object-oriented programming
+__________________________________________________
+Successfully edited flashcard
+
 ```
 
 ### Search for flashcards in a module by topic or by a search term
@@ -180,18 +198,30 @@ search --m CS2113 /t --s OOP
 	____________________________________________________________
 
 ```
+### Quitting the app: `quit`
+Quits the app session. 
+```bash
+quit
+```
+
+**Example:**
+```bash
+quit
+```
+
 
 ## Command summary
 
 | Command | Description                                                                  |
 | --- |------------------------------------------------------------------------------|
-| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]```                      |
+| Add flashcards | ```add --m [Module Name] {--t [Topic] (optional)} --q [Question] --a [Answer]```                      |
 | Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]```                                   |
 | Delete all flashcards in a set | ```deleteall --m [MODULE NAME]```                                            |
 | View all flashcards in every module | ```view --all```                                                             |
 | View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME```                                             |
 | Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
 | Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
+| Quit the app | ```quit``` |
 
 Note that specifying multiple command keywords in the input will be understood as command of the first type.
 

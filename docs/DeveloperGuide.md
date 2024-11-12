@@ -76,7 +76,7 @@ How the `Storage` component works:
 - Has a need to create flashcards for their studies
 - Needs to be able to test themselves on flashcard content
 - Needs to be able to track how well they understand the modules they take
-- can type fast
+- Can type fast
 - Prefers typing to mouse interactions
 - Is used to using CLI applications
 
@@ -133,7 +133,7 @@ Expected: Application exits and the text files in `./data` are updated according
 #### Deleting Flashcards
 ##### Prerequisites: There are a several flashcards in the flash book listed out using the view command
 1. Deleting flashcards from the flash book
-   1. Test case: `delete --m CS2113 --i 0` <br>
+   1. Test case: `delete --m CS2113 --i 1` <br>
    Expected: the first flashcard in the CS2113 flash card set is deleted. Details of the deleted card should be shown
    2. Test case: `delete` <br>
    Expected: An error is thrown and caught printing out "uh oh bad command"
