@@ -183,15 +183,16 @@ search --m CS2113 /t --s OOP
 
 ## Command summary
 
-| Command | Description                                                                  |
-| --- |------------------------------------------------------------------------------|
-| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]```                      |
-| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]```                                   |
-| Delete all flashcards in a set | ```deleteall --m [MODULE NAME]```                                            |
-| View all flashcards in every module | ```view --all```                                                             |
+| Command                                             | Description                                                                  |
+|-----------------------------------------------------|------------------------------------------------------------------------------|
+| Add flashcards                                      | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]```                      |
+| Delete one flashcard                                | ```delete --m [MODULE NAME] {--i [INDEX] (optional)}```                      |
+| Delete all flashcards in a set                      | ```deleteall --m [MODULE NAME]```                                            |
+| View all flashcards in every module                 | ```view --all```                                                             |
 | View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME```                                             |
-| Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
-| Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
+| Filter flashcards by module                         | ```view --m [MODULE NAME]```                                                 |
+| Edit flashcard                                      | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
+| Search flashcard                                    | ```search --m [MODULE NAME] {/t (optional)} --s [SEARCH TERM]```             |
 
 Note that specifying multiple command keywords in the input will be understood as command of the first type.
 

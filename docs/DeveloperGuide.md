@@ -88,18 +88,18 @@ content of the module in a simple and clear way.
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                             | So that I can ...                                                                     |
-|---------|----------|-----------------------------------------------------------|---------------------------------------------------------------------------------------|
-| v1.0    | new user | see usage instructions                                    | refer to them when I forget how to use the application                                |
-| v1.0    | student  | view existing flashcards                                  | I can test my knowledge to study efficiently                                          |
-| v1.0    | student  | view existing flashcards                                  | I can review and learn material                                                       |
-| v1.0    | crammer  | delete flashcards which im confident at                   | I can focus on my areas of weakness                                                   |
-| v1.0    | student  | review flashcards that I have answered incorrectly        | I can identify my knowledge gaps                                                      |
-| v2.0    | student  | have a timer within the app                               | I am able to time myself taking the quizzes within the app itself for better learning |
-| v2.0    | student  | view all incorrect flashcards in previous quizzes         | I can focus more on my weak areas                                                     | 
-| v2.0    | user     | search for flashcards based on keyword and module         | to test myself on specific topics                                                     |
-| v2.0    | student  | keep track of how many right and wrong answers in quizzes | so I can focus on how well versed I am in a topic                                     |
-| v2.0    | student  | filter flashcards by difficulty                           | I can choose which ones to focus on based on my current level of understanding        |
+| Version | As a ... | I want to ...                                             | So that I can ...                                                                |
+|---------|----------|-----------------------------------------------------------|----------------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                    | refer to them when I forget how to use the application                           |
+| v1.0    | student  | view existing flashcards                                  | test my knowledge to study efficiently                                           |
+| v1.0    | student  | view existing flashcards                                  | review and learn material                                                        |
+| v1.0    | crammer  | delete flashcards which im confident at                   | focus on my areas of weakness                                                    |
+| v1.0    | student  | review flashcards that I have answered incorrectly        | identify my knowledge gaps                                                       |
+| v2.0    | student  | have a timer within the app                               | able to time myself taking the quizzes within the app itself for better learning |
+| v2.0    | student  | view all incorrect flashcards in previous quizzes         | focus more on my weak areas                                                      | 
+| v2.0    | user     | search for flashcards based on keyword and module         | test myself on specific topics                                                   |
+| v2.0    | student  | keep track of how many right and wrong answers in quizzes | focus on how well versed I am in a topic                                         |
+| v2.0    | student  | filter flashcards by difficulty                           | choose which ones to focus on based on my current level of understanding         |
 ## Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java `17` or above installed
