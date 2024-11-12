@@ -12,7 +12,7 @@ To me, this project is a precious opportunity to build a comprehensive CLI app i
 Here is the link to my [RepoSense report](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=angelinawong1210&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other). 
 
 ### Enhancements implemented
-1. Implemeted the function of viewing all flashcards - **ViewCommand**, including creating the code and JUnit test cases. This function is an essen
+1. Implemeted the function of viewing all flashcards - **ViewCommand**, including creating the code and JUnit test cases. This function plays an essential role as it displays all the flashcards within a module.
 
 2. Updated the **Ui** class with welcome message and list of available commands of the app. 
 
