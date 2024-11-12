@@ -6,3 +6,10 @@ Useful links:
 * [User Guide](UserGuide.md)
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
+
+PPP <br>
+[Frederick](./team/frederickemerson.md) <br>
+[Ethan Soh](./team/ethansoh.md) <br>
+[Mikolaj Jedrzejewski](./team/mikolajed.md) <br>
+[Ranee Ng](./team/raneeng.md) <br>
+[Nguyen Hoang Minh Ngoc (Angelina)](./team/angelinawong1210.md)
