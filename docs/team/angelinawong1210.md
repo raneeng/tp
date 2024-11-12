@@ -18,7 +18,7 @@ Here is the link to my [RepoSense report](https://nus-cs2113-ay2425s1.github.io/
 
 3. Error handling enhancement for the **AddCommand** to capture invalid module names, questions and answers. 
 - For the module names, the app restricts users from creating flashcard set with empty module name. 
-- For the questions and answers, the app restricts users from including delimiters "|" in any questions or answers to avoid confusion in the storage process. 
+- For the questions and answers, the app restricts users from including delimiters in any questions or answers to avoid confusion in the storage process. 
 
 ### Contributions to the UG
 - Updated the User Guide with **Target User Profile** and **Value Proposition** to provide an overview about the app for users. 
