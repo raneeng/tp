@@ -50,12 +50,6 @@ public class FlashCardSet implements Iterable<Card> {
         assert !flashCardSet.contains(toRemove);
     }
 
-    public void removeALlCards() {
-        flashCardSet.clear();
-//        FlashBook flashBook = FlashBook.getInstance();
-//        flashBook.removeFlashCardSet(flashCardSet.getModuleName());
-        assert flashCardSet.isEmpty();
-    }
 
     // Displays all flashcards (view command) in FLashCardSet
     public void viewFlashCards(String module) {
@@ -75,7 +69,8 @@ public class FlashCardSet implements Iterable<Card> {
     }
 
     public void performFlashBang(long timerThreshold) {
-        //start keeps track of time spent in answering all questions, recurring keeps track of time spent in answering each question
+        //start keeps track of time spent in answering all questions,
+        // recurring keeps track of time spent in answering each question
         Date start = new Date();
         Date recurring = new Date();
         // variables to store the number of correct and wrong answers
@@ -138,7 +133,7 @@ public class FlashCardSet implements Iterable<Card> {
 
     @Override
     public String toString() {
-        StringBuilder setString = new StringBuilder(String.format("MODULE: $1%s\n", moduleName));
+        StringBuilder setString = new StringBuilder(String.format("MODULE: %1$s\n", moduleName));
         for (Card card : flashCardSet) {
             setString.append(card.toString()).append("\n");
         }

@@ -45,7 +45,7 @@ public class Flashbang {
                 CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());
-                if (command instanceof DeleteCommand) {
+                if (command instanceof DeleteCommand && ((DeleteCommand) command).getTargetCard() == null) {
                     storage.deleteFlashCardSetFile(((DeleteCommand) command).getTargetSet().getModuleName());
                 }
             } catch (IllegalArgumentException e) {

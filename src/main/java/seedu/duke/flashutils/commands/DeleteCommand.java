@@ -11,7 +11,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
 public class DeleteCommand extends Command {
 
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully deleted flashcard: %1$s";
+    public static final String SUCCESS_MESSAGE = "Successfully deleted flashcard(s): %1$s\n";
 
     public static final int INDEX_OFFSET = 1;
 
@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Prints result of the command, 
-     * which includes the success message and the Card to be deleted
+     * which includes the success message and the {@code Card} or {@code FlashCardSet} to be deleted
      * 
      * @return The result of the command
      */
