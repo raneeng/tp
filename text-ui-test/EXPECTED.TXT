@@ -1,0 +1,11 @@
+No text files found in the directory.
+> FlashBang
+> Welcome to the FlashBang app - learning your modules through engaging flashcards
+> __________________________________________________
+> Type help to view all the available commands
+> __________________________________________________
+> > __________________________________________________
+> uh oh bad command
+> __________________________________________________
+> Type help to view all the available commands
+> __________________________________________________
