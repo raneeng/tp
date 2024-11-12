@@ -51,7 +51,7 @@ add --m MA1521 --q "What is the derivative of sin(x)?" --a "cos(x)"
 add --m CS2113 --t OOP --q "What is an Object?" --a "An entity with state and behaviour"
 ```
 
-### Deleting flashcards: `delete`
+### Deleting flashcards: `delete`, `deleteall`
 
 To delete one flashcard:
 
@@ -62,14 +62,14 @@ delete --m [MODULE NAME] --i [INDEX]
 To delete all flashcards in a set:
 
 ```bash
-delete --m [MODULE NAME]
+deleteall --m [MODULE NAME]
 ```
 
 **Examples:**
 ```bash
 delete --m CS2113 --i 2    # Deletes second flashcard in the module CS2113
 delete --m MA1521 --i 5    # Deletes fifth flashcard in the module MA1521
-delete --m CS1010          # Deletes all flashcards in the module CS1010
+deleteall --m CS1010          # Deletes all flashcards in the module CS1010
 ```
 
 ### Viewing all flashcards: `view`
@@ -183,13 +183,21 @@ search --m CS2113 /t --s OOP
 
 ## Command summary
 
-| Command | Description |
-| --- | --- |
-| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]``` |
-| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]``` |
-| Delete all flashcards in a set | ```delete --m [MODULE NAME]``` |
-| View all flashcards in every module | ```view --all``` |
-| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME``` |
-| Filter flashcards by module | ```view --m [MODULE NAME]``` |
+| Command | Description                                                                  |
+| --- |------------------------------------------------------------------------------|
+| Add flashcards | ```add --m [MODULE NAME] --q [QUESTION] --a [ANSWER]```                      |
+| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]```                                   |
+| Delete all flashcards in a set | ```deleteall --m [MODULE NAME]```                                            |
+| View all flashcards in every module | ```view --all```                                                             |
+| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME```                                             |
+| Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
 | Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
+
+Note that specifying multiple command keywords in the input will be understood as command of the first type.
+
+## FAQs
+Q: Can I add two flashcards same question but different answer.
+
+A: Yes. Adding the two flashcards with both the same answer and question will work.
+
 

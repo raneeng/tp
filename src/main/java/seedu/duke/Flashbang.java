@@ -49,7 +49,7 @@ public class Flashbang {
                     storage.deleteFlashCardSetFile(((DeleteCommand) command).getTargetSet().getModuleName());
                 }
             } catch (IllegalArgumentException e) {
-                Ui.printResponse("Please enter a valid command");
+                Ui.printResponse(e.getMessage());
                 displayCommands();
             } catch (IOException e) {
                 Ui.printResponse(e.getMessage() + "\nAn IO Exception has been detected, please reset the App!");

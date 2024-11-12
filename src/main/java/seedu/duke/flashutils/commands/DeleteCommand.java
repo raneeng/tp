@@ -66,6 +66,6 @@ public class DeleteCommand extends Command {
             FlashBook.getInstance().deleteFlashCardSet(targetSet.getModuleName());
             deleteResult = new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.toString()));
         }
-        return new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
+        return deleteResult;
     }
 }

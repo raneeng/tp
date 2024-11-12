@@ -1,17 +1,9 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.AddCommand;
-import seedu.duke.flashutils.commands.Command;
-import seedu.duke.flashutils.commands.DeleteCommand;
-import seedu.duke.flashutils.commands.EditCommand;
-import seedu.duke.flashutils.commands.FlashbangCommand;
-import seedu.duke.flashutils.commands.InvalidCommand;
-import seedu.duke.flashutils.commands.QuitCommand;
-import seedu.duke.flashutils.commands.SearchCommand;
-import seedu.duke.flashutils.commands.ViewAllCommand;
-import seedu.duke.flashutils.commands.ViewCommand;
+import seedu.duke.flashutils.commands.*;
 
 
+import seedu.duke.flashutils.exceptions.FlashCardSetDoesNotExistException;
 import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
@@ -20,22 +12,24 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, Edit, View, FlashBang, Quit, Invalid, Search }
+    private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search, Help }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
-                "|\\bsearch\\b)";
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
+                "|\\bsearch\\b|\\bhelp\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
             return switch (matcher.group(1).toLowerCase()) {
             case "add" -> CommandType.Add;
             case "delete" -> CommandType.Delete;
+            case "deleteall" -> CommandType.DeleteAll;
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
             case "search" -> CommandType.Search;
             case "quit" -> CommandType.Quit;
+            case "help" -> CommandType.Help;
             default -> CommandType.Invalid;
             };
         }
@@ -47,13 +41,19 @@ public class Parser {
         return switch (commandType) {
         case Add -> createAddCommand(input);
         case Delete -> createDeleteCommand(input);
+        case DeleteAll -> createDeleteAllCommand(input);
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
         case Search -> createSearchCommand(input);
         case Quit -> createQuitCommand();
+        case Help -> createHelpCommand();
         default -> new InvalidCommand();
         };
+    }
+
+    public static Command createHelpCommand(){
+        return new HelpCommand();
     }
 
     public static Command createAddCommand(String input) {
@@ -62,14 +62,29 @@ public class Parser {
         if (matcher.find()) {
             String moduleName = matcher.group(1);
             String topic = matcher.group(2);
-            FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-            String question = matcher.group(3);
-            String answer = matcher.group(4);
-            if (topic == null) {
-                topic = "";
+            if (!(moduleName.contains("--m") || moduleName.trim().isEmpty())) {
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                String question = matcher.group(3);
+                String answer = matcher.group(4);
+
+                if (question.contains("|") && answer.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another pair of question and answer. Valid question and answer cannot include '|' ");
+                }
+                if (question.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another question. A valid question cannot include '|' ");
+                }
+                if (answer.contains("|")) {
+                    throw new IllegalArgumentException("Please enter another answer. A valid answer cannot include '|' ");
+                }
+
+                if (topic == null) {
+                    topic = "";
+                } 
+                assert !(module == null || question == null || answer == null);
+                return new AddCommand(module, new Card(question, answer, topic));
+            } else {
+                throw new IllegalArgumentException("Please enter a valid module name"); 
             }
-            assert !(module == null || question == null || answer == null);
-            return new AddCommand(module, new Card(question, answer, topic));
         } else {
             return new InvalidCommand();
         }
@@ -81,6 +96,11 @@ public class Parser {
             Matcher matcher = deletePattern.matcher(input);
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
+
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 int index;
                 if (matcher.group(2) != null) {
@@ -92,20 +112,52 @@ public class Parser {
             } else {
                 return new InvalidCommand();
             }
+
         } catch (IndexOutOfBoundsException e) {
             Ui.printResponse("Please enter a valid index");
             return new InvalidCommand();
+
+        } catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
         }
     }
 
+    public static Command createDeleteAllCommand(String input) {
+        try {
+            Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
+            Matcher matcher = deleteAllPattern.matcher(input);
+
+            if (matcher.find()) {
+                String moduleName = matcher.group(1);
+
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
+                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
+                return new DeleteAllCommand(module);
+
+            } else {
+                return new InvalidCommand();
+            }
+
+        }  catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
+        }
+    }
 
     public static Command createEditCommand(String input) {
         try {
-            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)\\s+(--q\\s+(.+?)\\s+--a\\s+(.+))?");
+            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)(?:\\s+--q\\s+(.+?)\\s+--a\\s+(.+))?$");
             Matcher matcher = editPattern.matcher(input);
 
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
+
+                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
+                    throw new FlashCardSetDoesNotExistException();
+                }
+
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 int index = Integer.parseInt(matcher.group(2));
 
@@ -120,11 +172,13 @@ public class Parser {
                     return new EditCommand(module, index);
                 }
             } else {
-                Ui.printResponse("Please enter a valid index");
-                return new InvalidCommand();
+                return new InvalidCommand("Please enter a valid index");
             }
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand();
+
+        } catch (FlashCardSetDoesNotExistException e) {
+            return new InvalidCommand("No such module exists");
         }
 
     }
@@ -146,11 +200,11 @@ public class Parser {
     }
 
     public static Command createFlashbangCommand(String input) {
-        Pattern flashbangPattern = Pattern.compile("--m\\s+(.+?)\\s+(--t\\s+.+)?");
+        Pattern flashbangPattern = Pattern.compile("--m\\s+(\\S+)(?:\\s+--t\\s+(\\d+)\\s+(second|seconds|minute|minutes))?$");
         Matcher matcher = flashbangPattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
-            String timer = matcher.group(2) != null ? matcher.group(2).trim() : "";
+            String timer = matcher.group(2) != null ? input.substring(input.indexOf("--t")+3).trim() : "";
             FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
             if (!timer.isEmpty()) {
                 try{
@@ -191,6 +245,7 @@ public class Parser {
         double value;
         try {
             value = Double.parseDouble(parts[0]);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid number format: " + parts[0]);
         }
@@ -199,9 +254,9 @@ public class Parser {
         String unit = parts[1];
 
         return switch (unit) {
-        case "second", "seconds" -> (long) (value * 1000);
-        case "minute", "minutes" -> (long) (value * 1000 * 60);
-        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit);
+        case "s","second", "seconds" -> (long) (value * 1000);
+        case "min","minute", "minutes" -> (long) (value * 1000 * 60);
+        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit+ "supported time units are second,seconds,minute,minutes");
         };
     }
 
