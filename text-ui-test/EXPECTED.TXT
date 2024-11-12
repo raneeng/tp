@@ -1,0 +1,9 @@
+No text files found in the directory.
+FlashBang
+Welcome to the FlashBang app - learning your modules through engaging flashcards
+__________________________________________________
+Type help to view all the available commands
+__________________________________________________
+> __________________________________________________
+Quit Flash Session
+__________________________________________________

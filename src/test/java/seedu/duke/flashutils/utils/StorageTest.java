@@ -28,6 +28,10 @@ class StorageTest {
         this.storage = new Storage(directoryPath);
     }
 
+    /**
+     * This test is to ensure that files to store data are created, written on in the correct format
+     * and read into the FlashCardSets correctly
+     */
     @Test
     void writeAndReadFlashCardsTest() {
         FlashBook flashBook = FlashBook.getInstance();
@@ -67,6 +71,9 @@ class StorageTest {
                     && this.getTopic().equals(card.getTopic());
         }
     }
+    /**
+     * This test is to ensure that multiple cards are written on to the text files and read appropriately using a stub
+     */
     @Test
     public void readAndWriteMultipleCards() throws IOException {
         FlashCardSet set1 = new FlashCardSet("CS2113");

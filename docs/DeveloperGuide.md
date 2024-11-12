@@ -41,7 +41,7 @@ The `CommandResult` is then used by `Ui` to provide feedback to the user.
 ### Ui component
 API: `Ui.java`
 
-Below is a partical class diagram showing the interactions of the `Ui` class. 
+Below is a particular class diagram showing the interactions of the `Ui` class. 
 ![Ui class diagram](./diagrams/UIClassDiagram.png) 
 
 The sequence diagram below illustrates the interactions between the user and this class when the program is executed. 
@@ -70,6 +70,23 @@ How the `Storage` component works:
         For each file found, `readFlashCardSetFromFile()` is called to read the cards and create a `FlashCardSet`.
         The `FlashCardSet` is then added back to the `FlashBook`, reconstructing the flashcard library in memory.
 
+### Command Structure
+API: `commands`
+
+Below is a class diagram to showcase the class structure of the `Command` classes
+![Command Structure class diagram](./diagrams/CommandStructureClassDiagram.png)
+
+This class diagram shows how the `Command` classes are used to generate independent behaviour for each of the commands.
+The use of an abstract class `Command` that all the commands inherit from is to utilise polymorphism in the main loop
+such that all an instance of any command can be called and executed to perform each commands function. For example, when
+the user inputs `add --m CS2113 --q What is OOP? --a Object-Oriented Programming` an instance of an `AddCommand` will be
+created which is then executed creating a CommandResult object.
+<br>
+<br>
+This behaviour is modelled in the Activity Diagram below:
+![CommandActivityDiagram](./diagrams/CommandActivityDiagram.png)
+
+
 ## Product scope
 ### Target user profile
 
@@ -88,18 +105,18 @@ content of the module in a simple and clear way.
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                             | So that I can ...                                                                     |
-|---------|----------|-----------------------------------------------------------|---------------------------------------------------------------------------------------|
-| v1.0    | new user | see usage instructions                                    | refer to them when I forget how to use the application                                |
-| v1.0    | student  | view existing flashcards                                  | I can test my knowledge to study efficiently                                          |
-| v1.0    | student  | view existing flashcards                                  | I can review and learn material                                                       |
-| v1.0    | crammer  | delete flashcards which im confident at                   | I can focus on my areas of weakness                                                   |
-| v1.0    | student  | review flashcards that I have answered incorrectly        | I can identify my knowledge gaps                                                      |
-| v2.0    | student  | have a timer within the app                               | I am able to time myself taking the quizzes within the app itself for better learning |
-| v2.0    | student  | view all incorrect flashcards in previous quizzes         | I can focus more on my weak areas                                                     | 
-| v2.0    | user     | search for flashcards based on keyword and module         | to test myself on specific topics                                                     |
-| v2.0    | student  | keep track of how many right and wrong answers in quizzes | so I can focus on how well versed I am in a topic                                     |
-| v2.0    | student  | filter flashcards by difficulty                           | I can choose which ones to focus on based on my current level of understanding        |
+| Version | As a ... | I want to ...                                             | So that I can ...                                                                |
+|---------|----------|-----------------------------------------------------------|----------------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                    | refer to them when I forget how to use the application                           |
+| v1.0    | student  | view existing flashcards                                  | test my knowledge to study efficiently                                           |
+| v1.0    | student  | view existing flashcards                                  | review and learn material                                                        |
+| v1.0    | crammer  | delete flashcards which im confident at                   | focus on my areas of weakness                                                    |
+| v1.0    | student  | review flashcards that I have answered incorrectly        | identify my knowledge gaps                                                       |
+| v2.0    | student  | have a timer within the app                               | able to time myself taking the quizzes within the app itself for better learning |
+| v2.0    | student  | view all incorrect flashcards in previous quizzes         | focus more on my weak areas                                                      | 
+| v2.0    | user     | search for flashcards based on keyword and module         | test myself on specific topics                                                   |
+| v2.0    | student  | keep track of how many right and wrong answers in quizzes | focus on how well versed I am in a topic                                         |
+| v2.0    | student  | filter flashcards by difficulty                           | choose which ones to focus on based on my current level of understanding         |
 ## Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java `17` or above installed

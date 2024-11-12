@@ -212,16 +212,16 @@ quit
 
 ## Command summary
 
-| Command | Description                                                                  |
-| --- |------------------------------------------------------------------------------|
-| Add flashcards | ```add --m [Module Name] {--t [Topic] (optional)} --q [Question] --a [Answer]```                      |
-| Delete one flashcard | ```delete --m [MODULE NAME] --i [INDEX]```                                   |
-| Delete all flashcards in a set | ```deleteall --m [MODULE NAME]```                                            |
-| View all flashcards in every module | ```view --all```                                                             |
-| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME```                                             |
-| Filter flashcards by module | ```view --m [MODULE NAME]```                                                 |
-| Edit flashcard | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]``` |
-| Quit the app | ```quit``` |
+| Command                                             | Description                                                                      |
+|-----------------------------------------------------|----------------------------------------------------------------------------------|
+| Add flashcards                                      | ```add --m [Module Name] {--t [Topic] (optional)} --q [Question] --a [Answer]``` |
+| Delete one flashcard                                | ```delete --m [MODULE NAME] --i [INDEX]```                                       |
+| Delete all flashcards in a set                      | ```delete --m [MODULE NAME]```                                                   |
+| View all flashcards in every module                 | ```view --all```                                                                 |
+| View all flashcards in a module without the answers | ```flashbang --m [MODULE NAME]```                                                |
+| Filter flashcards by module                         | ```view --m [MODULE NAME]```                                                     |
+| Edit flashcard                                      | ```edit --m [MODULE NAME] --i [INDEX] --q [NEW QUESTION] --a [NEW ANSWER]```     |
+| Quit the app                                        | ```quit```                                                                       |
 
 Note that specifying multiple command keywords in the input will be understood as command of the first type.
 

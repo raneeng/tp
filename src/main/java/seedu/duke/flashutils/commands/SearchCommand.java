@@ -7,7 +7,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
  * Represents searching for flashcards which match the term
  */
 public class SearchCommand extends Command {
-    private final String searchTerm;
+    private String searchTerm;
     private final boolean byTopic;
     private final FlashCardSet targetSet;
 
@@ -26,9 +26,10 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute() {
         StringBuilder matchingCards = new StringBuilder();
+        searchTerm = searchTerm.toLowerCase();
         int counter = 0;
         for (Card card : targetSet) {
-            if ((byTopic && card.getTopic().contains(searchTerm))
+            if ((byTopic && card.getTopic().toLowerCase().contains(searchTerm))
                     || (card.getAnswer().toLowerCase().contains(searchTerm)
                     || card.getQuestion().toLowerCase().contains(searchTerm))) {
                 matchingCards.append(++counter).append(". ").append(card).append("\n");

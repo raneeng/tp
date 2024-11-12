@@ -1,7 +1,7 @@
 # Frederick Amal Emerson's Project Portfolio Page
 
 ## Project: Flashbang
-Flashbang - is a desktop application for creating flashcards and and learning in an effective way. The user interacts with it using a CLI with predefied set of commands. It is written in Java, and has about 1000LoC.
+Flashbang - is a desktop application for creating flashcards and learning in an effective way. The user interacts with it using a CLI with predefied set of commands. It is written in Java, and has about 1000LoC.
 
 # Summary of Contributions
 Given below are my contributions to the project.

@@ -12,7 +12,7 @@ public class EditCommandTest {
         FlashCardSet testModule = new FlashCardSet("Some module");
         testModule.addCard(new Card("Some Question", "Some Answer"));
 
-        EditCommand command = new EditCommand(testModule, 0, "New Question", "New Answer");
+        EditCommand command = new EditCommand(testModule, 1, "New Question", "New Answer");
 
         assertEquals("New Question", command.getNewCard().getQuestion());
         assertEquals("New Answer", command.getNewCard().getAnswer());
@@ -29,7 +29,7 @@ public class EditCommandTest {
         Card testCard = new Card(testQuestion, testAnswer);
 
         testModule.addCard(testCard);
-        EditCommand command = new EditCommand(testModule, 0, newQuestion, newAnswer);
+        EditCommand command = new EditCommand(testModule, 1, newQuestion, newAnswer);
         command.execute();
 
         Card editedCard = testModule.getCard(0);
