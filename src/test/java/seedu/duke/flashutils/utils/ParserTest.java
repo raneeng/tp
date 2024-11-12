@@ -65,6 +65,5 @@ public class ParserTest {
         String input = "search --m SampleModule --s SearchTerm";
         Command command = Parser.parseCommand(input);
         assertInstanceOf(SearchCommand.class, command);
-
     }
 }
