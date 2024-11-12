@@ -1,6 +1,16 @@
 package seedu.duke.flashutils.utils;
 
-import seedu.duke.flashutils.commands.*;
+import seedu.duke.flashutils.commands.AddCommand;
+import seedu.duke.flashutils.commands.Command;
+import seedu.duke.flashutils.commands.DeleteCommand;
+import seedu.duke.flashutils.commands.EditCommand;
+import seedu.duke.flashutils.commands.FlashbangCommand;
+import seedu.duke.flashutils.commands.HelpCommand;
+import seedu.duke.flashutils.commands.InvalidCommand;
+import seedu.duke.flashutils.commands.QuitCommand;
+import seedu.duke.flashutils.commands.SearchCommand;
+import seedu.duke.flashutils.commands.ViewAllCommand;
+import seedu.duke.flashutils.commands.ViewCommand;
 
 
 import seedu.duke.flashutils.exceptions.FlashCardSetDoesNotExistException;
@@ -15,15 +25,14 @@ public class Parser {
     private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search, Help }
 
     private static CommandType parseCommandType(String input) {
-        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
-                "|\\bsearch\\b|\\bhelp\\b)";
+        String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b" +
+                "|\\bquit\\b|\\bsearch\\b|\\bhelp\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
             return switch (matcher.group(1).toLowerCase()) {
             case "add" -> CommandType.Add;
             case "delete" -> CommandType.Delete;
-            case "deleteall" -> CommandType.DeleteAll;
             case "edit" -> CommandType.Edit;
             case "view" -> CommandType.View;
             case "flashbang" -> CommandType.FlashBang;
@@ -41,7 +50,6 @@ public class Parser {
         return switch (commandType) {
         case Add -> createAddCommand(input);
         case Delete -> createDeleteCommand(input);
-        case DeleteAll -> createDeleteAllCommand(input);
         case Edit -> createEditCommand(input);
         case View -> createViewCommand(input);
         case FlashBang -> createFlashbangCommand(input);
@@ -66,21 +74,23 @@ public class Parser {
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 String question = matcher.group(3);
                 String answer = matcher.group(4);
-
                 if (question.contains("|") && answer.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another pair of question and answer. Valid question and answer cannot include '|' ");
+                    throw new IllegalArgumentException("Please enter another pair of question and answer." +
+                            " Valid question and answer cannot include '|' ");
                 }
                 if (question.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another question. A valid question cannot include '|' ");
+                    throw new IllegalArgumentException("Please enter another question." +
+                            " A valid question cannot include '|' ");
                 }
                 if (answer.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another answer. A valid answer cannot include '|' ");
+                    throw new IllegalArgumentException("Please enter another answer." +
+                            " A valid answer cannot include '|' ");
                 }
 
                 if (topic == null) {
                     topic = "";
                 } 
-                assert !(module == null || question == null || answer == null);
+                assert !(module == null);
                 return new AddCommand(module, new Card(question, answer, topic));
             } else {
                 throw new IllegalArgumentException("Please enter a valid module name"); 
@@ -92,7 +102,7 @@ public class Parser {
 
     public static Command createDeleteCommand(String input) {
         try {
-            Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
+            Pattern deletePattern = Pattern.compile("-m\\s+(.+?)(?=\\s+--i|$)(?:\\s+--i\\s+(\\d+))?");
             Matcher matcher = deletePattern.matcher(input);
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
@@ -102,7 +112,12 @@ public class Parser {
                 }
 
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-                int index = Integer.parseInt(matcher.group(2));
+                int index;
+                if (matcher.group(2) != null) {
+                    index = Integer.parseInt(matcher.group(2));
+                } else {
+                    index = -1;
+                }
                 return new DeleteCommand(module, index);
             } else {
                 return new InvalidCommand();
@@ -117,33 +132,11 @@ public class Parser {
         }
     }
 
-    public static Command createDeleteAllCommand(String input) {
-        try {
-            Pattern deleteAllPattern = Pattern.compile("--m\\s+(.+)");
-            Matcher matcher = deleteAllPattern.matcher(input);
-
-            if (matcher.find()) {
-                String moduleName = matcher.group(1);
-
-                if (!FlashBook.getInstance().flashCardSetExists(moduleName)) {
-                    throw new FlashCardSetDoesNotExistException();
-                }
-
-                FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-                return new DeleteAllCommand(module);
-
-            } else {
-                return new InvalidCommand();
-            }
-
-        }  catch (FlashCardSetDoesNotExistException e) {
-            return new InvalidCommand("No such module exists");
-        }
-    }
 
     public static Command createEditCommand(String input) {
         try {
-            Pattern editPattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)(?:\\s+--q\\s+(.+?)\\s+--a\\s+(.+))?$");
+            Pattern editPattern = Pattern.
+                    compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)(?:\\s+--q\\s+(.+?)\\s+--a\\s+(.+))?$");
             Matcher matcher = editPattern.matcher(input);
 
             if (matcher.find()) {
@@ -195,7 +188,8 @@ public class Parser {
     }
 
     public static Command createFlashbangCommand(String input) {
-        Pattern flashbangPattern = Pattern.compile("--m\\s+(\\S+)(?:\\s+--t\\s+(\\d+)\\s+(second|seconds|minute|minutes))?$");
+        Pattern flashbangPattern = Pattern
+                .compile("--m\\s+(\\S+)(?:\\s+--t\\s+(\\d+)\\s+(second|seconds|minute|minutes))?$");
         Matcher matcher = flashbangPattern.matcher(input);
         if (matcher.find()) {
             String moduleName = matcher.group(1);
@@ -251,7 +245,8 @@ public class Parser {
         return switch (unit) {
         case "s","second", "seconds" -> (long) (value * 1000);
         case "min","minute", "minutes" -> (long) (value * 1000 * 60);
-        default -> throw new IllegalArgumentException("Unsupported time unit: " + unit+ "supported time units are second,seconds,minute,minutes");
+        default -> throw new IllegalArgumentException("Unsupported time unit: " +
+                unit + "supported time units are second,seconds,minute,minutes");
         };
     }
 

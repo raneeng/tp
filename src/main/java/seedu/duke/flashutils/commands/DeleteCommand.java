@@ -1,6 +1,8 @@
 package seedu.duke.flashutils.commands;
 
+
 import seedu.duke.flashutils.types.Card;
+import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 /**
@@ -9,7 +11,7 @@ import seedu.duke.flashutils.types.FlashCardSet;
 public class DeleteCommand extends Command {
 
     // Confirmation message to be displayed to user, with placeholder for flashcard details
-    public static final String SUCCESS_MESSAGE = "Successfully deleted flashcard";
+    public static final String SUCCESS_MESSAGE = "Successfully deleted flashcard(s): %1$s\n";
 
     public static final int INDEX_OFFSET = 1;
 
@@ -24,7 +26,11 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         targetSet = module;
-        targetCard = targetSet.getCard(cardIndex - INDEX_OFFSET);
+        if (cardIndex > 0) {
+            targetCard = targetSet.getCard(cardIndex - INDEX_OFFSET);
+        } else {
+            targetCard = null;
+        }
     }
 
     /**
@@ -46,13 +52,20 @@ public class DeleteCommand extends Command {
 
     /**
      * Prints result of the command, 
-     * which includes the success message and the Card to be deleted
+     * which includes the success message and the {@code Card} or {@code FlashCardSet} to be deleted
      * 
      * @return The result of the command
      */
     @Override
     public CommandResult execute() {
-        targetSet.removeCard(targetCard);
-        return new CommandResult(SUCCESS_MESSAGE);
+        CommandResult deleteResult;
+        if (targetCard != null) {
+            targetSet.removeCard(targetCard);
+            deleteResult = new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
+        } else {
+            FlashBook.getInstance().deleteFlashCardSet(targetSet.getModuleName());
+            deleteResult = new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.toString()));
+        }
+        return deleteResult;
     }
 }
