@@ -4,6 +4,7 @@ import seedu.duke.flashutils.types.Card;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
+import javax.xml.namespace.QName;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -138,7 +139,15 @@ public class Storage {
 
         return flashCard;
     }
-
+    public void deleteFlashCardSetFile(String module) throws IOException {
+        File[] fileList = directory.listFiles((dir, name) -> name.equals(module + ".txt"));
+        assert fileList != null;
+        if (fileList[0].exists() && fileList[0].delete()) {
+            System.out.println("Successfully deleted file");
+        } else {
+            throw new IOException();
+        }
+    }
 }
 
 

@@ -77,12 +77,17 @@ public class Parser {
 
     public static Command createDeleteCommand(String input) {
         try {
-            Pattern deletePattern = Pattern.compile("--m\\s+(.+?)\\s+--i\\s+(\\d+)");
+            Pattern deletePattern = Pattern.compile("--m\\s+(.+?)(?:\\s+--i\\s+(\\d+))?");
             Matcher matcher = deletePattern.matcher(input);
             if (matcher.find()) {
                 String moduleName = matcher.group(1);
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
-                int index = Integer.parseInt(matcher.group(2));
+                int index;
+                if (matcher.group(2) != null) {
+                    index = Integer.parseInt(matcher.group(2));
+                } else {
+                    index = -1;
+                }
                 return new DeleteCommand(module, index);
             } else {
                 return new InvalidCommand();

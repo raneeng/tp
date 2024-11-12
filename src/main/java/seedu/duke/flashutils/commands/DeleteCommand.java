@@ -1,6 +1,8 @@
 package seedu.duke.flashutils.commands;
 
+
 import seedu.duke.flashutils.types.Card;
+import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.types.FlashCardSet;
 
 /**
@@ -24,7 +26,11 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(FlashCardSet module, int cardIndex) throws IndexOutOfBoundsException {
         targetSet = module;
-        targetCard = targetSet.getCard(cardIndex - INDEX_OFFSET);
+        if (cardIndex > 0) {
+            targetCard = targetSet.getCard(cardIndex - INDEX_OFFSET);
+        } else {
+            targetCard = null;
+        }
     }
 
     /**
@@ -52,7 +58,14 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        targetSet.removeCard(targetCard);
+        CommandResult deleteResult;
+        if (targetCard != null) {
+            targetSet.removeCard(targetCard);
+            deleteResult = new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
+        } else {
+            FlashBook.getInstance().deleteFlashCardSet(targetSet.getModuleName());
+            deleteResult = new CommandResult(String.format(SUCCESS_MESSAGE, targetSet.toString()));
+        }
         return new CommandResult(String.format(SUCCESS_MESSAGE, targetCard));
     }
 }

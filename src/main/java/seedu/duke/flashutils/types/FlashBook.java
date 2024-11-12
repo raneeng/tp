@@ -44,5 +44,8 @@ public class FlashBook {
         }
         return allFlashCardSets.get(module);
     }
+    public void deleteFlashCardSet(String module) {
+        allFlashCardSets.remove(module);
+    }
 
 }

@@ -150,6 +150,15 @@ public class FlashCardSet implements Iterable<Card> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder setString = new StringBuilder(String.format("MODULE: $1%s\n", moduleName));
+        for (Card card : flashCardSet) {
+            setString.append(card.toString()).append("\n");
+        }
+        return setString.toString();
+    }
+
     public int getNumberOfFlashcards() {
         return flashCardSet.size();
     }

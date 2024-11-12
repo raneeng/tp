@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.flashutils.commands.Command;
 import seedu.duke.flashutils.commands.CommandResult;
+import seedu.duke.flashutils.commands.DeleteCommand;
 import seedu.duke.flashutils.commands.QuitCommand;
 import seedu.duke.flashutils.types.FlashBook;
 import seedu.duke.flashutils.utils.Parser;
@@ -44,9 +45,14 @@ public class Flashbang {
                 CommandResult result = command.execute();
                 Ui.printResponse(result.feedbackToUser);
                 storage.writeFlashBookToFile(FlashBook.getInstance());
+                if (command instanceof DeleteCommand) {
+                    storage.deleteFlashCardSetFile(((DeleteCommand) command).getTargetSet().getModuleName());
+                }
             } catch (IllegalArgumentException e) {
                 Ui.printResponse("Please enter a valid command");
                 displayCommands();
+            } catch (IOException e) {
+                Ui.printResponse(e.getMessage() + "\nAn IO Exception has been detected, please reset the App!");
             }
         }
     }
