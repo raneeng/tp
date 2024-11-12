@@ -12,11 +12,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search }
+    private enum CommandType { Add, Delete, DeleteAll, Edit, View, FlashBang, Quit, Invalid, Search, Help }
 
     private static CommandType parseCommandType(String input) {
         String commandKeyword = "^(\\badd\\b|\\bdelete\\b|\\bdeleteall\\b|\\bedit\\b|\\bview\\b|\\bflashbang\\b|\\bquit\\b" +
-                "|\\bsearch\\b)";
+                "|\\bsearch\\b|\\bhelp\\b)";
         Pattern commandPattern = Pattern.compile(commandKeyword);
         Matcher matcher = commandPattern.matcher(input);
         if (matcher.find()) {
@@ -29,6 +29,7 @@ public class Parser {
             case "flashbang" -> CommandType.FlashBang;
             case "search" -> CommandType.Search;
             case "quit" -> CommandType.Quit;
+            case "help" -> CommandType.Help;
             default -> CommandType.Invalid;
             };
         }
@@ -46,8 +47,13 @@ public class Parser {
         case FlashBang -> createFlashbangCommand(input);
         case Search -> createSearchCommand(input);
         case Quit -> createQuitCommand();
+        case Help -> createHelpCommand();
         default -> new InvalidCommand();
         };
+    }
+
+    public static Command createHelpCommand(){
+        return new HelpCommand();
     }
 
     public static Command createAddCommand(String input) {
@@ -60,16 +66,16 @@ public class Parser {
                 FlashCardSet module = FlashBook.getInstance().getFlashCardSet(moduleName);
                 String question = matcher.group(3);
                 String answer = matcher.group(4);
-                
+
                 if (question.contains("|") && answer.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another pair of question and answer. Valid question and answer cannot include '|' "); 
-                }    
+                    throw new IllegalArgumentException("Please enter another pair of question and answer. Valid question and answer cannot include '|' ");
+                }
                 if (question.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another question. A valid question cannot include '|' "); 
-                }    
+                    throw new IllegalArgumentException("Please enter another question. A valid question cannot include '|' ");
+                }
                 if (answer.contains("|")) {
-                    throw new IllegalArgumentException("Please enter another answer. A valid answer cannot include '|' "); 
-                }    
+                    throw new IllegalArgumentException("Please enter another answer. A valid answer cannot include '|' ");
+                }
 
                 if (topic == null) {
                     topic = "";
